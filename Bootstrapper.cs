@@ -26,6 +26,8 @@ namespace PLCSiemensSymulatorHMI
         {
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
+
+            _container.Singleton<ShellViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)
