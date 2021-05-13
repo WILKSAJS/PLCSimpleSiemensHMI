@@ -17,9 +17,9 @@ namespace PLCSiemensSymulatorHMI.Views
     /// <summary>
     /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class ShellView : Window
+    public partial class ShellConductorView : Window
     {
-        public ShellView()
+        public ShellConductorView()
         {
             InitializeComponent();
         }

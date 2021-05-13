@@ -19,7 +19,7 @@ namespace PLCSiemensSymulatorHMI
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            DisplayRootViewFor<ShellConductorViewModel>();
         }
 
         protected override void Configure()
@@ -27,7 +27,7 @@ namespace PLCSiemensSymulatorHMI
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
 
-            _container.Singleton<ShellViewModel>();
+            _container.Singleton<ShellConductorViewModel>();
         }
 
         protected override object GetInstance(Type service, string key)

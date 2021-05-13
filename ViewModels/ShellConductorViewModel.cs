@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
-    public class ShellViewModel: PropertyChangedBase
+    public class ShellConductorViewModel: PropertyChangedBase
     {
         private readonly Sharp7PlcService _plcService;
-        public ShellViewModel()
+        public ShellConductorViewModel()
         {
             _plcService = new Sharp7PlcService();
             // for initialzie purpose
