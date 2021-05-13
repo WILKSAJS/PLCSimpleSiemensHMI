@@ -22,7 +22,9 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ContentControl x:Name="ControlsView" Grid.Row="1" Grid.Column="1" />
+        <!--<TabControl x:Name="Items" Grid.Row="0" Grid.ColumnSpan="3"/>-->
+
+        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
         
         <ContentControl x:Name="HmiStatusBar" Grid.Row="2" Grid.ColumnSpan="3" />
 

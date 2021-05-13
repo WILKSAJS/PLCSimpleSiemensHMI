@@ -10,14 +10,24 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class ShellConductorViewModel: Conductor<Screen>.Collection.OneActive
     {
-        public ShellConductorViewModel(HmiStatusBarViewModel hmiStatusBarViewModel, ControlsViewModel controlsViewModel)
+        private readonly ControlsViewModel _controlsViewModel;
+        private readonly SettingsViewModel _settingsViewModel;
+
+        public ShellConductorViewModel(HmiStatusBarViewModel hmiStatusBarViewModel, ControlsViewModel controlsViewModel, SettingsViewModel settingsViewModel)
         {
             HmiStatusBar = hmiStatusBarViewModel;
-            ControlsView = controlsViewModel;
+            _controlsViewModel = controlsViewModel;
+            _settingsViewModel = settingsViewModel;
+            
+        }
+        public HmiStatusBarViewModel HmiStatusBar { get; }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            ActivateItem(_controlsViewModel);
         }
 
-        public HmiStatusBarViewModel HmiStatusBar { get; }
-        public ControlsViewModel ControlsView { get; }
 
     }
 }

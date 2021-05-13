@@ -5,8 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Text="Pump Settings"
+                   TextWrapping="Wrap" />
+
+        <TextBlock Margin="10,46,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Inlet pump speed"
+                   TextWrapping="Wrap" />
+
+        <TextBlock Margin="180,46,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Outlet pump speed"
+                   TextWrapping="Wrap" />
+
+        <TextBox Width="110"
+                 Margin="10,67,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"/>
+
+        <TextBox Width="110"
+                 Margin="180,67,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"/>
+
     </Grid>
 </UserControl>
