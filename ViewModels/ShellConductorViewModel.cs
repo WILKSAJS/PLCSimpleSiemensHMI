@@ -11,17 +11,19 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class ShellConductorViewModel: Conductor<Screen>.Collection.OneActive
     {
         private readonly Sharp7PlcService _plcService;
-        public ShellConductorViewModel()
+        public ShellConductorViewModel(HmiStatusBarViewModel hmiStatusBarViewModel, Sharp7PlcService plcService)
         {
-            _plcService = new Sharp7PlcService();
+            _plcService = plcService;
             // for initialzie purpose
             OnPlcServiceValueUpdated(null,null);
             IpAdress = "127.0.0.1";
             Rack = "0";
             Slot = "1";
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
+            HmiStatusBar = hmiStatusBarViewModel;
         }
 
+        public HmiStatusBarViewModel HmiStatusBar { get; }
 
         #region Properties
         // First method
@@ -88,28 +90,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             }
         }
 
-        private ConnectionStates _connectionState;
-        public ConnectionStates ConnectionState
-        {
-            get { return _connectionState; }
-            set {
-                _connectionState = value;
-                NotifyOfPropertyChange(() => ConnectionState);
-            }
-        }
-
-        private TimeSpan timeSpan;
-        
-
-        public TimeSpan TimeScan
-        {
-            get { return timeSpan; }
-            set { 
-                timeSpan = value;
-                NotifyOfPropertyChange(() => TimeScan);
-            }
-        }
-
         #endregion
 
         #region Commands
@@ -140,12 +120,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         private void OnPlcServiceValueUpdated(object sender, EventArgs e)
         {
-            ConnectionState = _plcService.ConnectionState;
+            //ConnectionState = _plcService.ConnectionState;
+            //TimeScan = _plcService.ScanTtime;
             PumpState = _plcService.PumpState;
             HighSensor = _plcService.HighLimit;
             LowSensor = _plcService.LowLimit;
             TankLevel = _plcService.TankLevel;
-            TimeScan = _plcService.ScanTtime;
         }
 
     }

@@ -81,11 +81,7 @@
             <Label Content="Pump State" FontSize="15"/>
         </StackPanel>
 
-        <StatusBar Grid.Row="5" Grid.ColumnSpan="5">
-            <TextBlock Text="{Binding ConnectionState, StringFormat=Connection state:{0}}"/>
-            <Separator/>
-            <TextBlock Text="{Binding TimeScan, StringFormat=TimeScan {0}}"/>
-        </StatusBar>
-        
+        <ContentControl x:Name="HmiStatusBar" Grid.Row="5" Grid.ColumnSpan="5"/>
+
     </Grid>
 </Window>

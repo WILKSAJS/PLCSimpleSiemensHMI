@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,9 @@ namespace PLCSiemensSymulatorHMI
             _container.Singleton<IEventAggregator, EventAggregator>();
 
             _container.Singleton<ShellConductorViewModel>();
+
+            _container.Singleton<HmiStatusBarViewModel>();
+            _container.Singleton<Sharp7PlcService>();
         }
 
         protected override object GetInstance(Type service, string key)
