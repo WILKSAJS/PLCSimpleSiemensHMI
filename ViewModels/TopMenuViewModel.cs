@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
-    public class TopMenuViewModel
+    public class TopMenuViewModel: PropertyChangedBase
     {
         private readonly IEventAggregator _eventAggregator;
-
+        
         public TopMenuViewModel(IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;
+            _eventAggregator = eventAggregator;           
         }
-        
+
         public void NaviToMainPage()
         {
             _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.MainPage });

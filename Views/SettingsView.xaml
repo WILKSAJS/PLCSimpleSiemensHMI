@@ -27,12 +27,18 @@
         <TextBox Width="110"
                  Margin="10,67,0,0"
                  HorizontalAlignment="Left"
-                 VerticalAlignment="Top"/>
+                 VerticalAlignment="Top"
+                 Text="{Binding Path=InletPumpSpeed, Mode=TwoWay, Delay=3000, 
+                 UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBox Width="110"
                  Margin="180,67,0,0"
                  HorizontalAlignment="Left"
-                 VerticalAlignment="Top"/>
+                 VerticalAlignment="Top"
+                 Text="{Binding Path=OutletPumpSpeed, Mode=TwoWay, 
+                 UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!--<Button x:Name="SetValues" Content="SetValues" Width="110" Height="20"></Button>-->
 
     </Grid>
 </UserControl>
