@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             mc:Ignorable="d">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button x:Name="NaviToMainPage" Content="Main Page" />
+                <Button x:Name="NaviToMainSettings" Content="Settings" />
+            </ToolBar>
+        </ToolBarTray>
+    </DockPanel>
 </UserControl>

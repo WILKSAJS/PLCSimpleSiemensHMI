@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,21 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class TopMenuViewModel
     {
+        private readonly IEventAggregator _eventAggregator;
+
+        public TopMenuViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+        }
+        
+        public void NaviToMainPage()
+        {
+            _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.MainPage });
+        }
+
+        public void NaviToMainSettings()
+        {
+            _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.SettingsPage });
+        }
     }
 }

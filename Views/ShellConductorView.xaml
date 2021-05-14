@@ -17,12 +17,12 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <!--<TabControl x:Name="Items" Grid.Row="0" Grid.ColumnSpan="3"/>-->
+        <ContentControl x:Name="TopMenu" Grid.Row="0" Grid.ColumnSpan="3"/>
 
         <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
         

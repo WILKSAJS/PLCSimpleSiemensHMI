@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Messages\NavigateMessage.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
