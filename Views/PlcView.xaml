@@ -5,7 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
              mc:Ignorable="d">
-    <Grid>
-        <Button Content="{Binding Name, FallbackValue='PLC_1'}" MinWidth="150" Margin="5"/>
-    </Grid>
+
+    <ToolBarTray Background="DarkGray">
+        <ToolBar Background="White" MaxWidth="250">
+            <Button Content="{Binding Name, FallbackValue='PLC_1'}" MinWidth="100" Margin="5"/>
+            <Separator Background="Black" />
+            <Button x:Name="Remove"  Content="Remove" Background="Tomato"/>
+        </ToolBar>
+    </ToolBarTray>
 </UserControl>
