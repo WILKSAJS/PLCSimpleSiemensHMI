@@ -12,21 +12,21 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ContentControl x:Name="TopMenu" Grid.Row="0" Grid.ColumnSpan="3"/>
+        <ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0"/>
 
         <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
         
-        <ContentControl x:Name="HmiStatusBar" Grid.Row="2" Grid.ColumnSpan="3" />
+        <!--<ContentControl x:Name="HmiStatusBar" Grid.Row="2" Grid.ColumnSpan="3" />-->
 
     </Grid>
 </Window>

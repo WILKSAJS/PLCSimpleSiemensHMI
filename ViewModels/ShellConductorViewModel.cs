@@ -18,16 +18,20 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         public ShellConductorViewModel(HmiStatusBarViewModel hmiStatusBarViewModel, TopMenuViewModel topMenuViewModel,
             ControlsViewModel controlsViewModel, 
             SettingsViewModel settingsViewModel,
+            PlcListViewModel plcListViewModel,
             IEventAggregator eventAggregator)
         {
             HmiStatusBar = hmiStatusBarViewModel;
             TopMenu = topMenuViewModel;
+            PlcList = plcListViewModel;
+
             _controlsViewModel = controlsViewModel;
             _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
         }
         public HmiStatusBarViewModel HmiStatusBar { get; }
         public TopMenuViewModel TopMenu { get; }
+        public PlcListViewModel PlcList { get; }
 
         public void Handle(NavigateMessage message)
         {

@@ -75,6 +75,7 @@
     <Compile Include="Messages\NavigateMessage.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
+    <Compile Include="ViewModels\PlcListViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellConductorViewModel.cs" />
     <Compile Include="ViewModels\TopMenuViewModel.cs" />
@@ -83,6 +84,9 @@
     </Compile>
     <Compile Include="Views\HmiStatusBarView.xaml.cs">
       <DependentUpon>HmiStatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlcListView.xaml.cs">
+      <DependentUpon>PlcListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HmiStatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlcListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
