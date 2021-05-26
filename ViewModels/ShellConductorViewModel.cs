@@ -15,13 +15,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly SettingsViewModel _settingsViewModel;
         private readonly IEventAggregator _eventAggregator;
 
-        public ShellConductorViewModel(HmiStatusBarViewModel hmiStatusBarViewModel, TopMenuViewModel topMenuViewModel,
+        public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
             ControlsViewModel controlsViewModel, 
             SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
             IEventAggregator eventAggregator)
         {
-            HmiStatusBar = hmiStatusBarViewModel;
             TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
 
@@ -29,7 +28,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
         }
-        public HmiStatusBarViewModel HmiStatusBar { get; }
         public TopMenuViewModel TopMenu { get; }
         public PlcListViewModel PlcList { get; }
 

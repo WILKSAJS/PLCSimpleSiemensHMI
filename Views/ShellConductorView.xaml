@@ -24,9 +24,6 @@
 
         <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0"/>
 
-        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
-        
-        <!--<ContentControl x:Name="HmiStatusBar" Grid.Row="2" Grid.ColumnSpan="3" />-->
-
+        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>

@@ -19,6 +19,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0">
@@ -75,6 +76,8 @@
                      Fill="{Binding PumpState, Converter={StaticResource BoolToBrush}}"/>
             <Label Content="Pump State" FontSize="15"/>
         </StackPanel>
+
+        <ContentControl x:Name="HmiStatusBar" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" />
 
     </Grid>
 </UserControl>

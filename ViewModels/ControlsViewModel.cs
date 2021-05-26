@@ -11,8 +11,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class ControlsViewModel: Screen
     {
         private readonly Sharp7PlcService _plcService;
-        public ControlsViewModel(Sharp7PlcService plcService)
+        public ControlsViewModel(Sharp7PlcService plcService, HmiStatusBarViewModel hmiStatusBarViewModel)
         {
+            HmiStatusBar = hmiStatusBarViewModel;
             _plcService = plcService;
             // for initialzie purpose
             OnPlcServiceValueUpdated(null, null);
@@ -21,6 +22,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             Slot = "1";
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
         }
+        public HmiStatusBarViewModel HmiStatusBar { get; }
 
         #region Properties
         // First method
