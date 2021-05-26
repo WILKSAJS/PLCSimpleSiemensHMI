@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.PlcService;
+using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,19 +26,25 @@ namespace PLCSiemensSymulatorHMI
 
         protected override void Configure()
         {
+            // internals
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
 
+            // conductoris
             _container.Singleton<ShellConductorViewModel>();
 
+            // viewModels
             _container.Singleton<HmiStatusBarViewModel>();
             _container.Singleton<TopMenuViewModel>();
             _container.Singleton<ControlsViewModel>();
             _container.Singleton<SettingsViewModel>();
             _container.Singleton<PlcListViewModel>();
 
-
+            // service
             _container.Singleton<Sharp7PlcService>();
+
+            // repository
+            _container.Singleton<PlcRepository>();
         }
 
         protected override object GetInstance(Type service, string key)
