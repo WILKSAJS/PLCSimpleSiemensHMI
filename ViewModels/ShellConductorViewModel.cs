@@ -13,17 +13,19 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     {
         private readonly ControlsViewModel _controlsViewModel;
         private readonly SettingsViewModel _settingsViewModel;
+        private readonly CreatePlcViewModel _createPlcViewModel;
         private readonly IEventAggregator _eventAggregator;
 
         public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
             ControlsViewModel controlsViewModel, 
             SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
+            CreatePlcViewModel createPlcViewModel,
             IEventAggregator eventAggregator)
         {
             TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
-
+            _createPlcViewModel = createPlcViewModel;
             _controlsViewModel = controlsViewModel;
             _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
@@ -40,6 +42,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     break;
                 case CurrentPage.SettingsPage:
                     ActivateItem(_settingsViewModel);
+                    break;
+                case CurrentPage.CreatePlcPage:
+                    ActivateItem(_createPlcViewModel);
                     break;
                 default:
                     break;

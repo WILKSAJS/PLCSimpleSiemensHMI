@@ -7,9 +7,10 @@
              xmlns:models="clr-namespace:PLCSiemensSymulatorHMI.Models"
              mc:Ignorable="d" 
              d:DesignWidth="150">
-    
+
     <Border BorderBrush="Black" BorderThickness="0,0,1,0">
         <StackPanel>
+            <Button x:Name="NaviToPLCreatorView" Content="Add new PLC"/>
             <ItemsControl x:Name="PlcList"/>
         </StackPanel>
     </Border>

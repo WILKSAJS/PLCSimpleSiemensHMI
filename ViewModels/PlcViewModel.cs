@@ -18,7 +18,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plc = plc;
             _plcRepository = plcRepository;
         }
-        
+
+        public string Id => _plc.Id;
         public string Name => _plc.Name;
         public string IpAdress => _plc.IpAdress;
         public string Rack => _plc.Rack;

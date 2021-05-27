@@ -39,6 +39,7 @@ namespace PLCSiemensSymulatorHMI
             _container.Singleton<ControlsViewModel>();
             _container.Singleton<SettingsViewModel>();
             _container.Singleton<PlcListViewModel>();
+            _container.Singleton<CreatePlcViewModel>();
 
             // service
             _container.Singleton<Sharp7PlcService>();

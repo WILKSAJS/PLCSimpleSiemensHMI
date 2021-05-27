@@ -76,6 +76,7 @@
     <Compile Include="Models\Plc.cs" />
     <Compile Include="Repository\PlcRepository.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />
+    <Compile Include="ViewModels\CreatePlcViewModel.cs" />
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
     <Compile Include="ViewModels\PlcListViewModel.cs" />
     <Compile Include="ViewModels\PlcViewModel.cs" />
@@ -84,6 +85,9 @@
     <Compile Include="ViewModels\TopMenuViewModel.cs" />
     <Compile Include="Views\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreatePlcView.xaml.cs">
+      <DependentUpon>CreatePlcView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HmiStatusBarView.xaml.cs">
       <DependentUpon>HmiStatusBarView.xaml</DependentUpon>
@@ -135,6 +139,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ControlsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreatePlcView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

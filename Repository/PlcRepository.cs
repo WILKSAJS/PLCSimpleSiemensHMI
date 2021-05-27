@@ -26,7 +26,14 @@ namespace PLCSiemensSymulatorHMI.Repository
         {
             // TODO REMOVE PLC FORM Db/xml file
             return plcList.Remove(plc);
+        }
 
+        public bool AddPlc(Plc plc)
+        {
+            // TODO ADD PLC TO Db/xml file
+            plcList.Add(plc);
+
+            return true;
         }
     }
 }

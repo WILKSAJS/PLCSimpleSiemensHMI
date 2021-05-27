@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.Messages;
 using PLCSiemensSymulatorHMI.Models;
 using PLCSiemensSymulatorHMI.Repository;
 using System;
@@ -12,10 +13,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class PlcListViewModel
     {
         private readonly PlcRepository _plcRepository;
+        private readonly IEventAggregator _eventAggregator;
 
-        public PlcListViewModel(PlcRepository plcRepository)
+        public PlcListViewModel(PlcRepository plcRepository, IEventAggregator eventAggregator)
         {
             _plcRepository = plcRepository;
+            _eventAggregator = eventAggregator;
             // retrieve Plcs from Repo, and pass it for create each PlcViewModel then add to Item list - FOR THIS NESTED VM THERE IS NO BootstrapContener Registry!
             PlcList.AddRange(_plcRepository.GetAllPlc().Select(x => CreateNewPlcVewModel(x)));
         }
@@ -40,5 +43,16 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         }
 
         public BindableCollection<PlcViewModel> PlcList { get; } = new BindableCollection<PlcViewModel>();
+
+        public void NaviToPLCreatorView()
+        {
+            _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.CreatePlcPage });
+        }
+
+        public void AddNewPlcToList(Plc plc)
+        {
+            var plcViewModel = CreateNewPlcVewModel(plc);
+            PlcList.Add(plcViewModel);
+        }
     }
 }
