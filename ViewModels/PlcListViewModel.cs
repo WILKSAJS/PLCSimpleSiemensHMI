@@ -25,7 +25,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         private PlcViewModel CreateNewPlcVewModel(Plc plc)
         {
-            var plcViewModel = new PlcViewModel(plc, _plcRepository);
+            var plcViewModel = new PlcViewModel(plc, _plcRepository, _eventAggregator);
             plcViewModel.PlcRemoved += OnPlcRemoved;
             return plcViewModel;
         }
@@ -42,17 +42,36 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             PlcList.Remove(plcViewModel);
         }
 
-        public BindableCollection<PlcViewModel> PlcList { get; } = new BindableCollection<PlcViewModel>();
+        public BindableCollection<PlcViewModel> PlcList { get; set;  } = new BindableCollection<PlcViewModel>();
 
         public void NaviToPLCreatorView()
         {
             _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.CreatePlcPage });
         }
 
-        public void AddNewPlcToList(Plc plc)
+        public void AddNewPlcViewModel(Plc plc)
         {
+            // Find out last Id and assign next one to new plc
+            var nextId = PlcList.Count == 0 ? 1 : PlcList.OrderBy(x => x.Id).LastOrDefault().Id + 1;
+            plc.Id = nextId;
+            // add to repo
+            _plcRepository.AddPlc(plc);
+            //add to list
             var plcViewModel = CreateNewPlcVewModel(plc);
             PlcList.Add(plcViewModel);
         }
+
+
+        public void EditPlcViewModel(Plc plc, PlcViewModel plcViewModel)
+        {
+            _plcRepository.EditPlc(plc);
+            var index = PlcList.IndexOf(plcViewModel);
+            PlcList.Remove(PlcList.SingleOrDefault(x => x.Id == plc.Id));
+            //safety
+            index = index >= 0 ? index : PlcList.Count()-1;
+
+            PlcList.Insert(index,CreateNewPlcVewModel(plc));
+        }
+
     }
 }

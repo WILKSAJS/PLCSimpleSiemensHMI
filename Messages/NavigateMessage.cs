@@ -1,4 +1,5 @@
-﻿using PLCSiemensSymulatorHMI.ViewModels;
+﻿using PLCSiemensSymulatorHMI.Models;
+using PLCSiemensSymulatorHMI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,13 @@ namespace PLCSiemensSymulatorHMI.Messages
     {
         MainPage,
         SettingsPage,
-        CreatePlcPage
+        CreatePlcPage,
+        EditPlcPage
     }
     public class NavigateMessage
     {
         public CurrentPage CurrentPage { get; set; }
-
-        //public PlcListViewModel PlcListViewModel { get; set; }
+        public Plc Plc { get; set; }
+        public object Sender { get; set; }
     }
 }

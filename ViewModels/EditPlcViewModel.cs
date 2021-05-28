@@ -8,14 +8,27 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
-    public class CreatePlcViewModel: Screen
+    public class EditPlcViewModel: Screen
     {
+        private readonly Plc _plc;
         private readonly PlcListViewModel _plcListViewModel;
+        private readonly PlcViewModel _plcViewModel;
 
-        public CreatePlcViewModel(PlcListViewModel plcListViewModel)
+        public EditPlcViewModel(Plc plc, PlcListViewModel plcListViewModel, PlcViewModel plcViewModel)
         {
+            _plc = plc;
             _plcListViewModel = plcListViewModel;
+            _plcViewModel = plcViewModel;
         }
+
+        protected override void OnActivate()
+        {
+            Name = _plc.Name;
+            IpAdress = _plc.IpAdress;
+            Rack = _plc.Rack;
+            Slot = _plc.Slot;
+        }
+
         private string _name;
         public string Name
         {
@@ -45,26 +58,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             set => Set(ref _slot, value);
         }
 
-        protected override void OnActivate()
+        public void ConfirmEditPlc()
         {
-            base.OnActivate();
+            _plc.IpAdress = IpAdress;
+            _plc.Name = Name;
+            _plc.Rack = Rack;
+            _plc.Slot = Slot;
 
-            Name = "Default Name";
-            IpAdress = "127.0.0.1";
-            Rack = "0";
-            Slot = "1";
-        }
-
-        public void ConfirmCreatePlc()
-        {
-            var plc = new Plc()
-            {
-                IpAdress = this.IpAdress,
-                Name = this.Name,
-                Rack = this.Rack,
-                Slot = this.Slot
-            };
-            _plcListViewModel.AddNewPlcViewModel(plc);
+            _plcListViewModel.EditPlcViewModel(_plc, _plcViewModel);
         }
     }
 }

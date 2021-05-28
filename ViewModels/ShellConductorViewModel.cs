@@ -21,6 +21,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
+            EditPlcViewModel editPlcViewModel,
             IEventAggregator eventAggregator)
         {
             TopMenu = topMenuViewModel;
@@ -45,6 +46,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     break;
                 case CurrentPage.CreatePlcPage:
                     ActivateItem(_createPlcViewModel);
+                    break;
+                case CurrentPage.EditPlcPage:
+                    ActivateItem(new EditPlcViewModel(message.Plc, PlcList, (PlcViewModel)message.Sender));
                     break;
                 default:
                     break;
