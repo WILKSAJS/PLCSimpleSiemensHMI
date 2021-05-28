@@ -7,7 +7,7 @@
              mc:Ignorable="d">
     <Border BorderBrush="Gray" BorderThickness="1">
         <StackPanel>
-            <TextBlock Text="Edit PLC" TextAlignment="Center"  FontSize="25"/>
+            <TextBlock x:Name="Tittle" TextAlignment="Center"  FontSize="25"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="Name:" FontSize="20" />
                 <TextBox x:Name="Name" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130"/>

@@ -14,6 +14,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly ControlsViewModel _controlsViewModel;
         private readonly SettingsViewModel _settingsViewModel;
         private readonly CreatePlcViewModel _createPlcViewModel;
+        private readonly HmiStatusBarViewModel _hmiStatusBarViewModel;
+        private readonly Sharp7PlcService _plcService;
         private readonly IEventAggregator _eventAggregator;
 
         public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
@@ -21,12 +23,15 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
-            EditPlcViewModel editPlcViewModel,
+            HmiStatusBarViewModel hmiStatusBarViewModel,
+            Sharp7PlcService plcService,
             IEventAggregator eventAggregator)
         {
             TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
             _createPlcViewModel = createPlcViewModel;
+            _hmiStatusBarViewModel = hmiStatusBarViewModel;
+            _plcService = plcService;
             _controlsViewModel = controlsViewModel;
             _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
@@ -38,8 +43,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             switch (message.CurrentPage)
             {
-                case CurrentPage.MainPage:
-                    ActivateItem(_controlsViewModel);
+                case CurrentPage.ControlPage:
+                    ActivateItem(new ControlsViewModel(_plcService,_hmiStatusBarViewModel, (PlcViewModel)message.Sender));
                     break;
                 case CurrentPage.SettingsPage:
                     ActivateItem(_settingsViewModel);
@@ -59,7 +64,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
-            ActivateItem(_controlsViewModel);
+            // ActivateItem(_controlsViewModel);
         }
 
         protected override void OnDeactivate(bool close)

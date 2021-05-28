@@ -51,5 +51,15 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 Sender = this
             });
         }
+
+        public void NavigateToControlPage()
+        {
+            _eventAggregator.PublishOnUIThread(new NavigateMessage()
+            {
+                CurrentPage = CurrentPage.ControlPage,
+                Plc = _plc,
+                Sender = this
+            });
+        }
     }
 }

@@ -37,9 +37,15 @@
             </StackPanel>
         </StackPanel>
 
-        <Button x:Name="Connect" Grid.Column="1" Grid.Row="0" Content="Connect" Height="40" Width="150" />
+        <TextBlock x:Name="Name" Grid.Column="1" Grid.Row="0" Margin="10" TextAlignment="Center"/>
 
-        <Button x:Name="Disconnect" Grid.Column="2" Grid.Row="0" Content="Disconnect" Height="40" Width="150" />
+        <StackPanel Grid.Column="2" Grid.Row="0">
+            <Button x:Name="Connect"  Content="Connect" Height="40" Width="150" Margin="10" />
+
+            <Button x:Name="Disconnect" Content="Disconnect" Height="40" Width="150" />
+        </StackPanel>
+
+        
 
 
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">

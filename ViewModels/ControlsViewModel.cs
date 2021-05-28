@@ -11,21 +11,38 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class ControlsViewModel: Screen
     {
         private readonly Sharp7PlcService _plcService;
-        public ControlsViewModel(Sharp7PlcService plcService, HmiStatusBarViewModel hmiStatusBarViewModel)
+        private readonly PlcViewModel _plcViewModel;
+
+        public ControlsViewModel(Sharp7PlcService plcService, HmiStatusBarViewModel hmiStatusBarViewModel, PlcViewModel plcViewModel)
         {
             HmiStatusBar = hmiStatusBarViewModel;
+            _plcViewModel = plcViewModel;
             _plcService = plcService;
             // for initialzie purpose
             OnPlcServiceValueUpdated(null, null);
-            IpAdress = "127.0.0.1";
-            Rack = "0";
-            Slot = "1";
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
         }
         public HmiStatusBarViewModel HmiStatusBar { get; }
 
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            Name = _plcViewModel.Name;
+            IpAdress = _plcViewModel.IpAdress;
+            Rack = _plcViewModel.Rack;
+            Slot = _plcViewModel.Slot;
+        }
+
+
         #region Properties
         // First method
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => Set(ref _name, value);
+        }
+
         private string _ipAdress;
         public string IpAdress
         {

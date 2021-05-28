@@ -13,6 +13,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly Plc _plc;
         private readonly PlcListViewModel _plcListViewModel;
         private readonly PlcViewModel _plcViewModel;
+        public string Tittle { get; set; }
 
         public EditPlcViewModel(Plc plc, PlcListViewModel plcListViewModel, PlcViewModel plcViewModel)
         {
@@ -27,6 +28,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             IpAdress = _plc.IpAdress;
             Rack = _plc.Rack;
             Slot = _plc.Slot;
+
+            Tittle = $"Edit PLC: {Name}";
         }
 
         private string _name;
@@ -66,6 +69,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plc.Slot = Slot;
 
             _plcListViewModel.EditPlcViewModel(_plc, _plcViewModel);
+
+            TryClose();
         }
     }
 }

@@ -17,10 +17,10 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _eventAggregator = eventAggregator;           
         }
 
-        public void NaviToMainPage()
-        {
-            _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.MainPage });
-        }
+        //public void NaviToMainPage()
+        //{
+        //    _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.ControlPage });
+        //}
 
         public void NaviToMainSettings()
         {

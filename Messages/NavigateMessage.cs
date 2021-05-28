@@ -10,7 +10,7 @@ namespace PLCSiemensSymulatorHMI.Messages
 {
     public enum CurrentPage
     {
-        MainPage,
+        ControlPage,
         SettingsPage,
         CreatePlcPage,
         EditPlcPage

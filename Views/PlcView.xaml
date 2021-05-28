@@ -8,7 +8,7 @@
 
     <ToolBarTray Background="DarkGray">
         <ToolBar Background="White">
-            <Button Content="{Binding Name, FallbackValue='PLC_1'}" MinWidth="100" Margin="5"/>
+            <Button x:Name="NavigateToControlPage" Content="{Binding Name, FallbackValue='PLC_1'}" MinWidth="100" Margin="5"/>
             <Separator Background="Black" />
             <Button x:Name="Remove"  Content="Remove" Background="Tomato"/>
             <Button x:Name="NaviToPLCEditView"  Content="Edit" Background="BlueViolet"/>

@@ -65,6 +65,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 Slot = this.Slot
             };
             _plcListViewModel.AddNewPlcViewModel(plc);
+
+            TryClose();
         }
     }
 }

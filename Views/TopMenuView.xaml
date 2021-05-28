@@ -8,7 +8,7 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
-                <Button x:Name="NaviToMainPage" Content="Main Page" />
+                <!--<Button x:Name="NaviToMainPage" Content="Main Page" />-->
                 <Button x:Name="NaviToMainSettings" Content="Settings" />
             </ToolBar>
         </ToolBarTray>
