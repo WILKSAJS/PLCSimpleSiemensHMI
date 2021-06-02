@@ -7,38 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   Text="Pump Settings"
-                   TextWrapping="Wrap" />
+        
 
-        <TextBlock Margin="10,46,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="Inlet pump speed"
-                   TextWrapping="Wrap" />
-
-        <TextBlock Margin="180,46,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="Outlet pump speed"
-                   TextWrapping="Wrap" />
-
-        <TextBox Width="110"
-                 Margin="10,67,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Text="{Binding Path=InletPumpSpeed, Mode=TwoWay, Delay=3000, 
-                 UpdateSourceTrigger=PropertyChanged}"/>
-
-        <TextBox Width="110"
-                 Margin="180,67,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Text="{Binding Path=OutletPumpSpeed, Mode=TwoWay, 
-                 UpdateSourceTrigger=PropertyChanged}"/>
-
-        <!--<Button x:Name="SetValues" Content="SetValues" Width="110" Height="20"></Button>-->
+        <!--EMPTY: TODO ->DELETE OR FILL WITH CONTENT -->
 
     </Grid>
 </UserControl>

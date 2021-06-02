@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.Messages;
 using PLCSiemensSymulatorHMI.Models;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,16 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly Plc _plc;
         private readonly PlcListViewModel _plcListViewModel;
         private readonly PlcViewModel _plcViewModel;
+        private readonly IEventAggregator _eventAggregator;
+
         public string Tittle { get; set; }
 
-        public EditPlcViewModel(Plc plc, PlcListViewModel plcListViewModel, PlcViewModel plcViewModel)
+        public EditPlcViewModel(Plc plc, PlcListViewModel plcListViewModel, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
         {
             _plc = plc;
             _plcListViewModel = plcListViewModel;
             _plcViewModel = plcViewModel;
+            _eventAggregator = eventAggregator;
         }
 
         protected override void OnActivate()
@@ -68,7 +72,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plc.Rack = Rack;
             _plc.Slot = Slot;
 
-            _plcListViewModel.EditPlcViewModel(_plc, _plcViewModel);
+            //_plcListViewModel.EditPlcViewModel(_plc, _plcViewModel);
+            _eventAggregator.PublishOnUIThread(new EditPlcMessage() { PlcViewModel = _plcViewModel, EditedPlc = _plc });
 
             TryClose();
         }

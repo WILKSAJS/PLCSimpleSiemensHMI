@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
-    public class PlcListViewModel
+    public class PlcListViewModel: IHandle<EditPlcMessage>
     {
         private readonly PlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
@@ -19,6 +19,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             _plcRepository = plcRepository;
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
             // retrieve Plcs from Repo, and pass it for create each PlcViewModel then add to Item list - FOR THIS NESTED VM THERE IS NO BootstrapContener Registry!
             PlcList.AddRange(_plcRepository.GetAllPlc().Select(x => CreateNewPlcVewModel(x)));
         }
@@ -64,14 +65,18 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         public void EditPlcViewModel(Plc plc, PlcViewModel plcViewModel)
         {
-            _plcRepository.EditPlc(plc);
-            var index = PlcList.IndexOf(plcViewModel);
-            PlcList.Remove(PlcList.SingleOrDefault(x => x.Id == plc.Id));
-            //safety
-            index = index >= 0 ? index : PlcList.Count()-1;
-
-            PlcList.Insert(index,CreateNewPlcVewModel(plc));
+            
         }
 
+        public void Handle(EditPlcMessage message)
+        {
+            _plcRepository.EditPlc(message.EditedPlc);
+            var index = PlcList.IndexOf(message.PlcViewModel);
+            PlcList.Remove(PlcList.SingleOrDefault(x => x.Id == message.EditedPlc.Id));
+            //safety
+            index = index >= 0 ? index : PlcList.Count() - 1;
+
+            PlcList.Insert(index, CreateNewPlcVewModel(message.EditedPlc));
+        }
     }
 }

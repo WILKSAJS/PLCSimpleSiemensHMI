@@ -34,16 +34,18 @@ namespace PLCSiemensSymulatorHMI
             _container.Singleton<ShellConductorViewModel>();
 
             // viewModels
-            _container.Singleton<HmiStatusBarViewModel>();
+            _container.PerRequest<HmiStatusBarViewModel>();
+
             _container.Singleton<TopMenuViewModel>();
-            _container.Singleton<ControlsViewModel>();
-            _container.Singleton<SettingsViewModel>();
+            //_container.Singleton<SettingsViewModel>();
             _container.Singleton<PlcListViewModel>();
             _container.Singleton<CreatePlcViewModel>();
             _container.Singleton<EditPlcViewModel>();
 
             // service
-            _container.Singleton<Sharp7PlcService>();
+            // zrobic rejestracje przez klucz i sprobowac pozyskać istancje Sharp7PlcService na rzdądanie
+            // https://csharp.hotexamples.com/examples/Caliburn.Micro/PhoneContainer/RegisterPerRequest/php-phonecontainer-registerperrequest-method-examples.html
+            //_container.PerRequest<Sharp7PlcService>();
 
             // repository
             _container.Singleton<PlcRepository>();

@@ -16,27 +16,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcService = plcService;
         }
 
-        private short _inletPumpSpeed;
-
-        public short InletPumpSpeed
-        {
-            get { return _inletPumpSpeed; }
-            set {
-                _inletPumpSpeed = value;
-                NotifyOfPropertyChange(()=>InletPumpSpeed);
-                _plcService.WriteInletPumpSpeed(value).AsResult();
-            }
-        }
-        private short _outletPumpSpeed;
-        public short OutletPumpSpeed
-        {
-            get { return _outletPumpSpeed; }
-            set
-            {
-                _outletPumpSpeed = value;
-                NotifyOfPropertyChange(() => OutletPumpSpeed);
-                _plcService.WriteOutletPumpSpeed(value).AsResult();
-            }
-        }
+        
     }
 }

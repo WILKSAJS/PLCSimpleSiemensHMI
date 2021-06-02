@@ -10,6 +10,14 @@
             <TextBlock Text="{Binding ConnectionState, StringFormat=Connection state:{0}}"/>
             <Separator/>
             <TextBlock Text="{Binding TimeScan, StringFormat=TimeScan {0}}"/>
+            <Separator/>
+            <TextBlock Text="{Binding Name}"/>
+            <Separator/>
+            <TextBlock Text="{Binding IpAdress}"/>
+            <Separator/>
+            <TextBlock Text="{Binding Rack}"/>
+            <Separator/>
+            <TextBlock Text="{Binding Slot}"/>
         </StatusBar>
     </Grid>
 </UserControl>

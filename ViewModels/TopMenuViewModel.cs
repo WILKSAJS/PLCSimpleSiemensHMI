@@ -22,9 +22,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         //    _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.ControlPage });
         //}
 
-        public void NaviToMainSettings()
-        {
-            _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.SettingsPage });
-        }
+        //public void NaviToMainSettings()
+        //{
+        //    _eventAggregator.PublishOnUIThread(new NavigateMessage() { CurrentPage = CurrentPage.SettingsPage });
+        //}
     }
 }
