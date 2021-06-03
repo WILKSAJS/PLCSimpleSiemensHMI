@@ -11,39 +11,55 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class ControlsViewModel: Screen
     {
         private readonly Sharp7PlcService _plcService;
-        public ControlsViewModel(Sharp7PlcService plcService)
+        private readonly PlcViewModel _plcViewModel;
+        private readonly IEventAggregator _eventAggregator;
+
+        public ControlsViewModel(Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
         {
+            _plcViewModel = plcViewModel;
+            _eventAggregator = eventAggregator;
             _plcService = plcService;
+            HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
             // for initialzie purpose
             OnPlcServiceValueUpdated(null, null);
-            IpAdress = "127.0.0.1";
-            Rack = "0";
-            Slot = "1";
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
         }
+        public HmiStatusBarViewModel HmiStatusBar { get; }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            Name = _plcViewModel.Name;
+            IpAdress = _plcViewModel.IpAdress;
+            Rack = _plcViewModel.Rack;
+            Slot = _plcViewModel.Slot;
+
+            Connect();
+
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
+            _plcService.ValuesUpdated -= OnPlcServiceValueUpdated;
+            Disconnect();
+        }
+
 
         #region Properties
         // First method
-        private string _ipAdress;
-        public string IpAdress
+        private string _name;
+        public string Name
         {
-            get => _ipAdress;
-            set => Set(ref _ipAdress, value);
+            get => _name;
+            set => Set(ref _name, value);
         }
 
-        private string _rack;
-        public string Rack
-        {
-            get => _rack;
-            set => Set(ref _rack, value);
-        }
+        private string IpAdress;
 
-        private string _slot;
-        public string Slot
-        {
-            get => _slot;
-            set => Set(ref _slot, value);
-        }
+        private string Rack;
+
+        private string Slot;
 
         // Second Method
         private bool _highSensor;
@@ -87,6 +103,29 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             {
                 _tankLevel = value;
                 NotifyOfPropertyChange(() => TankLevel);
+            }
+        }
+
+        private short _inletPumpSpeed;
+        public short InletPumpSpeed
+        {
+            get { return _inletPumpSpeed; }
+            set
+            {
+                _inletPumpSpeed = value;
+                NotifyOfPropertyChange(() => InletPumpSpeed);
+                _plcService.WriteInletPumpSpeed(value).AsResult();
+            }
+        }
+        private short _outletPumpSpeed;
+        public short OutletPumpSpeed
+        {
+            get { return _outletPumpSpeed; }
+            set
+            {
+                _outletPumpSpeed = value;
+                NotifyOfPropertyChange(() => OutletPumpSpeed);
+                _plcService.WriteOutletPumpSpeed(value).AsResult();
             }
         }
 

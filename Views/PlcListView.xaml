@@ -1,15 +1,17 @@
-﻿<UserControl x:Class="PLCSiemensSymulatorHMI.Views.SettingsView"
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.Views.PlcListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+             xmlns:models="clr-namespace:PLCSiemensSymulatorHMI.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
+             d:DesignWidth="150">
 
-        <!--EMPTY: TODO ->DELETE OR FILL WITH CONTENT -->
-
-    </Grid>
+    <Border BorderBrush="Black" BorderThickness="0,0,1,0">
+        <StackPanel>
+            <Button x:Name="NaviToPLCreatorView" Content="Add new PLC"/>
+            <ItemsControl x:Name="PlcList" MaxWidth="150"/>
+        </StackPanel>
+    </Border>
 </UserControl>

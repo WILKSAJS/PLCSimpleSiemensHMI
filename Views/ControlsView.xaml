@@ -19,9 +19,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0">
+        <!--<StackPanel Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="IP Adress:" FontSize="20" />
                 <TextBox x:Name="IpAdress" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130"/>
@@ -34,11 +35,17 @@
                 <Label Content="Slot" FontSize="20" />
                 <TextBox x:Name="Slot" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130" />
             </StackPanel>
+        </StackPanel>-->
+
+        <TextBlock x:Name="Name" Grid.Column="1" Grid.Row="0" Margin="10" TextAlignment="Center"/>
+
+        <StackPanel Grid.Column="2" Grid.Row="0">
+            <Button x:Name="Connect"  Content="Connect" Height="40" Width="150" Margin="10" />
+
+            <Button x:Name="Disconnect" Content="Disconnect" Height="40" Width="150" />
         </StackPanel>
 
-        <Button x:Name="Connect" Grid.Column="1" Grid.Row="0" Content="Connect" Height="40" Width="150" />
-
-        <Button x:Name="Disconnect" Grid.Column="2" Grid.Row="0" Content="Disconnect" Height="40" Width="150" />
+        
 
 
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -60,6 +67,40 @@
             <Button x:Name="Stop" Content="Stop" Height="40" Width="150"  Margin="0,10"/>
         </StackPanel>
 
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Text="Pump Settings"
+                   TextWrapping="Wrap" />
+
+            <TextBlock Margin="10"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Inlet pump speed"
+                   TextWrapping="Wrap" />
+
+            <TextBox Width="110"
+                 Margin="10"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding Path=InletPumpSpeed, Mode=TwoWay, Delay=3000, 
+                 UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Margin="10"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Outlet pump speed"
+                   TextWrapping="Wrap" />
+
+           
+            <TextBox Width="110"
+                 Margin="10"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding Path=OutletPumpSpeed, Mode=TwoWay, 
+                 UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
 
         <StackPanel Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
@@ -75,6 +116,8 @@
                      Fill="{Binding PumpState, Converter={StaticResource BoolToBrush}}"/>
             <Label Content="Pump State" FontSize="15"/>
         </StackPanel>
+
+        <ContentControl x:Name="HmiStatusBar" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" />
 
     </Grid>
 </UserControl>

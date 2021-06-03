@@ -72,17 +72,36 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />
+    <Compile Include="Models\Plc.cs" />
+    <Compile Include="Repository\PlcRepository.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />
+    <Compile Include="ViewModels\CreatePlcViewModel.cs" />
+    <Compile Include="ViewModels\EditPlcViewModel.cs" />
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
+    <Compile Include="ViewModels\PlcListViewModel.cs" />
+    <Compile Include="ViewModels\PlcViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellConductorViewModel.cs" />
     <Compile Include="ViewModels\TopMenuViewModel.cs" />
     <Compile Include="Views\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CreatePlcView.xaml.cs">
+      <DependentUpon>CreatePlcView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPlcView.xaml.cs">
+      <DependentUpon>EditPlcView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HmiStatusBarView.xaml.cs">
       <DependentUpon>HmiStatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlcListView.xaml.cs">
+      <DependentUpon>PlcListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlcView.xaml.cs">
+      <DependentUpon>PlcView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -122,15 +141,29 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ControlsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreatePlcView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPlcView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HmiStatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlcListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlcView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

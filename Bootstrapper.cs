@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.PlcService;
+using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,16 +26,29 @@ namespace PLCSiemensSymulatorHMI
 
         protected override void Configure()
         {
+            // internals
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
 
+            // conductoris
             _container.Singleton<ShellConductorViewModel>();
 
-            _container.Singleton<HmiStatusBarViewModel>();
+            // viewModels
+            _container.PerRequest<HmiStatusBarViewModel>();
+
             _container.Singleton<TopMenuViewModel>();
-            _container.Singleton<ControlsViewModel>();
-            _container.Singleton<SettingsViewModel>();
-            _container.Singleton<Sharp7PlcService>();
+            //_container.Singleton<SettingsViewModel>();
+            _container.Singleton<PlcListViewModel>();
+            _container.Singleton<CreatePlcViewModel>();
+            _container.Singleton<EditPlcViewModel>();
+
+            // service
+            // zrobic rejestracje przez klucz i sprobowac pozyskać istancje Sharp7PlcService na rzdądanie
+            // https://csharp.hotexamples.com/examples/Caliburn.Micro/PhoneContainer/RegisterPerRequest/php-phonecontainer-registerperrequest-method-examples.html
+            //_container.PerRequest<Sharp7PlcService>();
+
+            // repository
+            _container.Singleton<PlcRepository>();
         }
 
         protected override object GetInstance(Type service, string key)

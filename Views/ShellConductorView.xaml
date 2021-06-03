@@ -6,27 +6,24 @@
         xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
         xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="450" Width="900" MinHeight="450" MinWidth="900" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrush" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ContentControl x:Name="TopMenu" Grid.Row="0" Grid.ColumnSpan="3"/>
+        <ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
-        
-        <ContentControl x:Name="HmiStatusBar" Grid.Row="2" Grid.ColumnSpan="3" />
+        <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0"/>
 
+        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>

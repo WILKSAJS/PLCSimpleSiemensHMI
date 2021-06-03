@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.Views.PlcView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+             mc:Ignorable="d">
+
+    <ToolBarTray Background="DarkGray">
+        <ToolBar Background="White">
+            <Button x:Name="NavigateToControlPage" Content="{Binding Name, FallbackValue='PLC_1'}" MinWidth="100" Margin="5"/>
+            <Separator Background="Black" />
+            <Button x:Name="Remove"  Content="Remove" Background="Tomato"/>
+            <Button x:Name="NaviToPLCEditView"  Content="Edit" Background="BlueViolet"/>
+        </ToolBar>
+    </ToolBarTray>
+</UserControl>

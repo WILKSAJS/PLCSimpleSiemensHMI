@@ -11,33 +11,40 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class ShellConductorViewModel: Conductor<Screen>.Collection.OneActive, IHandle<NavigateMessage>
     {
-        private readonly ControlsViewModel _controlsViewModel;
         private readonly SettingsViewModel _settingsViewModel;
+        private readonly CreatePlcViewModel _createPlcViewModel;
         private readonly IEventAggregator _eventAggregator;
 
-        public ShellConductorViewModel(HmiStatusBarViewModel hmiStatusBarViewModel, TopMenuViewModel topMenuViewModel,
-            ControlsViewModel controlsViewModel, 
+        public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
             SettingsViewModel settingsViewModel,
+            PlcListViewModel plcListViewModel,
+            CreatePlcViewModel createPlcViewModel,
             IEventAggregator eventAggregator)
         {
-            HmiStatusBar = hmiStatusBarViewModel;
             TopMenu = topMenuViewModel;
-            _controlsViewModel = controlsViewModel;
+            PlcList = plcListViewModel;
+            _createPlcViewModel = createPlcViewModel;
             _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
         }
-        public HmiStatusBarViewModel HmiStatusBar { get; }
         public TopMenuViewModel TopMenu { get; }
-
+        public PlcListViewModel PlcList { get; }
+        
         public void Handle(NavigateMessage message)
         {
             switch (message.CurrentPage)
             {
-                case CurrentPage.MainPage:
-                    ActivateItem(_controlsViewModel);
+                case CurrentPage.ControlPage:
+                    ActivateItem(new ControlsViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
                     break;
-                case CurrentPage.SettingsPage:
-                    ActivateItem(_settingsViewModel);
+                //case CurrentPage.SettingsPage:
+                //    ActivateItem(_settingsViewModel);
+                //    break;
+                case CurrentPage.CreatePlcPage:
+                    ActivateItem(_createPlcViewModel);
+                    break;
+                case CurrentPage.EditPlcPage:
+                    ActivateItem(new EditPlcViewModel(message.Plc, PlcList, (PlcViewModel)message.Sender, _eventAggregator));
                     break;
                 default:
                     break;
@@ -48,7 +55,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
-            ActivateItem(_controlsViewModel);
+            // ActivateItem(_controlsViewModel);
         }
 
         protected override void OnDeactivate(bool close)
