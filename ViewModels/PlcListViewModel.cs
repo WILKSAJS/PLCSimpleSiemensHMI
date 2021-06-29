@@ -14,9 +14,11 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     {
         private readonly PlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IWindowManager _windowManager;
 
-        public PlcListViewModel(PlcRepository plcRepository, IEventAggregator eventAggregator)
+        public PlcListViewModel(PlcRepository plcRepository, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
+            _windowManager = windowManager;
             _plcRepository = plcRepository;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
@@ -26,7 +28,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         private PlcViewModel CreateNewPlcVewModel(Plc plc)
         {
-            var plcViewModel = new PlcViewModel(plc, _plcRepository, _eventAggregator);
+            var plcViewModel = new PlcViewModel(plc, _plcRepository, _eventAggregator, _windowManager);
             plcViewModel.PlcRemoved += OnPlcRemoved;
             return plcViewModel;
         }

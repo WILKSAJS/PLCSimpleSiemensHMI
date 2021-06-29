@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
@@ -41,6 +42,10 @@ namespace PLCSiemensSymulatorHMI
             _container.Singleton<PlcListViewModel>();
             _container.Singleton<CreatePlcViewModel>();
             _container.Singleton<EditPlcViewModel>();
+
+            _container.PerRequest<SemaphoreViewModel>();
+            _container.PerRequest<CreateControlViewModel>();
+            _container.Singleton<ControlsHolderViewModel>();
 
             // service
             // zrobic rejestracje przez klucz i sprobowac pozyskać istancje Sharp7PlcService na rzdądanie

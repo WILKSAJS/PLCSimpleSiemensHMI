@@ -15,12 +15,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly Plc _plc;
         private readonly PlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IWindowManager _windowManager;
 
-        public PlcViewModel(Plc plc, PlcRepository plcRepository, IEventAggregator eventAggregator)
+        public PlcViewModel(Plc plc, PlcRepository plcRepository, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _plc = plc;
             _plcRepository = plcRepository;
             _eventAggregator = eventAggregator;
+            _windowManager = windowManager;
         }
         public int Id => _plc.Id;
         public string Name => _plc.Name;
@@ -40,6 +42,11 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             // TODO gona be async
             _plcRepository.RemovePlc(_plc);
             PlcRemoved?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void AddControl()
+        {
+            _windowManager.ShowWindow(new CreateControlViewModel(_eventAggregator), null, null);
         }
 
         public void NaviToPLCEditView()

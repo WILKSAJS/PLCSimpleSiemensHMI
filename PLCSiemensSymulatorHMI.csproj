@@ -72,11 +72,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
+    <Compile Include="CustomControls\Views\SemaphoreView.xaml.cs">
+      <DependentUpon>SemaphoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Messages\CreateControlMessage.cs" />
     <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />
     <Compile Include="Models\Plc.cs" />
     <Compile Include="Repository\PlcRepository.cs" />
+    <Compile Include="ViewModels\ControlsHolderViewModel.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />
+    <Compile Include="ViewModels\CreateControlViewModel.cs" />
     <Compile Include="ViewModels\CreatePlcViewModel.cs" />
     <Compile Include="ViewModels\EditPlcViewModel.cs" />
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
@@ -85,8 +92,14 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellConductorViewModel.cs" />
     <Compile Include="ViewModels\TopMenuViewModel.cs" />
+    <Compile Include="Views\ControlsHolderView.xaml.cs">
+      <DependentUpon>ControlsHolderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateControlView.xaml.cs">
+      <DependentUpon>CreateControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreatePlcView.xaml.cs">
       <DependentUpon>CreatePlcView.xaml</DependentUpon>
@@ -141,9 +154,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="CustomControls\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CustomControls\Views\SemaphoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ControlsHolderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ControlsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -35,7 +35,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             switch (message.CurrentPage)
             {
                 case CurrentPage.ControlPage:
-                    ActivateItem(new ControlsViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
+                    //ActivateItem(new ControlsViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
+                    ActivateItem(new ControlsHolderViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
                     break;
                 //case CurrentPage.SettingsPage:
                 //    ActivateItem(_settingsViewModel);
