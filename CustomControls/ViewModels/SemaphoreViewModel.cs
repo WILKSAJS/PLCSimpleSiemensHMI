@@ -36,7 +36,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         private void PlcService_ValuesUpdated(object sender, EventArgs e)
         {
             var service = (Sharp7PlcService)sender;
-            SemaphoreState = service.ReadBitValue(DbAdress);
+            SemaphoreState = service.ReadBitValue(DbBlockAdress);
         }
 
         private bool _semaphoreState;

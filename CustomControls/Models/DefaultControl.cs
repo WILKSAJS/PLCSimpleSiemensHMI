@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
     public class DefaultControl : Screen
     {
+        public int Id { get; set; }
         public string ControlName { get; set; }
         public string DataBlock { get; set; }
         public string Index { get; set; }
@@ -19,5 +21,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         {
             get { return $"{this.DataBlock}.{this.Index}.{this.Offset}"; }
         }
+        public ControlType ControlType { get; set; }
+
     }
 }

@@ -11,7 +11,8 @@ namespace PLCSiemensSymulatorHMI.Messages
         GreenSemaphore,
         OrangeSemaphore,
         RedSemaphore,
-        Button,
+        BistableButton,
+        MonostableButton,
         Label
     }
 
