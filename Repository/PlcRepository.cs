@@ -85,31 +85,31 @@ namespace PLCSiemensSymulatorHMI.Repository
         #region Controls
 
         // TODO need to be async if perform I/O operations
-        public IList<DefaultControl> GetAllControls(Plc plc)
+        public IList<DefaultControl> GetAllControls(int plcId)
         {
-            return plcList.Where(x => x.Id == plc.Id).FirstOrDefault().ControlList;
+            return plcList.Where(x => x.Id == plcId).FirstOrDefault().ControlList;
         }
 
-        public bool RemoveControl(DefaultControl control, Plc plc)
+        public bool RemoveControl(DefaultControl control, int plcId)
         {
             // TODO REMOVE PLC FORM Db/xml file
-            return plcList.Where(x => x.Id == plc.Id).FirstOrDefault()
+            return plcList.Where(x => x.Id == plcId).FirstOrDefault()
                     .ControlList.Remove(control);
         }
 
-        public bool AddControl(DefaultControl control, Plc plc)
+        public bool AddControl(DefaultControl control, int plcId)
         {
             // TODO ADD PLC TO Db/xml file
-            plcList.Where(x => x.Id == plc.Id).FirstOrDefault()
+            plcList.Where(x => x.Id == plcId).FirstOrDefault()
                 .ControlList.Add(control);
 
             return true;
         }
 
-        public bool EditControl(DefaultControl control, Plc plc)
+        public bool EditControl(DefaultControl control, int plcId)
         {
             // TODO ADD PLC TO Db/xml file
-            plcList.Where(x => x.Id == plc.Id).FirstOrDefault()
+            plcList.Where(x => x.Id == plcId).FirstOrDefault()
                    .ControlList.Where(x => x.Id == control.Id)
                    .Select(x => {
                        x.ControlName = control.ControlName;

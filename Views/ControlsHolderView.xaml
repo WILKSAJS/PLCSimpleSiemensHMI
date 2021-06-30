@@ -16,12 +16,18 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl x:Name="Items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" >
+        <ItemsControl x:Name="ControlList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas Background="Tomato"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding Path=X}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Path=Y}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
         </ItemsControl>
 
         <ContentControl x:Name="HmiStatusBar" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" />

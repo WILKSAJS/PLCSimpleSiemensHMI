@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.Messages;
 using PLCSiemensSymulatorHMI.PlcService;
+using PLCSiemensSymulatorHMI.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +14,20 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     {
         private readonly SettingsViewModel _settingsViewModel;
         private readonly CreatePlcViewModel _createPlcViewModel;
+        private readonly PlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
 
         public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
             SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
+            PlcRepository plcRepository,
             IEventAggregator eventAggregator)
         {
             TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
             _createPlcViewModel = createPlcViewModel;
+            _plcRepository = plcRepository;
             _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
         }
@@ -36,7 +40,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             {
                 case CurrentPage.ControlPage:
                     //ActivateItem(new ControlsViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
-                    ActivateItem(new ControlsHolderViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
+                    ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
                     break;
                 //case CurrentPage.SettingsPage:
                 //    ActivateItem(_settingsViewModel);

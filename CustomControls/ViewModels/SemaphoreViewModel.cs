@@ -1,6 +1,8 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.Converters;
+using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.PlcService;
+using PLCSiemensSymulatorHMI.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,24 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public class SemaphoreViewModel:Screen
     {
         //private readonly Sharp7PlcService plcService;
+        private readonly PlcRepository _plcRepository;
+        private readonly DefaultControl _defaultControl;
+        private readonly IEventAggregator _eventAggregator;
 
-        public SemaphoreViewModel()
+        public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, IEventAggregator eventAggregator)
         {
             // set colour for semaphore every time if crate new
             //SemaphoreColour = brushConverterColours;
             //this.plcService = plcService;
+            _plcRepository = plcRepository;
+            _defaultControl = defaultControl;
+            _eventAggregator = eventAggregator;
+            this.SemaphoreColour = brushConverterColours;
 
         }
+
+        public double X => _defaultControl.X;
+        public double Y => _defaultControl.Y;
 
         private bool _semaphoreState;
         public bool SemaphoreState
