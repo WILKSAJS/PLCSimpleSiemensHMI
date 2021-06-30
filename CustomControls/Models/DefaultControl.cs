@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
+namespace PLCSiemensSymulatorHMI.CustomControls.Models
 {
-    public class DefaultControl : Screen
+    public class DefaultControl
     {
         public int Id { get; set; }
         public string ControlName { get; set; }

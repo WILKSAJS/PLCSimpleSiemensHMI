@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="CustomControls\Models\DefaultControl.cs" />
+    <Compile Include="CustomControls\Models\SemaphoreControl.cs" />
     <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
     <Compile Include="CustomControls\Views\SemaphoreView.xaml.cs">
       <DependentUpon>SemaphoreView.xaml</DependentUpon>
@@ -81,6 +82,7 @@
     <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />
     <Compile Include="Models\Plc.cs" />
+    <Compile Include="Repository\ControlsRepository.cs" />
     <Compile Include="Repository\PlcRepository.cs" />
     <Compile Include="ViewModels\ControlsHolderViewModel.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />

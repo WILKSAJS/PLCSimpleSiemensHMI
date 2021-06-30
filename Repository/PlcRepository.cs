@@ -1,4 +1,5 @@
-﻿using PLCSiemensSymulatorHMI.Models;
+﻿using PLCSiemensSymulatorHMI.CustomControls.Models;
+using PLCSiemensSymulatorHMI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,39 @@ namespace PLCSiemensSymulatorHMI.Repository
     {
         // TEMPORARY
         private IList<Plc> plcList = new List<Plc> {
-            new Plc{ Id = 1, Name = "Plc1", IpAdress = "127.0.0.1", Rack = "0", Slot = "1" },
-            new Plc{ Id = 2, Name = "Plc2 Test", IpAdress = "127.0.0.1", Rack = "0", Slot = "1" },
-            new Plc{ Id = 3, Name = "Plc3 Test", IpAdress = "127.0.0.1", Rack = "0", Slot = "1" }
+            new Plc{ Id = 1, Name = "Plc1", IpAdress = "127.0.0.1", Rack = "0", Slot = "1", ControlList = new List<DefaultControl>(){
+                new SemaphoreControl()
+            {
+                     Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "Index1", Offset = "Offset1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
+            },
+                new SemaphoreControl()
+                {
+                     Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB2", Index = "Index2", Offset = "Offset2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
+                }
+            } },
+            new Plc{ Id = 2, Name = "Plc2 Test", IpAdress = "127.0.0.1", Rack = "0", Slot = "1", ControlList = new List<DefaultControl>(){
+                new SemaphoreControl()
+            {
+                     Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "Index1", Offset = "Offset1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
+            },
+                new SemaphoreControl()
+                {
+                     Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB2", Index = "Index2", Offset = "Offset2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
+                }
+            } },
+            new Plc{ Id = 3, Name = "Plc3 Test", IpAdress = "127.0.0.1", Rack = "0", Slot = "1", ControlList = new List<DefaultControl>(){
+                new SemaphoreControl()
+            {
+                     Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "Index1", Offset = "Offset1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
+            },
+                new SemaphoreControl()
+                {
+                     Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB2", Index = "Index2", Offset = "Offset2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
+                }
+            } }
         };
 
+        #region PLC
         // TODO need to be async if perform I/O operations
         public IList<Plc> GetAllPlc()
         {
@@ -50,5 +79,48 @@ namespace PLCSiemensSymulatorHMI.Repository
 
             return true;
         }
+
+        #endregion
+
+        #region Controls
+
+        // TODO need to be async if perform I/O operations
+        public IList<DefaultControl> GetAllControls(Plc plc)
+        {
+            return plcList.Where(x => x.Id == plc.Id).FirstOrDefault().ControlList;
+        }
+
+        public bool RemoveControl(DefaultControl control, Plc plc)
+        {
+            // TODO REMOVE PLC FORM Db/xml file
+            return plcList.Where(x => x.Id == plc.Id).FirstOrDefault()
+                    .ControlList.Remove(control);
+        }
+
+        public bool AddControl(DefaultControl control, Plc plc)
+        {
+            // TODO ADD PLC TO Db/xml file
+            plcList.Where(x => x.Id == plc.Id).FirstOrDefault()
+                .ControlList.Add(control);
+
+            return true;
+        }
+
+        public bool EditControl(DefaultControl control, Plc plc)
+        {
+            // TODO ADD PLC TO Db/xml file
+            plcList.Where(x => x.Id == plc.Id).FirstOrDefault()
+                   .ControlList.Where(x => x.Id == control.Id)
+                   .Select(x => {
+                       x.ControlName = control.ControlName;
+                       x.DataBlock = control.DataBlock;
+                       x.Index = control.Index;
+                       x.Offset = control.Offset;
+                       return x;
+                   });
+
+            return true;
+        }
+        #endregion
     }
 }

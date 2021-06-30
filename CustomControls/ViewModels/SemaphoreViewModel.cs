@@ -9,34 +9,16 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
-    public class SemaphoreViewModel: DefaultControl
+    public class SemaphoreViewModel:Screen
     {
-        private readonly Sharp7PlcService plcService;
+        //private readonly Sharp7PlcService plcService;
 
-        public SemaphoreViewModel(Sharp7PlcService plcService, BrushConverterColours brushConverterColours)
+        public SemaphoreViewModel()
         {
             // set colour for semaphore every time if crate new
-            SemaphoreColour = brushConverterColours;
-            this.plcService = plcService;
+            //SemaphoreColour = brushConverterColours;
+            //this.plcService = plcService;
 
-        }
-
-        protected override void OnActivate()
-        {
-            plcService.ValuesUpdated += PlcService_ValuesUpdated;
-            base.OnActivate();
-        }
-        protected override void OnDeactivate(bool close)
-        {
-            plcService.ValuesUpdated -= PlcService_ValuesUpdated;
-            base.OnDeactivate(close);
-        }
-
-
-        private void PlcService_ValuesUpdated(object sender, EventArgs e)
-        {
-            var service = (Sharp7PlcService)sender;
-            SemaphoreState = service.ReadBitValue(DbBlockAdress);
         }
 
         private bool _semaphoreState;
@@ -52,6 +34,26 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             get { return _semaphoreColour; }
             set => Set(ref _semaphoreColour, value);
         }
+
+        //protected override void OnActivate()
+        //{
+        //    plcService.ValuesUpdated += PlcService_ValuesUpdated;
+        //    base.OnActivate();
+        //}
+        //protected override void OnDeactivate(bool close)
+        //{
+        //    plcService.ValuesUpdated -= PlcService_ValuesUpdated;
+        //    base.OnDeactivate(close);
+        //}
+
+
+        //private void PlcService_ValuesUpdated(object sender, EventArgs e)
+        //{
+        //    var service = (Sharp7PlcService)sender;
+        //    SemaphoreState = service.ReadBitValue(dbAdress);
+        //}
+
+      
 
     }
 }

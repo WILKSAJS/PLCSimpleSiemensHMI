@@ -1,4 +1,5 @@
-﻿using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
+﻿using PLCSiemensSymulatorHMI.CustomControls.Models;
+using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace PLCSiemensSymulatorHMI.Models
         public string IpAdress { get; set; }
         public string Rack { get; set; }
         public string Slot { get; set; }
+        public List<DefaultControl> ControlList { get; set; }
     }
 }
