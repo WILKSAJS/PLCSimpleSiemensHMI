@@ -64,12 +64,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             PlcList.Add(plcViewModel);
         }
 
-
-        public void EditPlcViewModel(Plc plc, PlcViewModel plcViewModel)
-        {
-            
-        }
-
         public void Handle(EditPlcMessage message)
         {
             _plcRepository.EditPlc(message.EditedPlc);

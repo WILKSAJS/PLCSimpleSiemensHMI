@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="CustomControls\Models\DefaultControl.cs" />
     <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
     <Compile Include="CustomControls\Views\SemaphoreView.xaml.cs">
       <DependentUpon>SemaphoreView.xaml</DependentUpon>
@@ -154,9 +155,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomControls\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="CustomControls\Views\SemaphoreView.xaml">
       <SubType>Designer</SubType>

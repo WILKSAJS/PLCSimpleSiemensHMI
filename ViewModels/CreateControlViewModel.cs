@@ -11,10 +11,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class CreateControlViewModel: Screen
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly PlcViewModel _plcViewModel;
 
-        public CreateControlViewModel(IEventAggregator eventAggregator)
+        public CreateControlViewModel(IEventAggregator eventAggregator, PlcViewModel plcViewModel)
         {
             _eventAggregator = eventAggregator;
+            _plcViewModel = plcViewModel;
             ControlType = Enum.GetValues(typeof(ControlType)).Cast<ControlType>().ToList();
         }
         public IReadOnlyList<ControlType> ControlType { get; }
@@ -61,14 +63,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         public void Submit()
         {
-            _eventAggregator.PublishOnUIThread(new CreateControlMessage()
-            {
-                ControlName = this.ControlName,
-                DataBlock = this.DataBlock,
-                Index = this.Index,
-                Offset = this.Offset,
-                ControlType = this.SelectedControlType
-            });
+            //_eventAggregator.PublishOnUIThread(new CreateControlMessage()
+            //{
+            //    ControlName = this.ControlName,
+            //    DataBlock = this.DataBlock,
+            //    Index = this.Index,
+            //    Offset = this.Offset,
+            //    ControlType = this.SelectedControlType
+            //});
             TryClose();
         }
     }

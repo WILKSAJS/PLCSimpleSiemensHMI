@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
-    public class SemaphoreViewModel:Screen
+    public class SemaphoreViewModel: DefaultControl
     {
         private readonly Sharp7PlcService plcService;
 
-        public SemaphoreViewModel(Sharp7PlcService plcService)
+        public SemaphoreViewModel(Sharp7PlcService plcService, BrushConverterColours brushConverterColours)
         {
             // set colour for semaphore every time if crate new
-            SemaphoreColour = BrushConverterColours.Green;
+            SemaphoreColour = brushConverterColours;
             this.plcService = plcService;
 
         }
-
 
         protected override void OnActivate()
         {
@@ -54,16 +53,5 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             set => Set(ref _semaphoreColour, value);
         }
 
-        public string ControlName { get; set; }
-        public string DataBlock { get; set; }
-        public string Index { get; set; }
-        public string Offset { get; set; }
-
-        private string _DbAdress;
-        protected string DbAdress
-        {
-            get { return _DbAdress; }
-            set { _DbAdress = $"{this.DataBlock}.{this.Index}.{this.Offset}"; }
-        }
     }
 }

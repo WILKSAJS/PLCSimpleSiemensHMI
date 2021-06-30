@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
 using PLCSiemensSymulatorHMI.PlcService;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             OnPlcServiceValueUpdated(null, null);
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
 
-            Items = new BindableCollection<Screen>();
+            //Items = new BindableCollection<Screen>();
+
+            //Items.Add(new SemaphoreViewModel(_plcService,Converters.BrushConverterColours.Green));
         }
+
         public BindableCollection<Screen> Items { get; set; }
+
+
         public HmiStatusBarViewModel HmiStatusBar { get; }
 
         private void OnPlcServiceValueUpdated(object sender, EventArgs e)
