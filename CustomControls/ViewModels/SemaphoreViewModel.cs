@@ -3,6 +3,7 @@ using PLCSiemensSymulatorHMI.Converters;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
+using PLCSiemensSymulatorHMI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,9 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         private readonly PlcRepository _plcRepository;
         private readonly DefaultControl _defaultControl;
         private readonly IEventAggregator _eventAggregator;
+        private readonly PlcViewModel _plcViewModel;
 
-        public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, IEventAggregator eventAggregator)
+        public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, IEventAggregator eventAggregator, PlcViewModel plcViewModel)
         {
             // set colour for semaphore every time if crate new
             //SemaphoreColour = brushConverterColours;
@@ -31,6 +33,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             _plcRepository = plcRepository;
             _defaultControl = defaultControl;
             _eventAggregator = eventAggregator;
+            _plcViewModel = plcViewModel;
             this.SemaphoreColour = brushConverterColours;
 
             Y = _defaultControl.Y;
@@ -91,6 +94,10 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
                     Vector v = start - eventArgs.GetPosition(MyCanvas);
                     X = origin.X - v.X;
                     Y = origin.Y - v.Y;
+
+                    // ASSIGN NEW X Y TO POINT
+                    _defaultControl.X = X;
+                    _defaultControl.Y = Y;
                 }
             }
 
@@ -102,7 +109,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             dragObject = null;
 
             // SAVE NEW X Y POSITIONS
-            
+            _plcRepository.EditControl(_defaultControl, _plcViewModel.Id);
 
         }
 

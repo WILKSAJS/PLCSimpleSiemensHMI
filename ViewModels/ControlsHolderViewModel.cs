@@ -54,15 +54,15 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             switch (defaultControl.ControlType)
             {
                 case Messages.ControlType.GreenSemaphore:
-                    var controlViewModel = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator);
+                    var controlViewModel = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
                     //plcViewModel.PlcRemoved += OnPlcRemoved;
                     return controlViewModel;
                 case Messages.ControlType.OrangeSemaphore:
-                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _eventAggregator);
+                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
                     //plcViewModel.PlcRemoved += OnPlcRemoved;
                     return controlViewModel;
                 case Messages.ControlType.RedSemaphore:
-                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _eventAggregator);
+                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
                     //plcViewModel.PlcRemoved += OnPlcRemoved;
                     return controlViewModel;
                 //case Messages.ControlType.BistableButton:
@@ -73,7 +73,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 //    break;
                 default:
                     //TODO: DEFAULT BEHAVIOUR........
-                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator);
+                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
             }     
         }
 
