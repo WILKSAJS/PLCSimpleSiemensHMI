@@ -25,6 +25,11 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly PlcViewModel _plcViewModel;
 
+        UIElement dragObject = null;
+        Canvas MyCanvas;
+        Point start;
+        Point origin;
+
         public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, IEventAggregator eventAggregator, PlcViewModel plcViewModel)
         {
             // set colour for semaphore every time if crate new
@@ -38,7 +43,15 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
             Y = _defaultControl.Y;
             X = _defaultControl.X;
+            ControlName = _defaultControl.ControlName;
 
+        }
+
+        private string _controlName;
+        public string ControlName
+        {
+            get { return _controlName; }
+            set => Set(ref _controlName, value);
         }
 
         private double _Y;
@@ -69,13 +82,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             set => Set(ref _semaphoreColour, value);
         }
 
-
-        UIElement dragObject = null;
-        Canvas MyCanvas;
-        Point start;
-        Point origin;
-
-        public void MouseDown(object sender, MouseButtonEventArgs eventArgs, object dataContext, object source, object view, ActionExecutionContext executionContext)
+        public void MouseDown(MouseButtonEventArgs eventArgs,ActionExecutionContext executionContext)
         {
             MyCanvas = UIHelper.UIHelper.FindChild<Canvas>(Application.Current.MainWindow, "MyCanvas");
             dragObject = executionContext.Source as UIElement;
@@ -84,8 +91,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             origin = new Point(X,Y);
         }
 
-
-        public void MouseMove(object sender, MouseEventArgs eventArgs, object dataContext, object source, object view, ActionExecutionContext executionContext)
+        public void MouseMove(MouseEventArgs eventArgs)
         {
             if (dragObject != null)
             {
@@ -103,7 +109,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         }
 
-        public void MouseUp(object sender, MouseButtonEventArgs eventArgs, object dataContext, object source, object view, ActionExecutionContext executionContext)
+        public void MouseUp()
         {
             dragObject.ReleaseMouseCapture();
             dragObject = null;

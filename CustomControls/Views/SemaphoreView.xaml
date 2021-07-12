@@ -12,10 +12,16 @@
         <converters:BoolToBrushConverter x:Key="BoolToBrush" />
     </UserControl.Resources>
 
-    <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="1"
+    <StackPanel HorizontalAlignment="Center">
+        <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="1"
                          Fill="{Binding SemaphoreState, Converter={StaticResource BoolToBrush}, ConverterParameter=Green}"
-                         cal:Message.Attach="[Event MouseDown] = [Action MouseDown($this,$eventArgs,$dataContext, $source, $view, $executionContext)];
-                                             [Event MouseUp] = [Action MouseUp($this,$eventArgs,$dataContext, $source, $view, $executionContext)];
-                                             [Event MouseMove] = [Action MouseMove($this,$eventArgs,$dataContext, $source, $view, $executionContext)];"/>
+                         cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
+                                             [Event MouseUp] = [Action MouseUp()];
+                                             [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
+        <Label x:Name="ControlName"/>
+        
+    </StackPanel>
     
+    
+
 </UserControl>
