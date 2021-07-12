@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
              xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d">
     
     <UserControl.Resources>
@@ -12,5 +13,9 @@
     </UserControl.Resources>
 
     <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="1"
-                         Fill="{Binding SemaphoreState, Converter={StaticResource BoolToBrush}, ConverterParameter=Green}"/>
+                         Fill="{Binding SemaphoreState, Converter={StaticResource BoolToBrush}, ConverterParameter=Green}"
+                         cal:Message.Attach="[Event MouseDown] = [Action MouseDown($this,$eventArgs,$dataContext, $source, $view, $executionContext)];
+                                             [Event MouseUp] = [Action MouseUp($this,$eventArgs,$dataContext, $source, $view, $executionContext)];
+                                             [Event MouseMove] = [Action MouseMove($this,$eventArgs,$dataContext, $source, $view, $executionContext)];"/>
+    
 </UserControl>

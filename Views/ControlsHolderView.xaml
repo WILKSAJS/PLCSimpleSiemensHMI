@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d">
     <Grid>
 
@@ -16,10 +17,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl x:Name="ControlList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" >
+        <ItemsControl x:Name="ControlList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Background="Tomato"/>
+                    <Canvas x:Name="MyCanvas" Background="WhiteSmoke"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>

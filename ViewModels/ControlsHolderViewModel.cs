@@ -10,6 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
@@ -19,6 +24,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly Sharp7PlcService _plcService;
         private readonly PlcViewModel _plcViewModel;
         private readonly IEventAggregator _eventAggregator;
+        
 
         public ControlsHolderViewModel(PlcRepository plcRepository, Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
         {
@@ -35,6 +41,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
             //Items.Add(new SemaphoreViewModel(_plcService,Converters.BrushConverterColours.Green));
             ControlList.AddRange(_plcRepository.GetAllControls(_plcViewModel.Id).Select(x => CreateNewControlVewModel(x)));
+
         }
 
         public BindableCollection<Screen> ControlList { get; set; } = new BindableCollection<Screen>();
@@ -67,15 +74,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 default:
                     //TODO: DEFAULT BEHAVIOUR........
                     return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator);
-            }
-            
-            
+            }     
         }
-
 
         private void OnPlcServiceValueUpdated(object sender, EventArgs e)
         {
             //TODO: implement update!
         }
+
+
     }
 }

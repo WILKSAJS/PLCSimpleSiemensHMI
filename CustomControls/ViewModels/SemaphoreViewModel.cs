@@ -8,6 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
@@ -28,10 +33,24 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             _eventAggregator = eventAggregator;
             this.SemaphoreColour = brushConverterColours;
 
+            Y = _defaultControl.Y;
+            X = _defaultControl.X;
+
         }
 
-        public double X => _defaultControl.X;
-        public double Y => _defaultControl.Y;
+        private double _Y;
+        public double Y
+        {
+            get { return _Y; }
+            set => Set(ref _Y, value);
+        }
+
+        private double _X;
+        public double X
+        {
+            get { return _X; }
+            set => Set(ref _X, value);
+        }
 
         private bool _semaphoreState;
         public bool SemaphoreState
@@ -47,11 +66,53 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             set => Set(ref _semaphoreColour, value);
         }
 
+
+        UIElement dragObject = null;
+        Canvas MyCanvas;
+        Point start;
+        Point origin;
+
+        public void MouseDown(object sender, MouseButtonEventArgs eventArgs, object dataContext, object source, object view, ActionExecutionContext executionContext)
+        {
+            MyCanvas = UIHelper.UIHelper.FindChild<Canvas>(Application.Current.MainWindow, "MyCanvas");
+            dragObject = executionContext.Source as UIElement;
+            dragObject.CaptureMouse();
+            start = eventArgs.GetPosition(MyCanvas);
+            origin = new Point(X,Y);
+        }
+
+
+        public void MouseMove(object sender, MouseEventArgs eventArgs, object dataContext, object source, object view, ActionExecutionContext executionContext)
+        {
+            if (dragObject != null)
+            {
+                if (dragObject.IsMouseCaptured)
+                {
+                    Vector v = start - eventArgs.GetPosition(MyCanvas);
+                    X = origin.X - v.X;
+                    Y = origin.Y - v.Y;
+                }
+            }
+
+        }
+
+        public void MouseUp(object sender, MouseButtonEventArgs eventArgs, object dataContext, object source, object view, ActionExecutionContext executionContext)
+        {
+            dragObject.ReleaseMouseCapture();
+            dragObject = null;
+
+            // SAVE NEW X Y POSITIONS
+            
+
+        }
+
         //protected override void OnActivate()
         //{
-        //    plcService.ValuesUpdated += PlcService_ValuesUpdated;
+        //    //plcService.ValuesUpdated += PlcService_ValuesUpdated;
+
         //    base.OnActivate();
         //}
+
         //protected override void OnDeactivate(bool close)
         //{
         //    plcService.ValuesUpdated -= PlcService_ValuesUpdated;
@@ -65,7 +126,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         //    SemaphoreState = service.ReadBitValue(dbAdress);
         //}
 
-      
+
 
     }
 }

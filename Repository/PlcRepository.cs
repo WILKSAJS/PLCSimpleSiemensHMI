@@ -116,6 +116,8 @@ namespace PLCSiemensSymulatorHMI.Repository
                        x.DataBlock = control.DataBlock;
                        x.Index = control.Index;
                        x.Offset = control.Offset;
+                       x.Y = control.Y;
+                       x.X = control.X;
                        return x;
                    });
 

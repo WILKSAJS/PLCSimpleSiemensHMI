@@ -84,6 +84,7 @@
     <Compile Include="Models\Plc.cs" />
     <Compile Include="Repository\ControlsRepository.cs" />
     <Compile Include="Repository\PlcRepository.cs" />
+    <Compile Include="UIHelper\UIHelper.cs" />
     <Compile Include="ViewModels\ControlsHolderViewModel.cs" />
     <Compile Include="ViewModels\ControlsViewModel.cs" />
     <Compile Include="ViewModels\CreateControlViewModel.cs" />
