@@ -2,6 +2,7 @@
 using PLCSiemensSymulatorHMI.Converters;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
+using PLCSiemensSymulatorHMI.Messages;
 using PLCSiemensSymulatorHMI.Models;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
@@ -18,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
-    public class ControlsHolderViewModel:Screen
+    public class ControlsHolderViewModel:Screen, IHandle<CreateControlMessage>
     {
         private readonly PlcRepository _plcRepository;
         private readonly Sharp7PlcService _plcService;
@@ -30,6 +31,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             _plcViewModel = plcViewModel;
             _eventAggregator = eventAggregator;
+            
             _plcRepository = plcRepository;
             _plcService = plcService;
             HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
@@ -47,6 +49,18 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         public BindableCollection<Screen> ControlList { get; set; } = new BindableCollection<Screen>();
 
         public HmiStatusBarViewModel HmiStatusBar { get; }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            _eventAggregator.Subscribe(this);
+
+        }
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
+            _eventAggregator.Unsubscribe(this);
+        }
 
         private Screen CreateNewControlVewModel(DefaultControl defaultControl)
         {
@@ -75,6 +89,43 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     //TODO: DEFAULT BEHAVIOUR........
                     return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
             }     
+        }
+
+        // HERE NEW CONTROL IS CREATES
+        public void Handle(CreateControlMessage message)
+        {
+            var existedList = _plcRepository.GetAllControls(_plcViewModel.Id);
+
+            // Find last Id and assign next to new Control
+            var nextId = existedList.Count == 0 ? 1 : existedList.OrderBy(x => x.Id).LastOrDefault().Id + 1;
+
+            var newControl = new DefaultControl()
+            {
+                Id = nextId,
+                ControlName = message.ControlName,
+                DataBlock = message.DataBlock,
+                Index = message.Index,
+                Offset = message.Offset,
+                ControlType = message.ControlType,
+                X = 0,
+                Y = 0
+            };
+
+            // Add to repo
+            try
+            {
+                _plcRepository.AddControl(newControl, _plcViewModel.Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            // add to list
+            ControlList.Add(CreateNewControlVewModel(newControl));
+
+
+
         }
 
         private void OnPlcServiceValueUpdated(object sender, EventArgs e)

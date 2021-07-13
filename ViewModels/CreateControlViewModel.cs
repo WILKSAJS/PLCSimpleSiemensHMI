@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.Messages;
+using PLCSiemensSymulatorHMI.Models;
+using PLCSiemensSymulatorHMI.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +12,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class CreateControlViewModel: Screen
     {
+        private readonly Plc _plc;
         private readonly IEventAggregator _eventAggregator;
-        private readonly PlcViewModel _plcViewModel;
+        private readonly PlcRepository _plcRepository;
 
-        public CreateControlViewModel(IEventAggregator eventAggregator, PlcViewModel plcViewModel)
+        public CreateControlViewModel(Plc plc, IEventAggregator eventAggregator)
         {
+            _plc = plc;
             _eventAggregator = eventAggregator;
-            _plcViewModel = plcViewModel;
             ControlType = Enum.GetValues(typeof(ControlType)).Cast<ControlType>().ToList();
         }
         public IReadOnlyList<ControlType> ControlType { get; }
@@ -63,14 +66,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         public void Submit()
         {
-            //_eventAggregator.PublishOnUIThread(new CreateControlMessage()
-            //{
-            //    ControlName = this.ControlName,
-            //    DataBlock = this.DataBlock,
-            //    Index = this.Index,
-            //    Offset = this.Offset,
-            //    ControlType = this.SelectedControlType
-            //});
+            _eventAggregator.PublishOnUIThread(new CreateControlMessage()
+            {
+                ControlName = this.ControlName,
+                DataBlock = this.DataBlock,
+                Index = this.Index,
+                Offset = this.Offset,
+                ControlType = this.SelectedControlType
+            });
             TryClose();
         }
     }

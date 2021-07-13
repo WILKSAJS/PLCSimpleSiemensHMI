@@ -46,7 +46,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         public void AddControl()
         {
-            _windowManager.ShowWindow(new CreateControlViewModel(_eventAggregator,this), null, null);
+            _windowManager.ShowWindow(new CreateControlViewModel(_plc, _eventAggregator), null, null);
         }
 
         public void NaviToPLCEditView()
