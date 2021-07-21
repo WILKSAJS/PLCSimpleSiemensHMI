@@ -14,7 +14,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     {
         private readonly Plc _plc;
         private readonly IEventAggregator _eventAggregator;
-        private readonly PlcRepository _plcRepository;
 
         public CreateControlViewModel(Plc plc, IEventAggregator eventAggregator)
         {
