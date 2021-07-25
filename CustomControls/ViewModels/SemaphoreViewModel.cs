@@ -39,7 +39,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             _defaultControl = defaultControl;
             _eventAggregator = eventAggregator;
             _plcViewModel = plcViewModel;
-            this.SemaphoreColour = brushConverterColours;
+            SemaphoreColour = brushConverterColours;
 
             Y = _defaultControl.Y;
             X = _defaultControl.X;

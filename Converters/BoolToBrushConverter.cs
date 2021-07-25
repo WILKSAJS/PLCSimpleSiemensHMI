@@ -17,13 +17,13 @@ namespace PLCSiemensSymulatorHMI.Converters
     }
 
     [ValueConversion(typeof(bool), typeof(Brushes), ParameterType = typeof(string))]
-    public class BoolToBrushConverter : IValueConverter
+    public class BoolToBrushConverter : IMultiValueConverter //IValueConverter
     {
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            BrushConverterColours colour = (BrushConverterColours)Enum.Parse(typeof(BrushConverterColours), parameter.ToString());
-            var boolValue = (bool)value;
+            // values array is set in SemaphoreView and contains: [0] actual bool value - semaphore state, [1] - SemaphoreColour
+            BrushConverterColours colour = (BrushConverterColours)Enum.Parse(typeof(BrushConverterColours), values[1].ToString());
+            var boolValue = (bool)values[0];
 
             switch (colour)
             {
@@ -38,7 +38,7 @@ namespace PLCSiemensSymulatorHMI.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

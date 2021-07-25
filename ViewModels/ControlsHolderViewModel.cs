@@ -35,15 +35,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcRepository = plcRepository;
             _plcService = plcService;
             HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
+
             // for initialzie purpose
             OnPlcServiceValueUpdated(null, null);
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
 
-            //Items = new BindableCollection<Screen>();
-
-            //Items.Add(new SemaphoreViewModel(_plcService,Converters.BrushConverterColours.Green));
             ControlList.AddRange(_plcRepository.GetAllControls(_plcViewModel.Id).Select(x => CreateNewControlVewModel(x)));
-
         }
 
         public BindableCollection<Screen> ControlList { get; set; } = new BindableCollection<Screen>();
@@ -55,11 +52,16 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             base.OnActivate();
             _eventAggregator.Subscribe(this);
 
+            Connect();
         }
+
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
             _eventAggregator.Unsubscribe(this);
+            _plcService.ValuesUpdated -= OnPlcServiceValueUpdated;
+
+            Disconnect();
         }
 
         private Screen CreateNewControlVewModel(DefaultControl defaultControl)
@@ -123,16 +125,30 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
             // add to list
             ControlList.Add(CreateNewControlVewModel(newControl));
+        }
 
 
+        #region PLCService methods
+        public void Connect()
+        {
+            int rackResult; // default 0
+            int slotResult; // default 1
+            rackResult = Int32.TryParse(_plcViewModel.Rack, out rackResult) ? rackResult : 0;
+            slotResult = Int32.TryParse(_plcViewModel.Slot, out slotResult) ? slotResult : 1;
 
+            _plcService.ConnectToPlc(_plcViewModel.IpAdress, rackResult, slotResult);
+        }
+
+        public void Disconnect()
+        {
+            _plcService.Disconnect();
         }
 
         private void OnPlcServiceValueUpdated(object sender, EventArgs e)
         {
             //TODO: implement update!
         }
-
+        #endregion
 
     }
 }

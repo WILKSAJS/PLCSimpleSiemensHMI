@@ -10,18 +10,24 @@
     
     <UserControl.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrush" />
+        <Style TargetType="Ellipse">
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <MultiBinding Converter = "{StaticResource BoolToBrush}">
+                        <Binding Path="SemaphoreState" UpdateSourceTrigger="PropertyChanged"/>
+                        <Binding Path="SemaphoreColour" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
-
+   
     <StackPanel HorizontalAlignment="Center">
         <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="1"
-                         Fill="{Binding SemaphoreState, Converter={StaticResource BoolToBrush}, ConverterParameter=Green}"
                          cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];
                                              [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
         <Label x:Name="ControlName"/>
-        
     </StackPanel>
     
-    
-
 </UserControl>
