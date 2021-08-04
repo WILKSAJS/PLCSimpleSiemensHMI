@@ -13,35 +13,16 @@ namespace PLCSiemensSymulatorHMI.Repository
         // TEMPORARY
         private IList<Plc> plcList = new List<Plc> {
             new Plc{ Id = 1, Name = "Plc1", IpAdress = "127.0.0.1", Rack = "0", Slot = "1", ControlList = new List<DefaultControl>(){
-                new SemaphoreControl()
-            {
-                     Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "Index1", Offset = "Offset1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
-            },
-                new SemaphoreControl()
-                {
-                     Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB2", Index = "Index2", Offset = "Offset2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
-                }
-            } },
-            new Plc{ Id = 2, Name = "Plc2 Test", IpAdress = "127.0.0.1", Rack = "0", Slot = "1", ControlList = new List<DefaultControl>(){
-                new SemaphoreControl()
-            {
-                     Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "Index1", Offset = "Offset1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
-            },
-                new SemaphoreControl()
-                {
-                     Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB2", Index = "Index2", Offset = "Offset2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
-                }
-            } },
-            new Plc{ Id = 3, Name = "Plc3 Test", IpAdress = "127.0.0.1", Rack = "0", Slot = "1", ControlList = new List<DefaultControl>(){
-                new SemaphoreControl()
-            {
-                     Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "Index1", Offset = "Offset1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
-            },
-                new SemaphoreControl()
-                {
-                     Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB2", Index = "Index2", Offset = "Offset2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
-                }
-            } }
+                    new SemaphoreControl()
+                    {
+                         Id = 1, ControlName="SemGreen1", ControlType = Messages.ControlType.GreenSemaphore, DataBlock = "DB1", Index = "DBX8", Offset = "1", SemaphoreColour = Converters.BrushConverterColours.Green, SemaphoreState = false, X = 0, Y = 0
+                    },
+                    new SemaphoreControl()
+                    {
+                         Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB1", Index = "DBX8", Offset = "2", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
+                    }
+                } 
+            }
         };
 
         #region PLC

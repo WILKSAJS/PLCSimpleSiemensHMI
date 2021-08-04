@@ -74,6 +74,7 @@
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="CustomControls\Models\DefaultControl.cs" />
     <Compile Include="CustomControls\Models\SemaphoreControl.cs" />
+    <Compile Include="CustomControls\ViewModels\BaseControlViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
     <Compile Include="CustomControls\Views\SemaphoreView.xaml.cs">
       <DependentUpon>SemaphoreView.xaml</DependentUpon>

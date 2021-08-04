@@ -17,55 +17,13 @@ using System.Windows.Shapes;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
-    public class SemaphoreViewModel:Screen
+    public class SemaphoreViewModel: BaseControlViewModel
     {
-        //private readonly Sharp7PlcService plcService;
-        private readonly PlcRepository _plcRepository;
-        private readonly DefaultControl _defaultControl;
-        private readonly IEventAggregator _eventAggregator;
-        private readonly PlcViewModel _plcViewModel;
 
-        UIElement dragObject = null;
-        Canvas MyCanvas;
-        Point start;
-        Point origin;
-
-        public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, IEventAggregator eventAggregator, PlcViewModel plcViewModel)
+        public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+            :base(plcRepository,defaultControl,plcViewModel)
         {
-            // set colour for semaphore every time if crate new
-            //SemaphoreColour = brushConverterColours;
-            //this.plcService = plcService;
-            _plcRepository = plcRepository;
-            _defaultControl = defaultControl;
-            _eventAggregator = eventAggregator;
-            _plcViewModel = plcViewModel;
             SemaphoreColour = brushConverterColours;
-
-            Y = _defaultControl.Y;
-            X = _defaultControl.X;
-            ControlName = _defaultControl.ControlName;
-
-        }
-
-        private string _controlName;
-        public string ControlName
-        {
-            get { return _controlName; }
-            set => Set(ref _controlName, value);
-        }
-
-        private double _Y;
-        public double Y
-        {
-            get { return _Y; }
-            set => Set(ref _Y, value);
-        }
-
-        private double _X;
-        public double X
-        {
-            get { return _X; }
-            set => Set(ref _X, value);
         }
 
         private bool _semaphoreState;
@@ -82,64 +40,11 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             set => Set(ref _semaphoreColour, value);
         }
 
-        public void MouseDown(MouseButtonEventArgs eventArgs,ActionExecutionContext executionContext)
+
+        public override async Task ReadControlStatus(Sharp7PlcService plcService)
         {
-            MyCanvas = UIHelper.UIHelper.FindChild<Canvas>(Application.Current.MainWindow, "MyCanvas");
-            dragObject = executionContext.Source as UIElement;
-            dragObject.CaptureMouse();
-            start = eventArgs.GetPosition(MyCanvas);
-            origin = new Point(X,Y);
+            SemaphoreState = await plcService.ReadBit(_DbBlockAdress);
         }
-
-        public void MouseMove(MouseEventArgs eventArgs)
-        {
-            if (dragObject != null)
-            {
-                if (dragObject.IsMouseCaptured)
-                {
-                    Vector v = start - eventArgs.GetPosition(MyCanvas);
-                    X = origin.X - v.X;
-                    Y = origin.Y - v.Y;
-
-                    // ASSIGN NEW X Y TO POINT
-                    _defaultControl.X = X;
-                    _defaultControl.Y = Y;
-                }
-            }
-
-        }
-
-        public void MouseUp()
-        {
-            dragObject.ReleaseMouseCapture();
-            dragObject = null;
-
-            // SAVE NEW X Y POSITIONS
-            _plcRepository.EditControl(_defaultControl, _plcViewModel.Id);
-
-        }
-
-        //protected override void OnActivate()
-        //{
-        //    //plcService.ValuesUpdated += PlcService_ValuesUpdated;
-
-        //    base.OnActivate();
-        //}
-
-        //protected override void OnDeactivate(bool close)
-        //{
-        //    plcService.ValuesUpdated -= PlcService_ValuesUpdated;
-        //    base.OnDeactivate(close);
-        //}
-
-
-        //private void PlcService_ValuesUpdated(object sender, EventArgs e)
-        //{
-        //    var service = (Sharp7PlcService)sender;
-        //    SemaphoreState = service.ReadBitValue(dbAdress);
-        //}
-
-
 
     }
 }

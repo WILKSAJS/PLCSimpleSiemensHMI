@@ -21,8 +21,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcService = plcService;
             HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
             // for initialzie purpose
-            OnPlcServiceValueUpdated(null, null);
-            _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
+            //OnPlcServiceValueUpdated(null, null);
+            //_plcService.ValuesUpdated += OnPlcServiceValueUpdated;
         }
         public HmiStatusBarViewModel HmiStatusBar { get; }
 
@@ -41,7 +41,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
-            _plcService.ValuesUpdated -= OnPlcServiceValueUpdated;
+            //_plcService.ValuesUpdated -= OnPlcServiceValueUpdated;
             Disconnect();
         }
 
@@ -106,28 +106,28 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             }
         }
 
-        private short _inletPumpSpeed;
-        public short InletPumpSpeed
-        {
-            get { return _inletPumpSpeed; }
-            set
-            {
-                _inletPumpSpeed = value;
-                NotifyOfPropertyChange(() => InletPumpSpeed);
-                _plcService.WriteInletPumpSpeed(value).AsResult();
-            }
-        }
-        private short _outletPumpSpeed;
-        public short OutletPumpSpeed
-        {
-            get { return _outletPumpSpeed; }
-            set
-            {
-                _outletPumpSpeed = value;
-                NotifyOfPropertyChange(() => OutletPumpSpeed);
-                _plcService.WriteOutletPumpSpeed(value).AsResult();
-            }
-        }
+        //private short _inletPumpSpeed;
+        //public short InletPumpSpeed
+        //{
+        //    get { return _inletPumpSpeed; }
+        //    set
+        //    {
+        //        _inletPumpSpeed = value;
+        //        NotifyOfPropertyChange(() => InletPumpSpeed);
+        //        _plcService.WriteInletPumpSpeed(value).AsResult();
+        //    }
+        //}
+        //private short _outletPumpSpeed;
+        //public short OutletPumpSpeed
+        //{
+        //    get { return _outletPumpSpeed; }
+        //    set
+        //    {
+        //        _outletPumpSpeed = value;
+        //        NotifyOfPropertyChange(() => OutletPumpSpeed);
+        //        _plcService.WriteOutletPumpSpeed(value).AsResult();
+        //    }
+        //}
 
         #endregion
 
@@ -146,25 +146,25 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcService.Disconnect();
         }
 
-        public async void Start()
-        {
-            await _plcService.WriteStartMonostable();
-        }
+        //public async void Start()
+        //{
+        //    await _plcService.WriteStartMonostable();
+        //}
 
-        public async void Stop()
-        {
-            await _plcService.WriteStopMonostable();
-        }
+        //public async void Stop()
+        //{
+        //    await _plcService.WriteStopMonostable();
+        //}
         #endregion
 
-        private void OnPlcServiceValueUpdated(object sender, EventArgs e)
-        {
-            //ConnectionState = _plcService.ConnectionState;
-            //TimeScan = _plcService.ScanTtime;
-            PumpState = _plcService.PumpState;
-            HighSensor = _plcService.HighLimit;
-            LowSensor = _plcService.LowLimit;
-            TankLevel = _plcService.TankLevel;
-        }
+        //private void OnPlcServiceValueUpdated(object sender, EventArgs e)
+        //{
+        //    //ConnectionState = _plcService.ConnectionState;
+        //    //TimeScan = _plcService.ScanTtime;
+        //    PumpState = _plcService.PumpState;
+        //    HighSensor = _plcService.HighLimit;
+        //    LowSensor = _plcService.LowLimit;
+        //    TankLevel = _plcService.TankLevel;
+        //}
     }
 }

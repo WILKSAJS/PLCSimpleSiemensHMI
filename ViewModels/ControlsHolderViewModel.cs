@@ -25,7 +25,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly Sharp7PlcService _plcService;
         private readonly PlcViewModel _plcViewModel;
         private readonly IEventAggregator _eventAggregator;
-        
 
         public ControlsHolderViewModel(PlcRepository plcRepository, Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
         {
@@ -36,14 +35,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcService = plcService;
             HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
 
-            // for initialzie purpose
-            OnPlcServiceValueUpdated(null, null);
-            _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
+            
 
             ControlList.AddRange(_plcRepository.GetAllControls(_plcViewModel.Id).Select(x => CreateNewControlVewModel(x)));
         }
 
-        public BindableCollection<Screen> ControlList { get; set; } = new BindableCollection<Screen>();
+        public BindableCollection<BaseControlViewModel> ControlList { get; set; } = new BindableCollection<BaseControlViewModel>();
 
         public HmiStatusBarViewModel HmiStatusBar { get; }
 
@@ -51,6 +48,10 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
+
+            //// for initialzie purpose
+            //OnPlcServiceValueUpdated(null, null);
+            _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
 
             Connect();
         }
@@ -64,36 +65,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             Disconnect();
         }
 
-        private Screen CreateNewControlVewModel(DefaultControl defaultControl)
-        {
-            
-            switch (defaultControl.ControlType)
-            {
-                case Messages.ControlType.GreenSemaphore:
-                    var controlViewModel = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
-                    //plcViewModel.PlcRemoved += OnPlcRemoved;
-                    return controlViewModel;
-                case Messages.ControlType.OrangeSemaphore:
-                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
-                    //plcViewModel.PlcRemoved += OnPlcRemoved;
-                    return controlViewModel;
-                case Messages.ControlType.RedSemaphore:
-                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
-                    //plcViewModel.PlcRemoved += OnPlcRemoved;
-                    return controlViewModel;
-                //case Messages.ControlType.BistableButton:
-                //    break;
-                //case Messages.ControlType.MonostableButton:
-                //    break;
-                //case Messages.ControlType.Label:
-                //    break;
-                default:
-                    //TODO: DEFAULT BEHAVIOUR........
-                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _eventAggregator, _plcViewModel);
-            }     
-        }
 
-        // HERE NEW CONTROL IS CREATES
+        #region Create new control region
+        // HERE NEW CONTROL IS CREATED
         public void Handle(CreateControlMessage message)
         {
             var existedList = _plcRepository.GetAllControls(_plcViewModel.Id);
@@ -127,6 +101,36 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             ControlList.Add(CreateNewControlVewModel(newControl));
         }
 
+        private BaseControlViewModel CreateNewControlVewModel(DefaultControl defaultControl)
+        {
+
+            switch (defaultControl.ControlType)
+            {
+                case Messages.ControlType.GreenSemaphore:
+                    var controlViewModel = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+                    //plcViewModel.PlcRemoved += OnPlcRemoved;
+                    return controlViewModel;
+                case Messages.ControlType.OrangeSemaphore:
+                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel);
+                    //plcViewModel.PlcRemoved += OnPlcRemoved;
+                    return controlViewModel;
+                case Messages.ControlType.RedSemaphore:
+                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
+                    //plcViewModel.PlcRemoved += OnPlcRemoved;
+                    return controlViewModel;
+                //case Messages.ControlType.BistableButton:
+                //    break;
+                //case Messages.ControlType.MonostableButton:
+                //    break;
+                //case Messages.ControlType.Label:
+                //    break;
+                default:
+                    //TODO: DEFAULT BEHAVIOUR........
+                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+            }
+        }
+        #endregion
+
 
         #region PLCService methods
         public void Connect()
@@ -144,9 +148,15 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcService.Disconnect();
         }
 
-        private void OnPlcServiceValueUpdated(object sender, EventArgs e)
+        private async void OnPlcServiceValueUpdated(object sender, EventArgs e)
         {
-            //TODO: implement update!
+            if (HmiStatusBar.ConnectionState == ConnectionStates.Online)
+            {
+                foreach (BaseControlViewModel control in ControlList)
+                {
+                    await control.ReadControlStatus(_plcService);
+                }
+            }
         }
         #endregion
 
