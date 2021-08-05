@@ -40,8 +40,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             set => Set(ref _semaphoreColour, value);
         }
 
-
-        public override async Task ReadControlStatus(Sharp7PlcService plcService)
+        // Read bit that is converted to Semaphore Brush.Colour
+        public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
             SemaphoreState = await plcService.ReadBit(_DbBlockAdress);
         }

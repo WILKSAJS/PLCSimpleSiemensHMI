@@ -3,19 +3,11 @@ using PLCSiemensSymulatorHMI.Converters;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
 using PLCSiemensSymulatorHMI.Messages;
-using PLCSiemensSymulatorHMI.Models;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
@@ -44,7 +36,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         public HmiStatusBarViewModel HmiStatusBar { get; }
 
-        protected override void OnActivate()
+        protected override async void OnActivate()
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
@@ -53,7 +45,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             //OnPlcServiceValueUpdated(null, null);
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
 
-            Connect();
+            await Connect();
+            
         }
 
         protected override void OnDeactivate(bool close)
@@ -106,21 +99,16 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
             switch (defaultControl.ControlType)
             {
+                
                 case Messages.ControlType.GreenSemaphore:
-                    var controlViewModel = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
-                    //plcViewModel.PlcRemoved += OnPlcRemoved;
-                    return controlViewModel;
+                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
                 case Messages.ControlType.OrangeSemaphore:
-                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel);
-                    //plcViewModel.PlcRemoved += OnPlcRemoved;
-                    return controlViewModel;
+                    return new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel);
                 case Messages.ControlType.RedSemaphore:
-                    controlViewModel = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
-                    //plcViewModel.PlcRemoved += OnPlcRemoved;
-                    return controlViewModel;
+                    return new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
+                case Messages.ControlType.MonostableButton:
+                    return new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel);
                 //case Messages.ControlType.BistableButton:
-                //    break;
-                //case Messages.ControlType.MonostableButton:
                 //    break;
                 //case Messages.ControlType.Label:
                 //    break;
@@ -133,14 +121,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
 
         #region PLCService methods
-        public void Connect()
+        public async Task Connect()
         {
             int rackResult; // default 0
             int slotResult; // default 1
             rackResult = Int32.TryParse(_plcViewModel.Rack, out rackResult) ? rackResult : 0;
             slotResult = Int32.TryParse(_plcViewModel.Slot, out slotResult) ? slotResult : 1;
 
-            _plcService.ConnectToPlc(_plcViewModel.IpAdress, rackResult, slotResult);
+             await _plcService.ConnectToPlc(_plcViewModel.IpAdress, rackResult, slotResult);
         }
 
         public void Disconnect()
@@ -154,7 +142,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             {
                 foreach (BaseControlViewModel control in ControlList)
                 {
-                    await control.ReadControlStatus(_plcService);
+                    await control.PerformControlOperation(_plcService);
                 }
             }
         }

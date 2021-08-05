@@ -90,14 +90,16 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public void MouseUp()
         {
-            dragObject.ReleaseMouseCapture();
-            dragObject = null;
+            if (dragObject != null)
+            {
+                dragObject.ReleaseMouseCapture();
+                dragObject = null;
 
-            // SAVE NEW X Y POSITIONS
-            _plcRepository.EditControl(_defaultControl, _plcViewModel.Id);
-
+                // SAVE NEW X Y POSITIONS
+                _plcRepository.EditControl(_defaultControl, _plcViewModel.Id);
+            }
         }
 
-        public abstract Task ReadControlStatus(Sharp7PlcService plcService);
+        public abstract Task PerformControlOperation(Sharp7PlcService plcService);
     }
 }
