@@ -20,11 +20,14 @@ namespace PLCSiemensSymulatorHMI.Repository
                     new SemaphoreControl()
                     {
                          Id = 2, ControlName="SemRed1", ControlType = Messages.ControlType.RedSemaphore, DataBlock = "DB1", Index = "DBX8", Offset = "3", SemaphoreColour = Converters.BrushConverterColours.Red, SemaphoreState = false, X = 100, Y = 100
-                    }
-                    ,
+                    },
                     new MonostableButton()
                     {
                          Id = 2, ControlName="On Buton", ControlType = Messages.ControlType.MonostableButton, DataBlock = "DB1", Index = "DBX8", Offset = "0", X = 150, Y = 150
+                    },
+                    new BistableButton()
+                    {
+                         Id = 2, ControlName="On Buton", ControlType = Messages.ControlType.BistableButton, DataBlock = "DB1", Index = "DBX8", Offset = "0", X = 200, Y = 150
                     }
                 } 
             },

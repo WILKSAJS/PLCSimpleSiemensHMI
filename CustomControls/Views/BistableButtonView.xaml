@@ -1,13 +1,27 @@
-﻿<UserControl x:Class="PLCSiemensSymulatorHMI.CustomControls.Views.MonostableButtonView"
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.CustomControls.Views.BistableButtonView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
+             xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BoolToBistableButtonColourConverter x:Key="BoolToBistableButtonColour" />
+        <Style TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <MultiBinding Converter = "{StaticResource BoolToBistableButtonColour}">
+                        <Binding Path="State" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <StackPanel>
-        <Button x:Name="MonostableButtonClick" Content="MonostableButton" Padding="10"/>
+        <Button x:Name="BistableButtonClick" Content="BistableButton" Padding="10"/>
         <Label x:Name="ControlName" HorizontalAlignment="Center"
                cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];

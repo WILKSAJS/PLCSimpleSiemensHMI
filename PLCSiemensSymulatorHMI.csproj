@@ -72,12 +72,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToBistableButtonColourConverter.cs" />
+    <Compile Include="CustomControls\Models\BistableButton.cs" />
     <Compile Include="CustomControls\Models\DefaultControl.cs" />
     <Compile Include="CustomControls\Models\MonostableButton.cs" />
     <Compile Include="CustomControls\Models\SemaphoreControl.cs" />
     <Compile Include="CustomControls\ViewModels\BaseControlViewModel.cs" />
+    <Compile Include="CustomControls\ViewModels\BistableButtonViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\MonostableButtonViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
+    <Compile Include="CustomControls\Views\BistableButtonView.xaml.cs">
+      <DependentUpon>BistableButtonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\Views\MonostableButtonView.xaml.cs">
       <DependentUpon>MonostableButtonView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +172,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="CustomControls\Views\BistableButtonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\Views\MonostableButtonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
