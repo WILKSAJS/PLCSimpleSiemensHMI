@@ -110,8 +110,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     return new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel);
                 case Messages.ControlType.BistableButton:
                     return new BistableButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
-                //case Messages.ControlType.Label:
-                //    break;
+                case Messages.ControlType.RealTextBox:
+                    return new RealTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
                 default:
                     //TODO: DEFAULT BEHAVIOUR........
                     return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);

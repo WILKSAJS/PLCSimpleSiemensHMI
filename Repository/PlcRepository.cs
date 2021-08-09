@@ -27,7 +27,12 @@ namespace PLCSiemensSymulatorHMI.Repository
                     },
                     new BistableButton()
                     {
-                         Id = 2, ControlName="On Buton", ControlType = Messages.ControlType.BistableButton, DataBlock = "DB1", Index = "DBX8", Offset = "0", X = 200, Y = 150
+                         Id = 2, ControlName="On Buton", ControlType = Messages.ControlType.BistableButton, DataBlock = "DB1", Index = "DBX8", Offset = "0", X = 300, Y = 150
+                    }
+                    ,
+                    new RealTextBox()
+                    {
+                         Id = 2, ControlName="Temperature", ControlType = Messages.ControlType.RealTextBox, DataBlock = "DB1", Index = "DBW10", Offset = "0", X = 400, Y = 150
                     }
                 } 
             },

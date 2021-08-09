@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.CustomControls.Views.RealTextBoxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d">
+    <StackPanel>
+        <Label FontSize="12" Content="Real Value" HorizontalAlignment="Center" cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
+                                             [Event MouseUp] = [Action MouseUp()];
+                                             [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
+        
+        <Border BorderThickness="1" BorderBrush="BlanchedAlmond" Background="White">
+            <TextBlock x:Name="Value" Margin="1,2,1,0" TextAlignment="Center"/>
+        </Border>
+        <TextBox TextAlignment="Center" Margin="1,2,1,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <cal:ActionMessage MethodName="SaveNewValue">
+                        <cal:Parameter Value="$source" />
+                    </cal:ActionMessage>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+                 
+        <Label x:Name="ControlName" HorizontalAlignment="Center"  Margin="1,2,1,0"/>
+    </StackPanel>
+</UserControl>

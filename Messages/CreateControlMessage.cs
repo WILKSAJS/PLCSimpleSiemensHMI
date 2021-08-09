@@ -13,7 +13,8 @@ namespace PLCSiemensSymulatorHMI.Messages
         RedSemaphore,
         BistableButton,
         MonostableButton,
-        Label
+        RealTextBox,
+        IntegerTextbox
     }
 
     public class CreateControlMessage
