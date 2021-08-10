@@ -17,9 +17,10 @@
         </Border>
         <TextBox TextAlignment="Center" Margin="1,2,1,0">
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="LostFocus">
+                <i:EventTrigger EventName="KeyDown">
                     <cal:ActionMessage MethodName="SaveNewValue">
                         <cal:Parameter Value="$source" />
+                        <cal:Parameter Value="$eventArgs" />
                     </cal:ActionMessage>
                 </i:EventTrigger>
             </i:Interaction.Triggers>

@@ -1,4 +1,5 @@
-﻿using PLCSiemensSymulatorHMI.CustomControls.Models;
+﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
@@ -8,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
@@ -34,24 +36,21 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
            Value  = await _plcService.ReadReal(_DbBlockAdress);
         }
 
-        //public bool CanSaveNewValue(string name)
-        //{
-        //    return !string.IsNullOrWhiteSpace(name) && regex.IsMatch(name);
-        //}
-
-        public async Task SaveNewValue(TextBox source)
+        public async Task SaveNewValue(TextBox source, KeyEventArgs keyArgs)
         {
-            string value = source.Text.Replace(',', '.');
-
-
-            if (!string.IsNullOrWhiteSpace(value) && regex.IsMatch(value))
+            if (keyArgs.Key == Key.Enter)
             {
-                float var = float.Parse(value,CultureInfo.InvariantCulture);
-                await _plcService.WriteReal(_DbBlockAdress, var);
-            }
-            else
-            {
-                MessageBox.Show($"Wrong format of {value}");
+                string value = source.Text.Replace(',', '.');
+                if (!string.IsNullOrWhiteSpace(value) && regex.IsMatch(value))
+                {
+                    float var = float.Parse(value, CultureInfo.InvariantCulture);
+                    await _plcService.WriteReal(_DbBlockAdress, var);
+                    source.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show($"Wrong input format. Insert real value e.g.: 1.55");
+                }
             }
         }
     }
