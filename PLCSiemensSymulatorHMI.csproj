@@ -75,16 +75,21 @@
     <Compile Include="Converters\BoolToBistableButtonColourConverter.cs" />
     <Compile Include="CustomControls\Models\BistableButton.cs" />
     <Compile Include="CustomControls\Models\DefaultControl.cs" />
+    <Compile Include="CustomControls\Models\IntTextBox.cs" />
     <Compile Include="CustomControls\Models\RealTextBox.cs" />
     <Compile Include="CustomControls\Models\MonostableButton.cs" />
     <Compile Include="CustomControls\Models\SemaphoreControl.cs" />
     <Compile Include="CustomControls\ViewModels\BaseControlViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\BistableButtonViewModel.cs" />
+    <Compile Include="CustomControls\ViewModels\IntTextBoxViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\RealTextBoxViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\MonostableButtonViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
     <Compile Include="CustomControls\Views\BistableButtonView.xaml.cs">
       <DependentUpon>BistableButtonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Views\IntTextBoxView.xaml.cs">
+      <DependentUpon>IntTextBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\Views\RealTextBoxView.xaml.cs">
       <DependentUpon>RealTextBoxView.xaml</DependentUpon>
@@ -178,6 +183,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="CustomControls\Views\BistableButtonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\Views\IntTextBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,7 +32,11 @@ namespace PLCSiemensSymulatorHMI.Repository
                     ,
                     new RealTextBox()
                     {
-                         Id = 2, ControlName="Temperature", ControlType = Messages.ControlType.RealTextBox, DataBlock = "DB1", Index = "DBW10", Offset = "0", X = 400, Y = 150
+                         Id = 2, ControlName="Temperature", ControlType = Messages.ControlType.RealTextBox, DataBlock = "DB1", Index = "DBW10", Offset = "0", X = 450, Y = 150
+                    },
+                    new RealTextBox()
+                    {
+                         Id = 2, ControlName="Int Value", ControlType = Messages.ControlType.IntegerTextbox, DataBlock = "DB1", Index = "DBW14", Offset = "0", X = 600, Y = 150
                     }
                 } 
             },

@@ -1,30 +1,27 @@
-﻿using Caliburn.Micro;
+﻿using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
-using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
 using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Globalization;
+using System.Windows;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
-    public class RealTextBoxViewModel : BaseControlViewModel
+    public class IntTextBoxViewModel : BaseControlViewModel
     {
-        private readonly Regex regex = new Regex("[+-]?([0-9]*[.])?[0-9]+");
         private readonly Sharp7PlcService _plcService;
-        public RealTextBoxViewModel(Sharp7PlcService plcService, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public IntTextBoxViewModel(Sharp7PlcService plcService, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
             : base(plcRepository, defaultControl, plcViewModel)
         {
             _plcService = plcService;
         }
 
-        private float _value;
-        public float Value
+        private short _value;
+        public short Value
         {
             get { return _value; }
             set => Set(ref _value, value);
@@ -32,25 +29,26 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
-           Value  = await _plcService.ReadReal(_DbBlockAdress);
+            Value = await _plcService.ReadInt(_DbBlockAdress);
         }
 
         public async Task SaveNewValue(TextBox source, KeyEventArgs keyArgs)
         {
             if (keyArgs.Key == Key.Enter)
             {
-                string value = source.Text.Replace(',', '.');
-                if (!string.IsNullOrWhiteSpace(value) && regex.IsMatch(value))
+                string value = source.Text.Replace(" ", "");
+                short var;
+                if (short.TryParse(value, out var))
                 {
-                    float var = float.Parse(value, CultureInfo.InvariantCulture);
-                    await _plcService.WriteReal(_DbBlockAdress, var);
+                    await _plcService.WriteInt(_DbBlockAdress, var);
                     source.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show($"Wrong input format. Insert real value e.g.: 1.55");
+                    MessageBox.Show($"Wrong input format. Insert integer value e.g.: 25");
                 }
             }
         }
     }
 }
+

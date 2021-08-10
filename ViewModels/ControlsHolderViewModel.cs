@@ -112,6 +112,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     return new BistableButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
                 case Messages.ControlType.RealTextBox:
                     return new RealTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                case Messages.ControlType.IntegerTextbox:
+                    return new IntTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
                 default:
                     //TODO: DEFAULT BEHAVIOUR........
                     return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
