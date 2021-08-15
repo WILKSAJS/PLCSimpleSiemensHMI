@@ -13,11 +13,11 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     public class PlcViewModel: Screen
     {
         private readonly Plc _plc;
-        private readonly PlcRepository _plcRepository;
+        private readonly IBasePlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _windowManager;
 
-        public PlcViewModel(Plc plc, PlcRepository plcRepository, IEventAggregator eventAggregator, IWindowManager windowManager)
+        public PlcViewModel(Plc plc, IBasePlcRepository plcRepository, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _plc = plc;
             _plcRepository = plcRepository;

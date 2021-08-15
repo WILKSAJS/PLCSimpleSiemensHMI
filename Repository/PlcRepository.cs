@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.Repository
 {
-    public class PlcRepository
+    public class PlcRepository: IBasePlcRepository
     {
         // TEMPORARY
         private IList<Plc> plcList = new List<Plc> {

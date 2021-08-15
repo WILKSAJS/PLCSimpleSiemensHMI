@@ -14,14 +14,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     {
         private readonly SettingsViewModel _settingsViewModel;
         private readonly CreatePlcViewModel _createPlcViewModel;
-        private readonly PlcRepository _plcRepository;
+        private readonly IBasePlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
 
         public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
             SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
-            PlcRepository plcRepository,
+            IBasePlcRepository plcRepository,
             IEventAggregator eventAggregator)
         {
             TopMenu = topMenuViewModel;

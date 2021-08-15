@@ -17,7 +17,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     {
         private readonly Regex regex = new Regex("[+-]?([0-9]*[.])?[0-9]+");
         private readonly Sharp7PlcService _plcService;
-        public RealTextBoxViewModel(Sharp7PlcService plcService, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public RealTextBoxViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
             : base(plcRepository, defaultControl, plcViewModel)
         {
             _plcService = plcService;

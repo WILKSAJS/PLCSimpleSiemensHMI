@@ -17,7 +17,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public abstract class BaseControlViewModel:Screen
     {
         //private readonly Sharp7PlcService plcService;
-        protected readonly PlcRepository _plcRepository;
+        protected readonly IBasePlcRepository _plcRepository;
         protected readonly DefaultControl _defaultControl;
         protected readonly PlcViewModel _plcViewModel;
         protected readonly string _DbBlockAdress;
@@ -27,7 +27,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         protected Point start;
         protected Point origin;
 
-        public BaseControlViewModel(PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public BaseControlViewModel(IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
         {
             _plcRepository = plcRepository;
             _defaultControl = defaultControl;

@@ -14,7 +14,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public class IntTextBoxViewModel : BaseControlViewModel
     {
         private readonly Sharp7PlcService _plcService;
-        public IntTextBoxViewModel(Sharp7PlcService plcService, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public IntTextBoxViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
             : base(plcRepository, defaultControl, plcViewModel)
         {
             _plcService = plcService;

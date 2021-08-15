@@ -20,7 +20,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public class SemaphoreViewModel: BaseControlViewModel
     {
 
-        public SemaphoreViewModel(BrushConverterColours brushConverterColours, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public SemaphoreViewModel(BrushConverterColours brushConverterColours, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
             :base(plcRepository,defaultControl,plcViewModel)
         {
             SemaphoreColour = brushConverterColours;

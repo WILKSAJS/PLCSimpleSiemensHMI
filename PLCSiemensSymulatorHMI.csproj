@@ -105,6 +105,7 @@
     <Compile Include="Messages\NavigateMessage.cs" />
     <Compile Include="Models\Plc.cs" />
     <Compile Include="Repository\ControlsRepository.cs" />
+    <Compile Include="Repository\IBasePlcRepository.cs" />
     <Compile Include="Repository\PlcRepository.cs" />
     <Compile Include="UIHelper\UIHelper.cs" />
     <Compile Include="ViewModels\ControlsHolderViewModel.cs" />

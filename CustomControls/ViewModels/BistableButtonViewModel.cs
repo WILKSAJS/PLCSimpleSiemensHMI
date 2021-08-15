@@ -15,7 +15,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     {
         private readonly Sharp7PlcService _plcService;
 
-        public BistableButtonViewModel(Sharp7PlcService plcService, PlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public BistableButtonViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
             : base(plcRepository, defaultControl, plcViewModel)
         {
             _plcService = plcService;

@@ -13,12 +13,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class ControlsHolderViewModel:Screen, IHandle<CreateControlMessage>
     {
-        private readonly PlcRepository _plcRepository;
+        private readonly IBasePlcRepository _plcRepository;
         private readonly Sharp7PlcService _plcService;
         private readonly PlcViewModel _plcViewModel;
         private readonly IEventAggregator _eventAggregator;
 
-        public ControlsHolderViewModel(PlcRepository plcRepository, Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
+        public ControlsHolderViewModel(IBasePlcRepository plcRepository, Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
         {
             _plcViewModel = plcViewModel;
             _eventAggregator = eventAggregator;

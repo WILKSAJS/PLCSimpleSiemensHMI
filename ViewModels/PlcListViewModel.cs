@@ -12,11 +12,11 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class PlcListViewModel: IHandle<EditPlcMessage>
     {
-        private readonly PlcRepository _plcRepository;
+        private readonly IBasePlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _windowManager;
 
-        public PlcListViewModel(PlcRepository plcRepository, IEventAggregator eventAggregator, IWindowManager windowManager)
+        public PlcListViewModel(IBasePlcRepository plcRepository, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _windowManager = windowManager;
             _plcRepository = plcRepository;

@@ -54,7 +54,7 @@ namespace PLCSiemensSymulatorHMI
             //_container.PerRequest<Sharp7PlcService>();
 
             // repository
-            _container.Singleton<PlcRepository>();
+            _container.Singleton<IBasePlcRepository,PlcRepository>();
         }
 
         protected override object GetInstance(Type service, string key)
