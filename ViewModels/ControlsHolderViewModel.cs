@@ -27,9 +27,19 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcService = plcService;
             HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
 
-            
+            _plcViewModel.PlcRemoved += OnPlcRemoved;
 
             ControlList.AddRange(_plcRepository.GetAllControls(_plcViewModel.Id).Select(x => CreateNewControlVewModel(x)));
+        }
+
+        private void OnPlcRemoved(object sender, EventArgs e)
+        {
+            var plcViewModel = (PlcViewModel)sender;
+
+            plcViewModel.PlcRemoved -= OnPlcRemoved;
+
+            ControlList.Clear();
+            Disconnect();
         }
 
         public BindableCollection<BaseControlViewModel> ControlList { get; set; } = new BindableCollection<BaseControlViewModel>();
@@ -79,6 +89,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             try
             {
                 _plcRepository.AddControl(newControl, _plcViewModel.Id);
+                _plcRepository.SaveChanges();
             }
             catch (Exception e)
             {
@@ -134,7 +145,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         private async void OnPlcServiceValueUpdated(object sender, EventArgs e)
         {
-            if (_plcService.ConnectionState == ConnectionStates.Online)
+            if (_plcService.ConnectionState == ConnectionStates.Online && ControlList.Count > 0)
             {
                 foreach (BaseControlViewModel control in ControlList)
                 {

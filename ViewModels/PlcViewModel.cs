@@ -36,6 +36,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             // TODO gona be async
             _plcRepository.RemovePlc(_plc);
+            _plcRepository.SaveChanges();
             PlcRemoved?.Invoke(this, EventArgs.Empty);
         }
 

@@ -68,9 +68,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _eventAggregator.PublishOnUIThread(new CreateControlMessage()
             {
                 ControlName = this.ControlName,
-                DataBlock = this.DataBlock,
-                Index = this.Index,
-                Offset = this.Offset,
+                DataBlock = this.DataBlock.ToUpper(),
+                Index = this.Index.ToUpper(),
+                Offset = this.Offset == null ? "" : this.Offset.ToUpper(),
                 ControlType = this.SelectedControlType
             });
             TryClose();

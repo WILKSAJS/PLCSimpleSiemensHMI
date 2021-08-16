@@ -37,9 +37,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             var plcViewModel = (PlcViewModel)sender;
 
-            // _plcRepository.RemovePlc(); -- gona be async so is no need to perform this here, better in PlcViewModel
-
-            // Need to be unsubscribe after delete operation
             plcViewModel.PlcRemoved -= OnPlcRemoved;
 
             PlcList.Remove(plcViewModel);

@@ -27,6 +27,18 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             IpAdress = _plcViewModel.IpAdress;
             Rack = _plcViewModel.Rack;
             Slot = _plcViewModel.Slot;
+
+            _plcViewModel.PlcRemoved += OnPlcRemoved;
+        }
+
+        private void OnPlcRemoved(object sender, EventArgs e)
+        {
+            var plcViewModel = (PlcViewModel)sender;
+
+            plcViewModel.PlcRemoved -= OnPlcRemoved;
+
+            _eventAggregator.Unsubscribe(this);
+            _plcService.ValuesUpdated -= OnPlcServiceValueUpdated;
         }
 
         private void OnPlcServiceValueUpdated(object sender, EventArgs e)
