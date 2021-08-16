@@ -147,7 +147,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             if (_plcService.ConnectionState == ConnectionStates.Online && ControlList.Count > 0)
             {
-                foreach (BaseControlViewModel control in ControlList)
+                foreach (BaseControlViewModel control in ControlList.ToList())
                 {
                     await control.PerformControlOperation(_plcService);
                 }
