@@ -19,6 +19,13 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             : base(plcRepository, defaultControl, plcViewModel)
         {
             _plcService = plcService;
+
+            _plcService.ConnectionStateUpdated += _plcService_ConnectionStateUpdated;
+        }
+        // Event rised to perform CanBistableButtonClick check - if connection is estabilished button usecase is available
+        private void _plcService_ConnectionStateUpdated(object sender, EventArgs e)
+        {
+            this.NotifyOfPropertyChange(nameof(CanBistableButtonClick));
         }
 
         private bool _state;
