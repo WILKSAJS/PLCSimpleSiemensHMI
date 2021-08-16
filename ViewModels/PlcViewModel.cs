@@ -30,11 +30,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         public string Rack => _plc.Rack;
         public string Slot => _plc.Slot;
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-        }
-
         // Event to notify if Remove button is clicked - communication Between two VM's
         public event EventHandler PlcRemoved;
         public void Remove()

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.Models;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 IpAdress = this.IpAdress,
                 Name = this.Name,
                 Rack = this.Rack,
-                Slot = this.Slot
+                Slot = this.Slot,
+                ControlList = new List<DefaultControl>()
             };
             _plcListViewModel.AddNewPlcViewModel(plc);
 
