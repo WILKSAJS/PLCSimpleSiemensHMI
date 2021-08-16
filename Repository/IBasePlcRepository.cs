@@ -20,5 +20,6 @@ namespace PLCSiemensSymulatorHMI.Repository
         bool AddControl(DefaultControl control, int plcId);
         bool EditControl(DefaultControl control, int plcId);
 
+        void SaveChanges();
     }
 }

@@ -35,6 +35,11 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
            Value  = await _plcService.ReadReal(_DbBlockAdress);
         }
 
+        public bool CanSaveNewValue
+        {
+            get { return _plcService.ConnectionState == ConnectionStates.Online; }
+        }
+
         public async Task SaveNewValue(TextBox source, KeyEventArgs keyArgs)
         {
             if (keyArgs.Key == Key.Enter)

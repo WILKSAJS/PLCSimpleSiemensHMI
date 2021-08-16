@@ -31,6 +31,9 @@ namespace PLCSiemensSymulatorHMI
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();
 
+            // repository
+            _container.Singleton<IBasePlcRepository, XmlPlcRepository>();
+
             // conductoris
             _container.Singleton<ShellConductorViewModel>();
 
@@ -53,8 +56,7 @@ namespace PLCSiemensSymulatorHMI
             // https://csharp.hotexamples.com/examples/Caliburn.Micro/PhoneContainer/RegisterPerRequest/php-phonecontainer-registerperrequest-method-examples.html
             //_container.PerRequest<Sharp7PlcService>();
 
-            // repository
-            _container.Singleton<IBasePlcRepository,PlcRepository>();
+           
         }
 
         protected override object GetInstance(Type service, string key)

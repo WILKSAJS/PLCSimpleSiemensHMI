@@ -23,7 +23,10 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         {
             // thre is no need for cycle operation e.g. read status in Button Method
         }
-
+        public bool CanMonostableButtonClick
+        {
+            get { return _plcService.ConnectionState == ConnectionStates.Online; }
+        }
         public async void MonostableButtonClick()
         {
             await _plcService.WriteStartStopMonostable(_DbBlockAdress);

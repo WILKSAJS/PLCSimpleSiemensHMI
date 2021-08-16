@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.Models
 {
+    [Serializable]
     public class Plc
     {
         public int Id { get; set; }

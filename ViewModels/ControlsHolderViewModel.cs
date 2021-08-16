@@ -40,13 +40,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
-
-            //// for initialzie purpose
-            //OnPlcServiceValueUpdated(null, null);
             _plcService.ValuesUpdated += OnPlcServiceValueUpdated;
-
             await Connect();
-            
         }
 
         protected override void OnDeactivate(bool close)
@@ -54,7 +49,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             base.OnDeactivate(close);
             _eventAggregator.Unsubscribe(this);
             _plcService.ValuesUpdated -= OnPlcServiceValueUpdated;
-
+            _plcRepository.SaveChanges();
             Disconnect();
         }
 
@@ -99,7 +94,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
             switch (defaultControl.ControlType)
             {
-                
                 case Messages.ControlType.GreenSemaphore:
                     return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
                 case Messages.ControlType.OrangeSemaphore:
@@ -140,7 +134,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         private async void OnPlcServiceValueUpdated(object sender, EventArgs e)
         {
-            if (HmiStatusBar.ConnectionState == ConnectionStates.Online)
+            if (_plcService.ConnectionState == ConnectionStates.Online)
             {
                 foreach (BaseControlViewModel control in ControlList)
                 {

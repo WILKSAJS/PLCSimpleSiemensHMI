@@ -6,9 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.Models
 {
+    [XmlInclude(typeof(SemaphoreControl))]
+    [XmlInclude(typeof(BistableButton))]
+    [XmlInclude(typeof(IntTextBox))]
+    [XmlInclude(typeof(MonostableButton))]
+    [XmlInclude(typeof(RealTextBox))]
+    [Serializable]
     public class DefaultControl
     {
         public int Id { get; set; }

@@ -39,7 +39,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             switch (message.CurrentPage)
             {
                 case CurrentPage.ControlPage:
-                    //ActivateItem(new ControlsViewModel(new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
                     ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
                     break;
                 //case CurrentPage.SettingsPage:
@@ -60,7 +59,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             base.OnActivate();
             _eventAggregator.Subscribe(this);
-            // ActivateItem(_controlsViewModel);
         }
 
         protected override void OnDeactivate(bool close)

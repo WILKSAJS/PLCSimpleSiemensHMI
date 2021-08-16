@@ -103,7 +103,7 @@ namespace PLCSiemensSymulatorHMI.Repository
         {
             // TODO REMOVE PLC FORM Db/xml file
             return plcList.Where(x => x.Id == plcId).FirstOrDefault()
-                    .ControlList.Remove(control);
+                   .ControlList.Remove(control);
         }
 
         public bool AddControl(DefaultControl control, int plcId)
@@ -111,7 +111,6 @@ namespace PLCSiemensSymulatorHMI.Repository
             // TODO ADD PLC TO Db/xml file
             plcList.Where(x => x.Id == plcId).FirstOrDefault()
                 .ControlList.Add(control);
-
             return true;
         }
 
@@ -133,5 +132,9 @@ namespace PLCSiemensSymulatorHMI.Repository
             return true;
         }
         #endregion
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

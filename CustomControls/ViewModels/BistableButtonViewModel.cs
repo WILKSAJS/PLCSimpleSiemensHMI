@@ -33,6 +33,11 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             State = await plcService.ReadBit(_DbBlockAdress);
         }
 
+        public bool CanBistableButtonClick
+        {
+            get { return _plcService.ConnectionState == ConnectionStates.Online; }
+        }
+
         public async void BistableButtonClick()
         {
             var result = await _plcService.WriteBit(_DbBlockAdress, !State);

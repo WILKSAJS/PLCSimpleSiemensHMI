@@ -71,8 +71,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plc.Name = Name;
             _plc.Rack = Rack;
             _plc.Slot = Slot;
-
-            //_plcListViewModel.EditPlcViewModel(_plc, _plcViewModel);
             _eventAggregator.PublishOnUIThread(new EditPlcMessage() { PlcViewModel = _plcViewModel, EditedPlc = _plc });
 
             TryClose();
