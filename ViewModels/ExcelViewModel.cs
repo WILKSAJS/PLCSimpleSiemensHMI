@@ -9,6 +9,8 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class ExcelViewModel : Screen
     {
+        public event EventHandler DataChoosen;
+
         private string _controlName;
         public string ControlName
         {
@@ -35,6 +37,11 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             get => _offset;
             set => Set(ref _offset, value);
+        }
+
+        public void ExcelDatachoose()
+        {
+            DataChoosen?.Invoke(this, EventArgs.Empty);
         }
     }
 }

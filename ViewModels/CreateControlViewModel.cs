@@ -26,6 +26,16 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             ControlType = Enum.GetValues(typeof(ControlType)).Cast<ControlType>().ToList();
         }
 
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
+            // when deactive unsubscribe all events to free alocated data space
+            foreach (ExcelViewModel excelViewModel in excelViewModels)
+            {
+                excelViewModel.DataChoosen -= OnDataChoosen;
+            }
+        }
+
         #region LeftSideOfView
         public IReadOnlyList<ControlType> ControlType { get; }
 
@@ -79,7 +89,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 Offset = this.Offset == null ? "" : this.Offset.ToUpper(),
                 ControlType = this.SelectedControlType
             });
-            TryClose();
+
+            // Clear textboxes
+            ControlName = "";
+            DataBlock = "";
+            Index = "";
+            Offset = "";
+
+            //TryClose();
         }
         #endregion
 
@@ -126,14 +143,28 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             {
                 string[] firstCellData = excelData[i,0].Split('.');
                 string[] secondCellData = excelData[i, 1].Replace('%', ' ').Trim().Split('.');
-                yield return new ExcelViewModel()
+                var excelVM = new ExcelViewModel()
                 {
                     ControlName = firstCellData.Length > 1 ? firstCellData[1] : String.IsNullOrEmpty(firstCellData[0]) ? "Default Name": firstCellData[0],
                     DataBlock = secondCellData != null ? secondCellData[0] : "",
                     Index = secondCellData.Length > 1 ? secondCellData[1] : "",
                     Offset = secondCellData.Length > 2 ? secondCellData[2] : ""
+
                 };
+                // subscribe to event rised when particular ExcelViewModel is choosen
+                excelVM.DataChoosen += OnDataChoosen;
+                yield return excelVM;
             }
+        }
+
+        private void OnDataChoosen(object sender, EventArgs e)
+        {
+            var excelViewModel = (ExcelViewModel)sender;
+            // fill textBoxes with data form excel VM's
+            ControlName = excelViewModel.ControlName;
+            DataBlock = excelViewModel.DataBlock;
+            Index = excelViewModel.Index;
+            Offset = excelViewModel.Offset;
         }
 
         private string[,] ExtractDataFromExcel(string FilePath)

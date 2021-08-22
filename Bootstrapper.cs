@@ -48,7 +48,7 @@ namespace PLCSiemensSymulatorHMI
 
             _container.PerRequest<SemaphoreViewModel>();
             _container.PerRequest<MonostableButtonViewModel>();
-            _container.PerRequest<CreateControlViewModel>();
+            _container.Singleton<CreateControlViewModel>();
             _container.Singleton<ControlsHolderViewModel>();
 
             // service

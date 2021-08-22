@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
              mc:Ignorable="d">
-    <Button Margin="5">
+    <Button x:Name="ExcelDatachoose" Margin="5">
         <StackPanel Orientation="Horizontal">
             <TextBlock FontWeight="Bold" Margin="0,0,15,0" x:Name="ControlName"/>
             <TextBlock FontWeight="Bold" Margin="0,0,15,0" x:Name="DataBlock"/>
