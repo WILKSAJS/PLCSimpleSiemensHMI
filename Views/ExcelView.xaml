@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.Views.ExcelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+             mc:Ignorable="d">
+    <Button Margin="5">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Margin="0,0,15,0" x:Name="ControlName"/>
+            <TextBlock FontWeight="Bold" Margin="0,0,15,0" x:Name="DataBlock"/>
+            <TextBlock FontWeight="Bold" Margin="0,0,15,0" x:Name="Index"/>
+            <TextBlock FontWeight="Bold" x:Name="Offset"/>
+        </StackPanel>
+    </Button>
+    
+</UserControl>
