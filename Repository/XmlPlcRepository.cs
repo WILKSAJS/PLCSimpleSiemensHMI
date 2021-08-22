@@ -14,6 +14,7 @@ namespace PLCSiemensSymulatorHMI.Repository
     {
         public XmlPlcRepository()
         {
+            plcList = new List<Plc>();
             FilePath = "PLCSiemensHMIConfig.xml";
             XmlSerializer serializer = new XmlSerializer(typeof(List<Plc>));
             if (File.Exists(FilePath))
