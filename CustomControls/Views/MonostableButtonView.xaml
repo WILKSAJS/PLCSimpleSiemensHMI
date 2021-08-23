@@ -12,5 +12,10 @@
                cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];
                                              [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
     </StackPanel>
 </UserControl>

@@ -8,6 +8,7 @@ using PLCSiemensSymulatorHMI.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
@@ -68,6 +69,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         // HERE NEW CONTROL IS CREATED
         public void Handle(CreateControlMessage message)
         {
+            // Get list to retrieve next id in following steps
             var existedList = _plcRepository.GetAllControls(_plcViewModel.Id);
 
             // Find last Id and assign next to new Control
@@ -84,7 +86,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 X = 0,
                 Y = 0
             };
-
             // Add to repo
             try
             {
@@ -93,7 +94,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                MessageBox.Show(e.Message, "Message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             // add to list
@@ -102,27 +103,45 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         private BaseControlViewModel CreateNewControlVewModel(DefaultControl defaultControl)
         {
-
+            // default control gona be green semaphore in case of some cast problems
+            BaseControlViewModel newControlVm = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
             switch (defaultControl.ControlType)
             {
                 case Messages.ControlType.GreenSemaphore:
-                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.OrangeSemaphore:
-                    return new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.RedSemaphore:
-                    return new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.MonostableButton:
-                    return new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.BistableButton:
-                    return new BistableButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new BistableButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.RealTextBox:
-                    return new RealTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new RealTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.IntegerTextbox:
-                    return new IntTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new IntTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 default:
-                    //TODO: DEFAULT BEHAVIOUR........
-                    return new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+                    //Default behaviour - subscribe event and return new VM
+                    newControlVm.ControlRemoved += OnControlRemoved;
+                    return newControlVm;
             }
+        }
+
+        private void OnControlRemoved(object sender, EventArgs e)
+        {
+            var ControlVm = (BaseControlViewModel)sender;
+            // remove control from list
+            ControlList.Remove(ControlVm);
+            // unsubscribe
+            ControlVm.ControlRemoved -= OnControlRemoved;
         }
         #endregion
 

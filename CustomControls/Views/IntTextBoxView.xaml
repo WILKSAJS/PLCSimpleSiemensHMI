@@ -28,5 +28,10 @@
         </TextBox>
 
         <Label x:Name="ControlName" HorizontalAlignment="Center"  Margin="1,2,1,0"/>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
     </StackPanel>
 </UserControl>

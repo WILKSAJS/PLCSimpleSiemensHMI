@@ -39,6 +39,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             // to perform control oepration by PlcService
             _DbBlockAdress = _defaultControl.DbBlockAdress;
         }
+        public abstract Task PerformControlOperation(Sharp7PlcService plcService);
+        public event EventHandler ControlRemoved;
 
         private string _controlName;
         public string ControlName
@@ -63,11 +65,14 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public void MouseDown(MouseButtonEventArgs eventArgs, ActionExecutionContext executionContext)
         {
-            MyCanvas = UIHelper.UIHelper.FindChild<Canvas>(Application.Current.MainWindow, "MyCanvas");
-            dragObject = executionContext.Source as UIElement;
-            dragObject.CaptureMouse();
-            start = eventArgs.GetPosition(MyCanvas);
-            origin = new Point(X, Y);
+            if (eventArgs.LeftButton == MouseButtonState.Pressed)
+            {
+                MyCanvas = UIHelper.UIHelper.FindChild<Canvas>(Application.Current.MainWindow, "MyCanvas");
+                dragObject = executionContext.Source as UIElement;
+                dragObject.CaptureMouse();
+                start = eventArgs.GetPosition(MyCanvas);
+                origin = new Point(X, Y);
+            }
         }
 
         public void MouseMove(MouseEventArgs eventArgs)
@@ -100,6 +105,19 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             }
         }
 
-        public abstract Task PerformControlOperation(Sharp7PlcService plcService);
+        public void RemoveControl()
+        {
+            try
+            {
+                _plcRepository.RemoveControl(_defaultControl, _plcViewModel.Id);
+                //Notify ControlHolderVM to remove control from the list
+                ControlRemoved?.Invoke(this, EventArgs.Empty);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
     }
 }

@@ -26,8 +26,14 @@
         <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="1"
                          cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];
-                                             [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
+                                             [Event MouseMove] = [Action MouseMove($eventArgs)];">
+        </Ellipse>
         <Label x:Name="ControlName"/>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
     </StackPanel>
     
 </UserControl>
