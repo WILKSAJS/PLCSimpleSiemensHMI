@@ -12,26 +12,23 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 {
     public class ShellConductorViewModel: Conductor<Screen>.Collection.OneActive, IHandle<NavigateMessage>
     {
-        private readonly SettingsViewModel _settingsViewModel;
         private readonly CreatePlcViewModel _createPlcViewModel;
         private readonly IBasePlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
 
         public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
-            SettingsViewModel settingsViewModel,
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
             IBasePlcRepository plcRepository,
             IEventAggregator eventAggregator)
         {
-            TopMenu = topMenuViewModel;
+            // TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
             _createPlcViewModel = createPlcViewModel;
             _plcRepository = plcRepository;
-            _settingsViewModel = settingsViewModel;
             _eventAggregator = eventAggregator;
         }
-        public TopMenuViewModel TopMenu { get; }
+        //public TopMenuViewModel TopMenu { get; }
         public PlcListViewModel PlcList { get; }
         
         public void Handle(NavigateMessage message)

@@ -126,7 +126,6 @@
     <Compile Include="Repository\PlcRepository.cs" />
     <Compile Include="UIHelper\UIHelper.cs" />
     <Compile Include="ViewModels\ControlsHolderViewModel.cs" />
-    <Compile Include="ViewModels\ControlsViewModel.cs" />
     <Compile Include="ViewModels\CreateControlViewModel.cs" />
     <Compile Include="ViewModels\CreatePlcViewModel.cs" />
     <Compile Include="ViewModels\EditPlcViewModel.cs" />
@@ -134,14 +133,10 @@
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
     <Compile Include="ViewModels\PlcListViewModel.cs" />
     <Compile Include="ViewModels\PlcViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellConductorViewModel.cs" />
     <Compile Include="ViewModels\TopMenuViewModel.cs" />
     <Compile Include="Views\ControlsHolderView.xaml.cs">
       <DependentUpon>ControlsHolderView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ControlsView.xaml.cs">
-      <DependentUpon>ControlsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateControlView.xaml.cs">
       <DependentUpon>CreateControlView.xaml</DependentUpon>
@@ -163,9 +158,6 @@
     </Compile>
     <Compile Include="Views\PlcView.xaml.cs">
       <DependentUpon>PlcView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellConductorView.xaml.cs">
       <DependentUpon>ShellConductorView.xaml</DependentUpon>
@@ -228,10 +220,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ControlsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\CreateControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,10 +245,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlcView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

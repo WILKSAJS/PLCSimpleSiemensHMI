@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <!--<ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>-->
 
         <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0"/>
 
