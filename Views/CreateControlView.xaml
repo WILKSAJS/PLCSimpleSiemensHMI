@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Title="CreateControlView" Height="380" Width="850" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -18,13 +19,13 @@
 
         <StackPanel Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Control Name" Width="auto" Height="auto" Margin="30,0"/>
-            <TextBox x:Name="ControlName" Margin="30,0"/>
+            <TextBox x:Name="ControlName" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
             <Label Content="Data Block" Width="auto" Height="auto" Margin="30,0"/>
-            <TextBox x:Name="DataBlock" Margin="30,0"/>
+            <TextBox x:Name="DataBlock" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
             <Label Content="Index" Width="auto" Height="auto" Margin="30,0"/>
-            <TextBox x:Name="Index" Margin="30,0"/>
+            <TextBox x:Name="Index" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
             <Label Content="Offset" Width="auto" Height="auto" Margin="30,0"/>
-            <TextBox x:Name="Offset" Margin="30,0"/>
+            <TextBox x:Name="Offset" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
             <ComboBox MaxWidth="150" x:Name="ControlType" Margin="0,30"/>
             <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
         </StackPanel>

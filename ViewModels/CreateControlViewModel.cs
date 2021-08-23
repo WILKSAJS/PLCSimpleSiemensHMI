@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -24,6 +25,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plc = plc;
             _eventAggregator = eventAggregator;
             ControlType = Enum.GetValues(typeof(ControlType)).Cast<ControlType>().ToList();
+
+            //initialize
+            ControlName = "";
+            DataBlock = "";
+            Index = "";
+            Offset = "";
         }
 
         protected override void OnDeactivate(bool close)
@@ -36,7 +43,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             }
         }
 
-        #region LeftSideOfView
+        #region LeftSideOfView - Add control
         public IReadOnlyList<ControlType> ControlType { get; }
 
         private string _controlName;
@@ -98,9 +105,34 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
             //TryClose();
         }
+
+        //Validation
+        public bool CanSubmit
+        {
+            get { return AreInputsValid(); }
+        }
+
+        Regex DataBlockRegex = new Regex("DB[0-9]{1,}", RegexOptions.IgnoreCase);
+        Regex IndexBlockRegex = new Regex("DB[XWD][0-9]{1,}", RegexOptions.IgnoreCase);
+        Regex OffsetlockRegex = new Regex("[0-9]{1,}", RegexOptions.IgnoreCase);
+
+        private bool AreInputsValid()
+        {
+            var boolval = !String.IsNullOrEmpty(ControlName)
+                && (String.IsNullOrEmpty(DataBlock) ? false : DataBlockRegex.IsMatch(DataBlock))
+                && (String.IsNullOrEmpty(Index) ? false : IndexBlockRegex.IsMatch(Index))
+                && (String.IsNullOrEmpty(Offset) ? true : OffsetlockRegex.IsMatch(Offset));
+            return boolval;
+        }
+
+        public void TextChanged()
+        {
+            this.NotifyOfPropertyChange(nameof(CanSubmit));
+        }
+
         #endregion
 
-        #region RightSideOfView
+        #region RightSideOfView - Load Excel file
         public BindableCollection<ExcelViewModel> excelViewModels { get; set; } = new BindableCollection<ExcelViewModel>();
         private string _filePath;
         public string FilePath
