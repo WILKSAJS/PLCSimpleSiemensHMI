@@ -6,11 +6,13 @@
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
              xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
              xmlns:cal="http://www.caliburnproject.org"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DesignHeight="40" d:DesignWidth="100">
+    
     <UserControl.Resources>
         <converters:BoolToBistableButtonColourConverter x:Key="BoolToBistableButtonColour" />
-        <Style TargetType="Button">
-            <Setter Property="Background">
+        <Style TargetType="Rectangle">
+            <Setter Property="Fill">
                 <Setter.Value>
                     <MultiBinding Converter = "{StaticResource BoolToBistableButtonColour}">
                         <Binding Path="State" UpdateSourceTrigger="PropertyChanged"/>
@@ -20,9 +22,55 @@
         </Style>
     </UserControl.Resources>
     
-    <StackPanel>
+    <!--<StackPanel>
         <Button x:Name="BistableButtonClick" Content="BistableButton" Padding="10"/>
         <Label x:Name="ControlName" HorizontalAlignment="Center"
+               cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
+                                             [Event MouseUp] = [Action MouseUp()];
+                                             [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
+    </StackPanel>-->
+
+    <StackPanel>
+        <Button x:Name="BistableButtonClick" Padding="0" Margin="0">
+            <Viewbox>
+                <Canvas Height="40" Width="100" >
+                    <!--Step 1-->
+                    <Rectangle Canvas.Left="0" Canvas.Top="0" Height="40" Width="100" StrokeThickness="0.5" Stroke="Gray" RadiusX="5" RadiusY="5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush x:Name="LinearProcessBush" StartPoint="0.5,1" EndPoint="1,0" SpreadMethod="Pad">
+                                <GradientStop Color="Gray" Offset="0"/>
+                                <GradientStop Color="White" Offset="0.5"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <!--Step 2-->
+                    <Rectangle Canvas.Left="2" Canvas.Top="2" Height="36" Width="96" StrokeThickness="0.5" Stroke="DarkGray" RadiusX="3.5" RadiusY="3.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush x:Name="LinearProcessBush2" StartPoint="0,0" EndPoint="0,1" SpreadMethod="Pad">
+                                <GradientStop Color="Gray" Offset="0"/>
+                                <GradientStop Color="White" Offset="0.5"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <!--Step 3-->
+                    <Rectangle Canvas.Left="5" Canvas.Top="5" Height="30" Width="90" StrokeThickness="0.5" Stroke="Black" RadiusX="3" RadiusY="3">
+                        <Rectangle.Fill>
+                            <MultiBinding Converter = "{StaticResource BoolToBistableButtonColour}">
+                                <Binding Path="State" UpdateSourceTrigger="PropertyChanged"/>
+                            </MultiBinding>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Height="30" Width="90" Content="BISTABLE" Canvas.Left="5" Canvas.Top="5" FontSize="12" Foreground="White" FontWeight="Bold"
+                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </Canvas>
+            </Viewbox>
+        </Button>
+        <Label x:Name="ControlName" HorizontalAlignment="Center" 
                cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];
                                              [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
