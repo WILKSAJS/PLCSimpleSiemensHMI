@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
              xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
              xmlns:cal="http://www.caliburnproject.org"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="100">
     
     <UserControl.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrush" />
@@ -21,19 +22,46 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-   
-    <StackPanel HorizontalAlignment="Center">
-        <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="1"
-                         cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
+
+    <StackPanel>
+        <Viewbox>
+            <Canvas Width="100" Height="100" cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];
                                              [Event MouseMove] = [Action MouseMove($eventArgs)];">
-        </Ellipse>
-        <Label x:Name="ControlName"/>
+                <!--Step 1-->
+                <Ellipse Width="100" Height="100" StrokeThickness="0.5"  Stroke="Gray" Canvas.Left="0" Canvas.Top="0">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush x:Name="LinearProcessBrush" StartPoint="0.5,1" EndPoint="1,0" SpreadMethod="Pad">
+                            <GradientStop Color="#FF071923" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <!--Step 2-->
+                <Ellipse Canvas.Left="7.25" Canvas.Top="7.25" Width="85" Height="85" StrokeThickness="0.5" Stroke="Gray">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush x:Name="LinearProcessBrush2" StartPoint="1,0.5" EndPoint="0,1" SpreadMethod="Pad">
+                            <GradientStop Color="#FF071923" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <!--Step 3-->
+                <Ellipse Canvas.Left="12.25" Canvas.Top="12.25" Width="75" Height="75" StrokeThickness="0.5" Stroke="Black">
+                    <Ellipse.Fill>
+                        <MultiBinding Converter = "{StaticResource BoolToBrush}">
+                            <Binding Path="SemaphoreState" UpdateSourceTrigger="PropertyChanged"/>
+                            <Binding Path="SemaphoreColour" UpdateSourceTrigger="PropertyChanged"/>
+                        </MultiBinding>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Canvas>
+        </Viewbox>
+        <Label x:Name="ControlName" HorizontalAlignment="Center"/>
         <StackPanel.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
             </ContextMenu>
         </StackPanel.ContextMenu>
     </StackPanel>
-    
 </UserControl>
