@@ -14,7 +14,8 @@ namespace PLCSiemensSymulatorHMI.Messages
         BistableButton,
         MonostableButton,
         RealTextBox,
-        IntegerTextbox
+        IntegerTextbox,
+        EmergencyButton
     }
 
     public class CreateControlMessage

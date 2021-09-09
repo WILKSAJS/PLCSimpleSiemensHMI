@@ -1,0 +1,62 @@
+﻿using PLCSiemensSymulatorHMI.CustomControls.Models;
+using PLCSiemensSymulatorHMI.PlcService;
+using PLCSiemensSymulatorHMI.Repository;
+using PLCSiemensSymulatorHMI.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
+{
+    public class EmergencyButtonViewModel : BaseControlViewModel
+    {
+        private readonly Sharp7PlcService _plcService;
+        public EmergencyButtonViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+            : base(plcRepository, defaultControl, plcViewModel)
+        {
+            _plcService = plcService;
+
+            _plcService.ConnectionStateUpdated += _plcService_ConnectionStateUpdated;
+        }
+        // Event rised to perform CanBistableButtonClick check - if connection is estabilished button usecase is available
+        private void _plcService_ConnectionStateUpdated(object sender, EventArgs e)
+        {
+            this.NotifyOfPropertyChange(nameof(CanEmergencyButtonClick));
+        }
+
+        private bool _state;
+        public bool State
+        {
+            get { return _state; }
+            set => Set(ref _state, value);
+        }
+
+        public override async Task PerformControlOperation(Sharp7PlcService plcService)
+        {
+            State = await plcService.ReadBit(_DbBlockAdress);
+        }
+
+        public bool CanEmergencyButtonClick
+        {
+            get { return _plcService.ConnectionState == ConnectionStates.Online; }
+        }
+
+        public async void EmergencyButtonClick()
+        {
+            var result = await _plcService.WriteBit(_DbBlockAdress, !State);
+            if (result != 0)
+            {
+                // TODO: Implement this with NLog
+                Debug.WriteLine(DateTime.Now.ToString() + "\t WRITE BistableButton State Error");
+            }
+            else
+            {
+                State = !State;
+            }
+
+        }
+    }
+}

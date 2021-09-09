@@ -128,6 +128,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 case Messages.ControlType.IntegerTextbox:
                     newControlVm = new IntTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
                     goto default;
+                case Messages.ControlType.EmergencyButton:
+                    newControlVm = new EmergencyButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 default:
                     //Default behaviour - subscribe event and return new VM
                     newControlVm.ControlRemoved += OnControlRemoved;
