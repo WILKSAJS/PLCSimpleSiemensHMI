@@ -36,7 +36,7 @@
     </StackPanel>-->
 
     <StackPanel>
-        <Button x:Name="BistableButtonClick" Padding="0" Margin="0">
+        <Button x:Name="BistableButtonClick" Padding="0" Margin="0" BorderThickness="0" Background="Transparent">
             <Viewbox>
                 <Canvas Height="40" Width="100" >
                     <!--Step 1-->

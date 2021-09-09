@@ -1,0 +1,8 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/PLCSiemensSymulatorHMI;component/Themes/CustomMonoButton.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

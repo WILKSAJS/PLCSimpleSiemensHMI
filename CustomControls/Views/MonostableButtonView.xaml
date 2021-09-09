@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
+             xmlns:directory="clr-namespace:PLCSiemensSymulatorHMI.CustomControls"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d">
     <StackPanel>
-        <Button x:Name="MonostableButtonClick" Content="MonostableButton" Padding="10"/>
+        <directory:CustomMonoButton Content="MONOSTABLE" Height="40" Width="100" x:Name="MonostableButtonClick" Padding="10"/>
         <Label x:Name="ControlName" HorizontalAlignment="Center"
                cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
                                              [Event MouseUp] = [Action MouseUp()];
@@ -18,4 +19,6 @@
             </ContextMenu>
         </StackPanel.ContextMenu>
     </StackPanel>
+    
+
 </UserControl>
