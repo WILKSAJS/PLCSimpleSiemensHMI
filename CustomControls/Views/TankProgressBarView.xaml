@@ -119,7 +119,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <!--Step10-->
-                <UIHelper:ProcessLevel Canvas.Left="25" Canvas.Top="19" Height="75.4" Width="30" BorderColor="#FF686464"/>
+                <UIHelper:ProcessLevel Canvas.Left="25" Canvas.Top="19" Height="75.4" Width="30" BorderColor="#FF686464" Orientation="Vertical" Minimum="0" Maximum="2000" Value="50" ProcessColor="Orange"/>
             </Canvas>
         </Viewbox>
         <StackPanel.ContextMenu>

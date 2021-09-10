@@ -14,9 +14,10 @@
     <Border x:Name="ProcessValue" VerticalAlignment="Bottom" Width="60">
         <Border.Background>
             <LinearGradientBrush x:Name="LinearProcessBrush" StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
-                <GradientStop Color="Lime" Offset="0" />
+                <GradientStop Color="{Binding ProcessColor}" Offset="0" />
                 <GradientStop Color="White" Offset="1.5" />
             </LinearGradientBrush>
         </Border.Background>
     </Border>
+    
 </UserControl>
