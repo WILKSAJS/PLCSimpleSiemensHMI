@@ -22,19 +22,6 @@
         </Style>
     </UserControl.Resources>
     
-    <!--<StackPanel>
-        <Button x:Name="BistableButtonClick" Content="BistableButton" Padding="10"/>
-        <Label x:Name="ControlName" HorizontalAlignment="Center"
-               cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
-                                             [Event MouseUp] = [Action MouseUp()];
-                                             [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
-        <StackPanel.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
-            </ContextMenu>
-        </StackPanel.ContextMenu>
-    </StackPanel>-->
-
     <StackPanel>
         <Button x:Name="BistableButtonClick" Padding="0" Margin="0" BorderThickness="0" Background="Transparent">
             <Viewbox>

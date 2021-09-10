@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.CustomControls.Views.TankProgressBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
+             xmlns:UIHelper="clr-namespace:PLCSiemensSymulatorHMI.UIHelper"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" Height="349.834" Width="193.834">
+    <StackPanel>
+        <Label x:Name="ControlName" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <Viewbox>
+            <Canvas  Width="80" Height="150" cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
+                                             [Event MouseUp] = [Action MouseUp()];
+                                             [Event MouseMove] = [Action MouseMove($eventArgs)];">
+                <!--Step1-->
+                <Rectangle Width="6" Height="22" Canvas.Left="18" Canvas.Top="100" StrokeThickness="0.5" Stroke="Black"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="60"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step2-->
+                <Rectangle Width="6" Height="20" Canvas.Left="55" Canvas.Top="100" StrokeThickness="0.5" Stroke="Black"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-60"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step3-->
+                <Rectangle Width="10" Height="25" Canvas.Left="8" Canvas.Top="103" StrokeThickness="0.5" Stroke="Black"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step4-->
+                <Rectangle Width="10" Height="25" Canvas.Left="63" Canvas.Top="103" StrokeThickness="0.5" Stroke="Black"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step5-->
+                <Rectangle Width="20" Height="8" Canvas.Left="3" Canvas.Top="125" StrokeThickness="0.5" Stroke="Black"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step6-->
+                <Rectangle Width="20" Height="8" Canvas.Left="58" Canvas.Top="125" StrokeThickness="0.5" Stroke="Black"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step7-->
+                <Path Width="80" Height="107.5" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" 
+                  StrokeThickness="1" Stroke="Black"
+                  Data="m 332.88422,416.95594 c -5.50361,0 -4.90627,8.59373 -4.90627,8.59373 l -0.0312,0 0,93.625 0.0312,0 c -0.0117,0.17426 -0.54041,8.59376 4.90627,8.59376 l 126.96874,0 c 5.26593,0 4.75001,-8.62501 4.75001,-8.62501 l 0,-93.59375 c 0,0 0.51592,-8.59373 -4.75001,-8.59373 l -126.96874,0 z">
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+                <!--Step8-->
+                <Rectangle Width="80" Height="4" Canvas.Left="0" Canvas.Top="15" StrokeThickness="0.5" Stroke="Black"
+                       Stretch="Fill" StrokeMiterLimit="2.75">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step9-->
+                <Rectangle Width="80" Height="4" Canvas.Left="0" Canvas.Top="94" StrokeThickness="0.5" Stroke="Black"
+                       Stretch="Fill" StrokeMiterLimit="2.75">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0" SpreadMethod="Reflect">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!--Step10-->
+                <UIHelper:ProcessLevel Canvas.Left="25" Canvas.Top="19" Height="75.4" Width="30" BorderColor="#FF686464"/>
+            </Canvas>
+        </Viewbox>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
+    </StackPanel>
+</UserControl>

@@ -26,15 +26,16 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         {
             this.NotifyOfPropertyChange(nameof(CanMonostableButtonClick));
         }
+        public bool CanMonostableButtonClick
+        {
+            get { return _plcService.ConnectionState == ConnectionStates.Online; }
+        }
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
             // thre is no need for cycle operation e.g. read status in Button Method
         }
-        public bool CanMonostableButtonClick
-        {
-            get { return _plcService.ConnectionState == ConnectionStates.Online; }
-        }
+        
         public async void MonostableButtonClick()
         {
             await _plcService.WriteStartStopMonostable(_DbBlockAdress);

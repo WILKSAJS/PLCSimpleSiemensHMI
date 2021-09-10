@@ -15,7 +15,8 @@ namespace PLCSiemensSymulatorHMI.Messages
         MonostableButton,
         RealTextBox,
         IntegerTextbox,
-        EmergencyButton
+        EmergencyButton,
+        TankProgressBar
     }
 
     public class CreateControlMessage
