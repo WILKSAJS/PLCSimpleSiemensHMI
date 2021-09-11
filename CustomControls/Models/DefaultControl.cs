@@ -32,6 +32,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.Models
             get { return $"{this.DataBlock}.{this.Index}.{this.Offset}"; }
         }
         public ControlType ControlType { get; set; }
+        public string[] AdditionalControlInfo { get; set; } // for any additional data needed to create control eg. TankProgessBar - Min/Max Value, color itp
 
     }
 }

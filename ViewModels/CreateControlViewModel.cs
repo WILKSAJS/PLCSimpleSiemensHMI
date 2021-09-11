@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using ClosedXML.Excel;
 using Microsoft.Win32;
+using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.Messages;
 using PLCSiemensSymulatorHMI.Models;
 using PLCSiemensSymulatorHMI.Repository;
@@ -19,11 +20,13 @@ namespace PLCSiemensSymulatorHMI.ViewModels
     {
         private readonly Plc _plc;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IWindowManager _windowManager;
 
-        public CreateControlViewModel(Plc plc, IEventAggregator eventAggregator)
+        public CreateControlViewModel(Plc plc, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _plc = plc;
             _eventAggregator = eventAggregator;
+            _windowManager = windowManager;
             ControlType = Enum.GetValues(typeof(ControlType)).Cast<ControlType>().ToList();
 
             //initialize
@@ -88,6 +91,42 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         public void Submit()
         {
+            switch (SelectedControlType)
+            {
+                case Messages.ControlType.TankProgressBar:
+                    // check index validation - rexgex - if not error message box
+                    if (IndexForTankControlBlockRegex.IsMatch(Index))
+                    {
+                        _windowManager.ShowWindow(new CreateControlDetailViewModel(_eventAggregator, _windowManager,
+                            // In this case DefaultControl object is only container for below listed data, there is no ID needed
+                            new DefaultControl() {
+                                ControlName = this.ControlName,
+                                DataBlock = this.DataBlock.ToUpper(),
+                                Index = this.Index.ToUpper(),
+                                Offset = this.Offset == null ? "" : this.Offset.ToUpper(),
+                                ControlType = this.SelectedControlType
+                            }
+                            ), null, null);
+                    }
+                    else
+                    {
+                        MessageBox.Show("If Tank ProgressBar has been choosen, only Index pattern for either Int or Real values are allowed (\"W\" or \"D\")", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    break;
+                default:
+                    PublishOnUIThread();
+                    break;
+            }
+            // Clear textboxes
+            ControlName = "";
+            DataBlock = "";
+            Index = "";
+            Offset = "";
+            //TryClose(); if there is a need.
+        }
+
+        private void PublishOnUIThread()
+        {
             _eventAggregator.PublishOnUIThread(new CreateControlMessage()
             {
                 ControlName = this.ControlName,
@@ -96,14 +135,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 Offset = this.Offset == null ? "" : this.Offset.ToUpper(),
                 ControlType = this.SelectedControlType
             });
-
-            // Clear textboxes
-            ControlName = "";
-            DataBlock = "";
-            Index = "";
-            Offset = "";
-
-            //TryClose();
         }
 
         //Validation
@@ -114,15 +145,15 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         Regex DataBlockRegex = new Regex("DB[0-9]{1,}", RegexOptions.IgnoreCase);
         Regex IndexBlockRegex = new Regex("DB[XWD][0-9]{1,}", RegexOptions.IgnoreCase);
+        Regex IndexForTankControlBlockRegex = new Regex("DB[WD][0-9]{1,}", RegexOptions.IgnoreCase);
         Regex OffsetlockRegex = new Regex("[0-9]{1,}", RegexOptions.IgnoreCase);
 
         private bool AreInputsValid()
         {
-            var boolval = !String.IsNullOrEmpty(ControlName)
+            return !String.IsNullOrEmpty(ControlName)
                 && (String.IsNullOrEmpty(DataBlock) ? false : DataBlockRegex.IsMatch(DataBlock))
                 && (String.IsNullOrEmpty(Index) ? false : IndexBlockRegex.IsMatch(Index))
                 && (String.IsNullOrEmpty(Offset) ? true : OffsetlockRegex.IsMatch(Offset));
-            return boolval;
         }
 
         public void TextChanged()

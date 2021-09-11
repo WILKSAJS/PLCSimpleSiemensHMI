@@ -26,5 +26,6 @@ namespace PLCSiemensSymulatorHMI.Messages
         public string Index { get; set; }
         public string Offset { get; set; }
         public ControlType ControlType { get; set; }
+        public string[] AdditionalControlInfo { get; set; } // for any additional data needed to create control
     }
 }

@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace PLCSiemensSymulatorHMI.ViewModels
 {
@@ -83,8 +84,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 Index = message.Index,
                 Offset = message.Offset,
                 ControlType = message.ControlType,
-                X = 0,
-                Y = 0
+                X = 0, // Default values - left upper corner
+                Y = 0,
+                AdditionalControlInfo = message.AdditionalControlInfo != null ? message.AdditionalControlInfo : new string[0]
             };
             // Add to repo
             try

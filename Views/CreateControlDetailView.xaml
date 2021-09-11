@@ -1,0 +1,32 @@
+﻿<Window x:Class="PLCSiemensSymulatorHMI.Views.CreateControlDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        Title="CreateControlDetailView" Height="350" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Detail control informations:"  FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <Label Content="Minimum ProgressBar Value :"/>
+                <TextBox x:Name="MinimumValue" MinWidth="100" Margin="22,0,0,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <Label Content="Maximum ProgressBar Value :"/>
+                <TextBox x:Name="MaximumValue" MinWidth="100" Margin="20,0,0,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <Label Content="PorgressBar Color :"/>
+                <ComboBox MaxWidth="150" x:Name="PorgressBarColor" MinWidth="100" Margin="20,0,0,0" />
+            </StackPanel>
+            <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
