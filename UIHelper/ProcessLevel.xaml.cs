@@ -43,13 +43,11 @@ namespace PLCSiemensSymulatorHMI.UIHelper
         DependencyProperty.Register("BorderColor", typeof(Color), typeof(ProcessLevel), new PropertyMetadata(Colors.White, new PropertyChangedCallback(OnBorderColorChanged)));
 
         public static readonly DependencyProperty ProcessColorProperty =
-        DependencyProperty.Register("ProcessColor", typeof(Color), typeof(ProcessLevel), new PropertyMetadata(Colors.Lime));
-
+        DependencyProperty.Register("ProcessColor", typeof(Color), typeof(ProcessLevel), new PropertyMetadata(Colors.Lime, new PropertyChangedCallback(OnProcessColorChanged)));
 
         public ProcessLevel()
         {
             InitializeComponent();
-            DataContext = this;
         }
 
         [Category("HMI Professional")]
@@ -158,6 +156,17 @@ namespace PLCSiemensSymulatorHMI.UIHelper
             objProcessLevel.BorderBrush = new SolidColorBrush(value);
             objProcessLevel.OnRender(null);
         }
+        
+
+        private static void OnProcessColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            ProcessLevel objProcessLevel = sender as ProcessLevel;
+            Color value = Colors.Lime;
+            if (e.NewValue != null)
+                value = (Color)e.NewValue;
+            objProcessLevel.ProcessColor = value;
+            objProcessLevel.OnRender(null);
+        }
 
         private static void OnMinimumChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -189,7 +198,7 @@ namespace PLCSiemensSymulatorHMI.UIHelper
                     this.Factor = this.Height / this.Maximum;
                     this.LinearProcessBrush.EndPoint = new Point(0.5, 0);
 
-                    this.ProcessValue.Height = Value * Factor; // Gia tri.
+                    this.ProcessValue.Height = Value * Factor < 0 ? 0 : Value * Factor; // Gia tri.
                     this.ProcessValue.Width = this.Width;
                     this.ProcessValue.VerticalAlignment = VerticalAlignment.Bottom;
                     this.ProcessValue.HorizontalAlignment = HorizontalAlignment.Center;

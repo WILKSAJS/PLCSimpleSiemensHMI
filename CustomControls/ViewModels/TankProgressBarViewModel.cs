@@ -18,38 +18,50 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             : base(plcRepository, defaultControl, plcViewModel)
         {
             _plcService = plcService;
-            MinimumValue = Double.Parse(defaultControl.AdditionalControlInfo[0]);
-            MaximumValue = Double.Parse(defaultControl.AdditionalControlInfo[1]);
-            ProgressBarColor = (Color)ColorConverter.ConvertFromString(defaultControl.AdditionalControlInfo[2]);
-
+            Minimum = Double.Parse(_defaultControl.AdditionalControlInfo[0]);
+            Maximum = Double.Parse(_defaultControl.AdditionalControlInfo[1]);
+            ProcessColor = (Color)ColorConverter.ConvertFromString(_defaultControl.AdditionalControlInfo[2]);
         }
         private double _Value;
         public double Value
         {
             get { return _Value; }
-            set => Set(ref _Value, value);
+            set
+            {
+                _Value = value;
+                this.NotifyOfPropertyChange(() => Value);
+            }
         }
 
-        private double _minimumValue;
-        public double MinimumValue
+        private double _Minimum;
+        public double Minimum
         {
-            get { return _minimumValue; }
-            set => Set(ref _minimumValue, value);
+            get { return _Minimum; }
+            set
+            {
+                _Minimum = value;
+                this.NotifyOfPropertyChange(() => Minimum);
+            }
         }
 
-        private double _maximumValue;
-        public double MaximumValue
+        private double _Maximum;
+        public double Maximum
         {
-            get { return _maximumValue; }
-            set => Set(ref _maximumValue, value);
+            get { return _Maximum; }
+            set
+            {
+                _Maximum = value;
+                this.NotifyOfPropertyChange(() => Maximum);
+            }
         }
 
-        private Color _ProgressBarColor;
-        public Color ProgressBarColor
+        private Color _ProcessColor;
+        public Color ProcessColor
         {
-            get { return _ProgressBarColor; }
-            set => Set(ref _ProgressBarColor, value);
+            get { return _ProcessColor; }
+            set => Set(ref _ProcessColor, value);
         }
+
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {

@@ -119,8 +119,18 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <!--Step10-->
-                <UIHelper:ProcessLevel Canvas.Left="25" Canvas.Top="19" Height="75.4" Width="30" BorderColor="#FF686464" Orientation="Vertical" Minimum="0" Maximum="2000" Value="50" ProcessColor="Orange"/>
-            </Canvas>
+                <UIHelper:ProcessLevel Canvas.Left="25" Canvas.Top="19" Height="75.4" Width="30" BorderColor="#FF686464" 
+                                       Orientation="Vertical" 
+                                       Minimum="{Binding Minimum}"
+                                       Maximum="{Binding Maximum}" 
+                                       Value="{Binding Value}" 
+                                       ProcessColor="{Binding ProcessColor}"/>
+                <Label Content="{Binding Maximum}" Canvas.Left="55" Canvas.Top="16" FontWeight="Bold" FontSize="5"/>
+                <Label Content="{Binding Value}" Canvas.Left="55" Canvas.Top="50" FontWeight="Bold" FontSize="5"/>
+                <Label Content="{Binding Minimum}" Canvas.Left="55" Canvas.Top="81" FontWeight="Bold" FontSize="5"/>
+
+            </Canvas >
+            
         </Viewbox>
         <StackPanel.ContextMenu>
             <ContextMenu>
