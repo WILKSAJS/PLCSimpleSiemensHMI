@@ -42,6 +42,12 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         public abstract Task PerformControlOperation(Sharp7PlcService plcService);
         public event EventHandler ControlRemoved;
 
+        // only of read purpose
+        public string DbBlockAdress
+        {
+            get { return _DbBlockAdress; }
+        }
+
         private string _controlName;
         public string ControlName
         {
