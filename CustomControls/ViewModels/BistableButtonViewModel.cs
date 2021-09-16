@@ -37,7 +37,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
-            State = await plcService.ReadBit(_DbBlockAdress);
+            //Button doesn't need to read sate, because it should be independend from PLC behaviour
+            //State = await plcService.ReadBit(_DbBlockAdress);
         }
 
         public bool CanBistableButtonClick
@@ -45,17 +46,17 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             get { return _plcService.ConnectionState == ConnectionStates.Online; }
         }
 
-        public async void BistableButtonClick()
+        public async Task BistableButtonClick()
         {
             var result = await _plcService.WriteBit(_DbBlockAdress, !State);
-            if (result != 0)
+            if (result == 0)
             {
-                // TODO: Implement this with NLog
-                Debug.WriteLine(DateTime.Now.ToString() + "\t WRITE BistableButton State Error");
+                State = !State;
             }
             else
             {
-                State = !State;
+                // TODO: Implement this with NLog
+                Debug.WriteLine(DateTime.Now.ToString() + "\t WRITE BistableButton State Error");
             }    
             
         }

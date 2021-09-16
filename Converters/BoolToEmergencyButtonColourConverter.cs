@@ -15,7 +15,7 @@ namespace PLCSiemensSymulatorHMI.Converters
         {
             bool boolValue = (bool)values[0];
 
-            return boolValue == true ? Brushes.DarkRed : Brushes.Red;
+            return boolValue == true ? Brushes.Red : Brushes.DarkRed;
             // POPRAWIC ZMIANE KOLORU!
         }
 
