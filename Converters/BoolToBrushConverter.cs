@@ -13,7 +13,8 @@ namespace PLCSiemensSymulatorHMI.Converters
     {
         Green,
         Red,
-        Orange
+        Orange,
+        Blue
     }
 
     [ValueConversion(typeof(bool), typeof(Brushes), ParameterType = typeof(string))]
@@ -33,6 +34,8 @@ namespace PLCSiemensSymulatorHMI.Converters
                     return boolValue ? Brushes.Red : Brushes.Gray;
                 case BrushConverterColours.Orange:
                     return boolValue ? Brushes.Orange : Brushes.Gray;
+                case BrushConverterColours.Blue:
+                    return boolValue ? Brushes.Blue : Brushes.Gray;
                 default:
                     return Brushes.Gray;
             }

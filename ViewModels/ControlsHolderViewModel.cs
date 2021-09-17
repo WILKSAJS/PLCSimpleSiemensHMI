@@ -118,6 +118,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 case Messages.ControlType.RedSemaphore:
                     newControlVm = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
                     goto default;
+                case Messages.ControlType.BlueSemaphore:
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Blue, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 case Messages.ControlType.MonostableButton:
                     newControlVm = new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel);
                     goto default;
