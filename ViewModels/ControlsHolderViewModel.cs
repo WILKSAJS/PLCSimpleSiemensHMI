@@ -139,6 +139,9 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 case Messages.ControlType.TankProgressBar:
                     newControlVm = new TankProgressBarViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
                     goto default;
+                case Messages.ControlType.SliderControl:
+                    newControlVm = new SliderViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    goto default;
                 default:
                     //Default behaviour - subscribe event and return new VM
                     newControlVm.ControlRemoved += OnControlRemoved;

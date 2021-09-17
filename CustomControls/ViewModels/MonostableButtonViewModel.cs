@@ -36,7 +36,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             // thre is no need for cycle operation e.g. read status in Button Method
         }
         
-        public async void MonostableButtonClick()
+        public async Task MonostableButtonClick()
         {
             await _plcService.WriteStartStopMonostable(_DbBlockAdress);
         }

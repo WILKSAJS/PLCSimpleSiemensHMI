@@ -17,7 +17,8 @@ namespace PLCSiemensSymulatorHMI.Messages
         RealTextBox,
         IntegerTextbox,
         EmergencyButton,
-        TankProgressBar
+        TankProgressBar,
+        SliderControl
     }
 
     public class CreateControlMessage

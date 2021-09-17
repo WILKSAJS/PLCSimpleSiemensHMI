@@ -102,6 +102,7 @@
     <Compile Include="CustomControls\Models\RealTextBox.cs" />
     <Compile Include="CustomControls\Models\MonostableButton.cs" />
     <Compile Include="CustomControls\Models\SemaphoreControl.cs" />
+    <Compile Include="CustomControls\Models\SliderControl.cs" />
     <Compile Include="CustomControls\Models\TankProgressBar.cs" />
     <Compile Include="CustomControls\ViewModels\BaseControlViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\BistableButtonViewModel.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="CustomControls\ViewModels\RealTextBoxViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\MonostableButtonViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\SemaphoreViewModel.cs" />
+    <Compile Include="CustomControls\ViewModels\SliderViewModel.cs" />
     <Compile Include="CustomControls\ViewModels\TankProgressBarViewModel.cs" />
     <Compile Include="CustomControls\Views\BistableButtonView.xaml.cs">
       <DependentUpon>BistableButtonView.xaml</DependentUpon>
@@ -128,6 +130,9 @@
     </Compile>
     <Compile Include="CustomControls\Views\SemaphoreView.xaml.cs">
       <DependentUpon>SemaphoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Views\SliderView.xaml.cs">
+      <DependentUpon>SliderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\Views\TankProgressBarView.xaml.cs">
       <DependentUpon>TankProgressBarView.xaml</DependentUpon>
@@ -241,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\Views\SemaphoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\Views\SliderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

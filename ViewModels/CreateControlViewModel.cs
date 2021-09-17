@@ -95,7 +95,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             {
                 case Messages.ControlType.TankProgressBar:
                     // check index validation - rexgex - if not error message box
-                    if (IndexForTankControlBlockRegex.IsMatch(Index))
+                    if (IndexForIntRealControlBlockRegex.IsMatch(Index))
                     {
                         _windowManager.ShowWindow(new CreateControlDetailViewModel(_eventAggregator, _windowManager,
                             // In this case DefaultControl object is only container for below listed data, there is no ID needed
@@ -111,6 +111,27 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     else
                     {
                         MessageBox.Show("If Tank ProgressBar has been choosen, only Index pattern for either Int or Real values are allowed (\"W\" or \"D\")", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    break;
+                case Messages.ControlType.SliderControl:
+                    // check index validation - rexgex - if not error message box
+                    if (IndexForIntRealControlBlockRegex.IsMatch(Index))
+                    {
+                        _windowManager.ShowWindow(new CreateControlDetailViewModel(_eventAggregator, _windowManager,
+                            // In this case DefaultControl object is only container for below listed data, there is no ID needed
+                            new DefaultControl()
+                            {
+                                ControlName = this.ControlName,
+                                DataBlock = this.DataBlock.ToUpper(),
+                                Index = this.Index.ToUpper(),
+                                Offset = this.Offset == null ? "" : this.Offset.ToUpper(),
+                                ControlType = this.SelectedControlType
+                            }
+                            ), null, null);
+                    }
+                    else
+                    {
+                        MessageBox.Show("If Slider Control has been choosen, only Index pattern for either Int or Real values are allowed (\"W\" or \"D\")", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     break;
                 default:
@@ -145,7 +166,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
 
         Regex DataBlockRegex = new Regex("DB[0-9]{1,}", RegexOptions.IgnoreCase);
         Regex IndexBlockRegex = new Regex("DB[XWD][0-9]{1,}", RegexOptions.IgnoreCase);
-        Regex IndexForTankControlBlockRegex = new Regex("DB[WD][0-9]{1,}", RegexOptions.IgnoreCase);
+        Regex IndexForIntRealControlBlockRegex = new Regex("DB[WD][0-9]{1,}", RegexOptions.IgnoreCase);
         Regex OffsetlockRegex = new Regex("[0-9]{1,}", RegexOptions.IgnoreCase);
 
         private bool AreInputsValid()

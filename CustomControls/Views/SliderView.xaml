@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="PLCSiemensSymulatorHMI.CustomControls.Views.SliderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.CustomControls.Views"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d">
+    <StackPanel>
+        <Label Content="{Binding Value}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Center"  />
+        <StackPanel Orientation="Horizontal">
+            <Label x:Name="Minimum" HorizontalAlignment="Left"/>
+            <Slider Minimum = "{Binding Minimum}" Maximum = "{Binding Maximum}" TickPlacement = "BottomRight" Margin = "5" MinWidth="250"
+                    cal:Message.Attach="[Event ValueChanged] = [Action OnSliderValueChanged($eventArgs)];
+                                        [Event PreviewMouseUp] = [Action OnThumbPreviewMouseUp()];" >
+                <Slider.Background>
+                    <LinearGradientBrush EndPoint = "0.5,1" StartPoint = "0.5,0">
+                        <GradientStop Color = "{Binding ProcessColor}" Offset = "0" />
+                        <GradientStop Color = "#FFF5DCDC" Offset = "1" />
+                    </LinearGradientBrush>
+                </Slider.Background>
+            </Slider>
+            <Label x:Name="Maximum" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <Label x:Name="ControlName" HorizontalAlignment="Center" 
+               cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
+                                             [Event MouseUp] = [Action MouseUp()];
+                                             [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
+        <StackPanel.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
+                <MenuItem Header="{Binding DbBlockAdress}" Background="Gray"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
+    </StackPanel>
+</UserControl>

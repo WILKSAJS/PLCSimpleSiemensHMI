@@ -22,6 +22,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             Maximum = Double.Parse(_defaultControl.AdditionalControlInfo[1]);
             ProcessColor = (Color)ColorConverter.ConvertFromString(_defaultControl.AdditionalControlInfo[2]);
         }
+
+        #region properties
         private double _Value;
         public double Value
         {
@@ -62,6 +64,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             set => Set(ref _ProcessColor, value);
         }
 
+        #endregion
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
