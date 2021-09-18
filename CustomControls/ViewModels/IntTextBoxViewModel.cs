@@ -8,14 +8,15 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Globalization;
 using System.Windows;
+using Caliburn.Micro;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
     public class IntTextBoxViewModel : BaseControlViewModel
     {
         private readonly Sharp7PlcService _plcService;
-        public IntTextBoxViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
-            : base(plcRepository, defaultControl, plcViewModel)
+        public IntTextBoxViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
+            : base(plcRepository, defaultControl, plcViewModel, windowManager)
         {
             _plcService = plcService;
 
@@ -36,7 +37,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
-            Value = await _plcService.ReadInt(_DbBlockAdress);
+            Value = await _plcService.ReadInt(DbBlockAdress);
         }
 
         public bool CanSaveNewValue
@@ -52,7 +53,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
                 short var;
                 if (short.TryParse(value, out var))
                 {
-                    await _plcService.WriteInt(_DbBlockAdress, var);
+                    await _plcService.WriteInt(DbBlockAdress, var);
                     source.Text = "";
                 }
                 else

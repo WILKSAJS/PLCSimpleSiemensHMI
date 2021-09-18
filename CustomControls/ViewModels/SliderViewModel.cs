@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using Caliburn.Micro;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
@@ -16,8 +17,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     {
         private readonly Sharp7PlcService _plcService;
 
-        public SliderViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
-            : base(plcRepository, defaultControl, plcViewModel)
+        public SliderViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
+            : base(plcRepository, defaultControl, plcViewModel, windowManager)
         {
             _plcService = plcService;
             Minimum = float.Parse(_defaultControl.AdditionalControlInfo[0]);
@@ -96,12 +97,12 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             {
                 if (_defaultControl.Index.Contains("DBW"))
                 {
-                    await _plcService.WriteInt(_DbBlockAdress, Convert.ToInt16(Value));
+                    await _plcService.WriteInt(DbBlockAdress, Convert.ToInt16(Value));
                 }
 
                 if (_defaultControl.Index.Contains("DBD"))
                 {
-                    await _plcService.WriteReal(_DbBlockAdress, Value);
+                    await _plcService.WriteReal(DbBlockAdress, Value);
                 }
             }
         }

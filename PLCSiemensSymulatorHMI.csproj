@@ -137,6 +137,7 @@
     <Compile Include="CustomControls\Views\TankProgressBarView.xaml.cs">
       <DependentUpon>TankProgressBarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Messages\ControlEditEventArgs.cs" />
     <Compile Include="Messages\CreateControlMessage.cs" />
     <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="ViewModels\CreateControlDetailViewModel.cs" />
     <Compile Include="ViewModels\CreateControlViewModel.cs" />
     <Compile Include="ViewModels\CreatePlcViewModel.cs" />
+    <Compile Include="ViewModels\EditControlViewModel.cs" />
     <Compile Include="ViewModels\EditPlcViewModel.cs" />
     <Compile Include="ViewModels\ExcelViewModel.cs" />
     <Compile Include="ViewModels\HmiStatusBarViewModel.cs" />
@@ -170,6 +172,9 @@
     </Compile>
     <Compile Include="Views\CreatePlcView.xaml.cs">
       <DependentUpon>CreatePlcView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditControlView.xaml.cs">
+      <DependentUpon>EditControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditPlcView.xaml.cs">
       <DependentUpon>EditPlcView.xaml</DependentUpon>
@@ -282,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreatePlcView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

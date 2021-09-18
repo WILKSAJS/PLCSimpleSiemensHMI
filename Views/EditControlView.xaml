@@ -1,0 +1,22 @@
+﻿<Window x:Class="PLCSiemensSymulatorHMI.Views.EditControlView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        Title="EditControlView" Height="350" Width="300" WindowStartupLocation="CenterScreen">
+    
+    <StackPanel Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label Content="Control Name" Width="auto" Height="auto" Margin="30,0"/>
+        <TextBox x:Name="ControlName" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+        <Label Content="Data Block" Width="auto" Height="auto" Margin="30,0"/>
+        <TextBox x:Name="DataBlock" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+        <Label Content="Index" Width="auto" Height="auto" Margin="30,0"/>
+        <TextBox x:Name="Index" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+        <Label Content="Offset" Width="auto" Height="auto" Margin="30,0"/>
+        <TextBox x:Name="Offset" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+        <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
+    </StackPanel>
+</Window>

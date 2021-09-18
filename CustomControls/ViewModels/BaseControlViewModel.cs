@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
+using PLCSiemensSymulatorHMI.Messages;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
@@ -16,36 +17,39 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
     public abstract class BaseControlViewModel:Screen
     {
-        //private readonly Sharp7PlcService plcService;
         protected readonly IBasePlcRepository _plcRepository;
         protected readonly DefaultControl _defaultControl;
         protected readonly PlcViewModel _plcViewModel;
-        protected readonly string _DbBlockAdress;
+        private readonly IWindowManager _windowManager;
 
         protected UIElement dragObject = null;
         protected Canvas MyCanvas;
         protected Point start;
         protected Point origin;
 
-        public BaseControlViewModel(IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
+        public BaseControlViewModel(IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
         {
             _plcRepository = plcRepository;
             _defaultControl = defaultControl;
             _plcViewModel = plcViewModel;
+            _windowManager = windowManager;
             // to move and show name of control on desktop
             Y = _defaultControl.Y;
             X = _defaultControl.X;
             ControlName = _defaultControl.ControlName;
             // to perform control oepration by PlcService
-            _DbBlockAdress = _defaultControl.DbBlockAdress;
+            DbBlockAdress = _defaultControl.DbBlockAdress;
         }
         public abstract Task PerformControlOperation(Sharp7PlcService plcService);
         public event EventHandler ControlRemoved;
-
-        // only for read purpose
+      
+        // only for read purpose: View - Edit Control ContextMenu option
+   
+        private string _DbBlockAdress;
         public string DbBlockAdress
         {
             get { return _DbBlockAdress; }
+            set => Set(ref _DbBlockAdress, value);
         }
 
         private string _controlName;
@@ -105,9 +109,6 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             {
                 dragObject.ReleaseMouseCapture();
                 dragObject = null;
-
-                // SAVE NEW X Y POSITIONS
-                _plcRepository.EditControl(_defaultControl, _plcViewModel.Id);
             }
         }
 
@@ -123,7 +124,13 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             {
                 MessageBox.Show(e.Message, "Message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+        }
+
+        //public event EventHandler<ControlEditEventArgs> ControlEdited;
+
+        public void EditControl()
+        {
+            _windowManager.ShowWindow(new EditControlViewModel(this,_defaultControl), null, null);
         }
     }
 }

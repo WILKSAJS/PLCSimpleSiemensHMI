@@ -64,7 +64,7 @@
         <StackPanel.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
-                <MenuItem Header="{Binding DbBlockAdress}" Background="Gray"/>
+                <MenuItem Header="{Binding DbBlockAdress}" Background="Gray" cal:Message.Attach="EditControl()"/>
             </ContextMenu>
         </StackPanel.ContextMenu>
 

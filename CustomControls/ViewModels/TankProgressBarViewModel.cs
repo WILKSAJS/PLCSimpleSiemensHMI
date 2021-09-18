@@ -1,4 +1,5 @@
-﻿using PLCSiemensSymulatorHMI.CustomControls.Models;
+﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
@@ -14,8 +15,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public class TankProgressBarViewModel:BaseControlViewModel
     {
         private readonly Sharp7PlcService _plcService;
-        public TankProgressBarViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
-            : base(plcRepository, defaultControl, plcViewModel)
+        public TankProgressBarViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
+            : base(plcRepository, defaultControl, plcViewModel, windowManager)
         {
             _plcService = plcService;
             Minimum = Double.Parse(_defaultControl.AdditionalControlInfo[0]);
@@ -70,12 +71,12 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         {
             if (_defaultControl.Index.Contains("DBW"))
             {
-                Value = Convert.ToDouble(await _plcService.ReadInt(_DbBlockAdress));
+                Value = Convert.ToDouble(await _plcService.ReadInt(DbBlockAdress));
             }
 
             if (_defaultControl.Index.Contains("DBD"))
             {
-                Value = Convert.ToDouble(await _plcService.ReadReal(_DbBlockAdress));
+                Value = Convert.ToDouble(await _plcService.ReadReal(DbBlockAdress));
             } 
         }
         

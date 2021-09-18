@@ -17,8 +17,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     {
         private readonly Regex regex = new Regex("[+-]?([0-9]*[.])?[0-9]+");
         private readonly Sharp7PlcService _plcService;
-        public RealTextBoxViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
-            : base(plcRepository, defaultControl, plcViewModel)
+        public RealTextBoxViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
+            : base(plcRepository, defaultControl, plcViewModel, windowManager)
         {
             _plcService = plcService;
 
@@ -39,7 +39,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
-           Value  = await _plcService.ReadReal(_DbBlockAdress);
+           Value  = await _plcService.ReadReal(DbBlockAdress);
         }
 
         public bool CanSaveNewValue
@@ -55,7 +55,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
                 if (!string.IsNullOrWhiteSpace(value) && regex.IsMatch(value))
                 {
                     float var = float.Parse(value, CultureInfo.InvariantCulture);
-                    await _plcService.WriteReal(_DbBlockAdress, var);
+                    await _plcService.WriteReal(DbBlockAdress, var);
                     source.Text = "";
                 }
                 else

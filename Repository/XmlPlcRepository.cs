@@ -80,17 +80,20 @@ namespace PLCSiemensSymulatorHMI.Repository
         }
         public bool EditControl(DefaultControl control, int plcId)
         {
-            plcList.Where(x => x.Id == plcId).FirstOrDefault()
-                   .ControlList.Where(x => x.Id == control.Id)
-                   .Select(x => {
-                       x.ControlName = control.ControlName;
-                       x.DataBlock = control.DataBlock;
-                       x.Index = control.Index;
-                       x.Offset = control.Offset;
-                       x.Y = control.Y;
-                       x.X = control.X;
-                       return x;
-                   });
+            // there is no need to implement edit control because ediition is made
+            // in runetime through DefaultControl _defaultControl object in particular VM's
+            // and saved when program is collapsing
+            //plcList.Where(x => x.Id == plcId).FirstOrDefault()
+            //       .ControlList.Where(x => x.Id == control.Id)
+            //       .Select(x => {
+            //           x.ControlName = control.ControlName;
+            //           x.DataBlock = control.DataBlock;
+            //           x.Index = control.Index;
+            //           x.Offset = control.Offset;
+            //           x.X = control.X;
+            //           x.Y = control.Y;
+            //           return x;
+            //       });
             return true;
         }
         public bool RemoveControl(DefaultControl control, int plcId)

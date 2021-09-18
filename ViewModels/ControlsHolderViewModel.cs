@@ -19,12 +19,14 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly Sharp7PlcService _plcService;
         private readonly PlcViewModel _plcViewModel;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IWindowManager _windowManager;
 
-        public ControlsHolderViewModel(IBasePlcRepository plcRepository, Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator)
+        public ControlsHolderViewModel(IBasePlcRepository plcRepository, Sharp7PlcService plcService, PlcViewModel plcViewModel, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _plcViewModel = plcViewModel;
             _eventAggregator = eventAggregator;
-            
+            _windowManager = windowManager;
+
             _plcRepository = plcRepository;
             _plcService = plcService;
             HmiStatusBar = new HmiStatusBarViewModel(_plcService, _plcViewModel, _eventAggregator);
@@ -106,41 +108,41 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private BaseControlViewModel CreateNewControlVewModel(DefaultControl defaultControl)
         {
             // default control gona be green semaphore in case of some cast problems
-            BaseControlViewModel newControlVm = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+            BaseControlViewModel newControlVm = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel, _windowManager);
             switch (defaultControl.ControlType)
             {
                 case Messages.ControlType.GreenSemaphore:
-                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Green, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.OrangeSemaphore:
-                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Orange, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.RedSemaphore:
-                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Red, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.BlueSemaphore:
-                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Blue, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SemaphoreViewModel(BrushConverterColours.Blue, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.MonostableButton:
-                    newControlVm = new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new MonostableButtonViewModel(_plcService ,_plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.BistableButton:
-                    newControlVm = new BistableButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new BistableButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.RealTextBox:
-                    newControlVm = new RealTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new RealTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.IntegerTextbox:
-                    newControlVm = new IntTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new IntTextBoxViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.EmergencyButton:
-                    newControlVm = new EmergencyButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new EmergencyButtonViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.TankProgressBar:
-                    newControlVm = new TankProgressBarViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new TankProgressBarViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 case Messages.ControlType.SliderControl:
-                    newControlVm = new SliderViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel);
+                    newControlVm = new SliderViewModel(_plcService, _plcRepository, defaultControl, _plcViewModel, _windowManager);
                     goto default;
                 default:
                     //Default behaviour - subscribe event and return new VM

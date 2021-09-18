@@ -1,4 +1,5 @@
-﻿using PLCSiemensSymulatorHMI.CustomControls.Models;
+﻿using Caliburn.Micro;
+using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
@@ -14,8 +15,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public class EmergencyButtonViewModel : BaseControlViewModel
     {
         private readonly Sharp7PlcService _plcService;
-        public EmergencyButtonViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
-            : base(plcRepository, defaultControl, plcViewModel)
+        public EmergencyButtonViewModel(Sharp7PlcService plcService, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
+            : base(plcRepository, defaultControl, plcViewModel, windowManager)
         {
             _plcService = plcService;
 
@@ -47,7 +48,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public async Task EmergencyButtonClick()
         {
-            var result = await _plcService.WriteBit(_DbBlockAdress, !State);
+            var result = await _plcService.WriteBit(DbBlockAdress, !State);
             
             if (result == 0)
             {

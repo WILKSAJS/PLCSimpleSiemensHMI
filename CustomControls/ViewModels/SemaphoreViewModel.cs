@@ -20,8 +20,8 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
     public class SemaphoreViewModel: BaseControlViewModel
     {
 
-        public SemaphoreViewModel(BrushConverterColours brushConverterColours, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel)
-            :base(plcRepository,defaultControl,plcViewModel)
+        public SemaphoreViewModel(BrushConverterColours brushConverterColours, IBasePlcRepository plcRepository, DefaultControl defaultControl, PlcViewModel plcViewModel, IWindowManager windowManager)
+            :base(plcRepository,defaultControl,plcViewModel, windowManager)
         {
             SemaphoreColour = brushConverterColours;
         }
@@ -43,7 +43,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
         // Read bit that is converted to Semaphore Brush.Colour
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
-            SemaphoreState = await plcService.ReadBit(_DbBlockAdress);
+            SemaphoreState = await plcService.ReadBit(DbBlockAdress);
         }
 
     }

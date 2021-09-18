@@ -17,6 +17,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.Models
     [XmlInclude(typeof(RealTextBox))]
     [XmlInclude(typeof(EmergencyButton))]
     [XmlInclude(typeof(TankProgressBar))]
+    [XmlInclude(typeof(SliderControl))]
     [Serializable]
     public class DefaultControl
     {

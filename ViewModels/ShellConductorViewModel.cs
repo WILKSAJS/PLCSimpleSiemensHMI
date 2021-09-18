@@ -15,18 +15,21 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly CreatePlcViewModel _createPlcViewModel;
         private readonly IBasePlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IWindowManager _windowManager;
 
         public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
             IBasePlcRepository plcRepository,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            IWindowManager windowManager)
         {
             // TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
             _createPlcViewModel = createPlcViewModel;
             _plcRepository = plcRepository;
             _eventAggregator = eventAggregator;
+            _windowManager = windowManager;
         }
         //public TopMenuViewModel TopMenu { get; }
         public PlcListViewModel PlcList { get; }
@@ -36,7 +39,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             switch (message.CurrentPage)
             {
                 case CurrentPage.ControlPage:
-                    ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator));
+                    ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator, _windowManager));
                     break;
                 //case CurrentPage.SettingsPage:
                 //    ActivateItem(_settingsViewModel);

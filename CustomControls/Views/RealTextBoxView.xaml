@@ -7,33 +7,6 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d">
-    <!--<StackPanel>
-        <Label FontSize="12" Content="Real Value" HorizontalAlignment="Center" 
-               cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
-                                   [Event MouseUp] = [Action MouseUp()];
-                                   [Event MouseMove] = [Action MouseMove($eventArgs)];"/>
-        
-        <Border BorderThickness="1" BorderBrush="ForestGreen" Background="White">
-            <TextBlock x:Name="Value" Margin="1,2,1,0" TextAlignment="Center"/>
-        </Border>
-        <TextBox TextAlignment="Center" Margin="1,2,1,0">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="KeyDown">
-                    <cal:ActionMessage MethodName="SaveNewValue">
-                        <cal:Parameter Value="$source" />
-                        <cal:Parameter Value="$eventArgs" />
-                    </cal:ActionMessage>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
-                 
-        <Label x:Name="ControlName" HorizontalAlignment="Center"  Margin="1,2,1,0"/>
-        <StackPanel.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
-            </ContextMenu>
-        </StackPanel.ContextMenu>
-    </StackPanel>-->
     <StackPanel>
         <Label FontSize="12" Content="Real VALUE" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Oblique"
                cal:Message.Attach="[Event MouseDown] = [Action MouseDown($eventArgs, $executionContext)];
@@ -90,7 +63,7 @@
         <StackPanel.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Remove" Background="Tomato" cal:Message.Attach="RemoveControl()"/>
-                <MenuItem Header="{Binding DbBlockAdress}" Background="Gray"/>
+                <MenuItem Header="{Binding DbBlockAdress}" Background="Gray" cal:Message.Attach="EditControl()"/>
             </ContextMenu>
         </StackPanel.ContextMenu>
 
