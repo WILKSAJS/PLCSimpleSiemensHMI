@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="CreateControlView" Height="380" Width="850" WindowStartupLocation="CenterScreen">
+        Title="CreateControlView" Height="380" Width="850" WindowStartupLocation="CenterScreen" Topmost="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" MinWidth="300"/>
