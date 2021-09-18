@@ -137,7 +137,6 @@
     <Compile Include="CustomControls\Views\TankProgressBarView.xaml.cs">
       <DependentUpon>TankProgressBarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messages\ControlEditEventArgs.cs" />
     <Compile Include="Messages\CreateControlMessage.cs" />
     <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />

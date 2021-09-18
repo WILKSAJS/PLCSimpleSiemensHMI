@@ -126,8 +126,6 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             }
         }
 
-        //public event EventHandler<ControlEditEventArgs> ControlEdited;
-
         public void EditControl()
         {
             _windowManager.ShowWindow(new EditControlViewModel(this,_defaultControl), null, null);
