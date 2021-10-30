@@ -143,7 +143,6 @@
     <Compile Include="Models\Plc.cs" />
     <Compile Include="Repository\IBasePlcRepository.cs" />
     <Compile Include="Repository\XmlPlcRepository.cs" />
-    <Compile Include="Repository\PlcRepository.cs" />
     <Compile Include="UIHelper\ProcessLevel.xaml.cs">
       <DependentUpon>ProcessLevel.xaml</DependentUpon>
     </Compile>
