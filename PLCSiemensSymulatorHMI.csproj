@@ -137,6 +137,8 @@
     <Compile Include="CustomControls\Views\TankProgressBarView.xaml.cs">
       <DependentUpon>TankProgressBarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExternalComponents\Services\Sharp7PlcService.cs" />
+    <Compile Include="ExternalComponents\Sharp7.cs" />
     <Compile Include="Messages\CreateControlMessage.cs" />
     <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />
@@ -320,12 +322,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PLCSiemensSymulatorHMI.PlcService\PLCSiemensSymulatorHMI.PlcService.csproj">
-      <Project>{3266180e-2f83-4903-9a76-e643f54a93a6}</Project>
-      <Name>PLCSiemensSymulatorHMI.PlcService</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

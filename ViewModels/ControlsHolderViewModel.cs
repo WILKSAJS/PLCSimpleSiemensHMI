@@ -3,7 +3,7 @@ using PLCSiemensSymulatorHMI.Converters;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
 using PLCSiemensSymulatorHMI.CustomControls.ViewModels;
 using PLCSiemensSymulatorHMI.Messages;
-using PLCSiemensSymulatorHMI.PlcService;
+using PLCSiemensSymulatorHMI.ExternalComponents.Services;
 using PLCSiemensSymulatorHMI.Repository;
 using System;
 using System.Linq;

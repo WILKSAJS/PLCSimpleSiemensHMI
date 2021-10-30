@@ -1,7 +1,7 @@
 ﻿using Caliburn.Micro;
 using PLCSiemensSymulatorHMI.CustomControls.Models;
+using PLCSiemensSymulatorHMI.ExternalComponents.Services;
 using PLCSiemensSymulatorHMI.Messages;
-using PLCSiemensSymulatorHMI.PlcService;
 using PLCSiemensSymulatorHMI.Repository;
 using PLCSiemensSymulatorHMI.ViewModels;
 using System;
