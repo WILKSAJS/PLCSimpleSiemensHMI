@@ -11,7 +11,7 @@
     <Border BorderBrush="Black" BorderThickness="0,0,1,0">
         <StackPanel>
             <Button x:Name="NaviToPLCreatorView" Content="Add new PLC"/>
-            <ItemsControl x:Name="PlcList" MaxWidth="150"/>
+            <ItemsControl x:Name="PlcList" MaxWidth="200"/>
         </StackPanel>
     </Border>
 </UserControl>

@@ -8,6 +8,7 @@
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
+                <ResourceDictionary Source="UIHelper/PlcButtonResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

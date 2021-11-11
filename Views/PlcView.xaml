@@ -5,14 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
              mc:Ignorable="d">
-
-    <ToolBarTray Background="DarkGray">
-        <ToolBar Background="White">
-            <Button x:Name="NavigateToControlPage" Content="{Binding Name, FallbackValue='PLC_1'}" MinWidth="100" Margin="5"/>
+    <ToolBarTray Background="Azure">
+        <ToolBar Background="Azure">
+            <Button x:Name="NavigateToControlPage" MinWidth="150" Margin="1" HorizontalContentAlignment="Stretch"
+                    Background="MediumSlateBlue" Foreground="White" Height="30" Style="{StaticResource PlcRoundButton}">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition  Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <!--Icons made by: dmitri13 from www.flaticon.com-->
+                    <Image Margin="10,0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="30" Source="/Images/data-management_2.png"/>
+                    <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Name" Foreground="White"/>
+                </Grid>
+            </Button>
             <Separator Background="Black" />
-            <Button x:Name="AddControl" Content="AddControl" Background="GreenYellow"/>
-            <Button x:Name="Remove"  Content="Remove" Background="Tomato"/>
-            <Button x:Name="NaviToPLCEditView"  Content="Edit" Background="BlueViolet"/>
+            <!--Icons made by: dmitri13 from www.flaticon.com-->
+            <Button x:Name="AddControl">
+                <Image  Height="30" Width="30" Source="/Images/add.png"/>
+            </Button>
+            <Button  x:Name="NaviToPLCEditView">
+                <Image  Height="30" Width="30" Source="/Images/settings.png"/>
+            </Button>
+            <Button x:Name="Remove">
+                <Image  Height="30" Width="30" Source="/Images/trash.png"/>
+            </Button>
         </ToolBar>
     </ToolBarTray>
 </UserControl>
