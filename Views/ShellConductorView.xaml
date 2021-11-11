@@ -7,6 +7,9 @@
         xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
         mc:Ignorable="d"
         Background="Gainsboro"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
         Title="Simple Siemens HMI" Height="850" Width="1700" MinHeight="450" MinWidth="900" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrush" />
@@ -17,14 +20,37 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--<ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>-->
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#252525" MouseDown="Border_MouseDown">
+            <Grid>
+                <Label Content="Simple Siemens HMI" Foreground="Gray" FontWeight="SemiBold" VerticalAlignment="Center"/>
 
-        <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Width="25" Height="25" Content="_"  
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonMinimize_Click"/>
+                    
+                    <Button Width="25" Height="25" Content="☐"  
+                            Background="Transparent" BorderThickness="0" 
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonMaximize_Click"/>
+                    
+                    <Button Width="25" Height="25" Content="⨉" Margin="0,0,5,0" 
+                            Background="Transparent" BorderThickness="0" 
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonExit_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1"/>
+        <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"/>
+
+        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"/>
     </Grid>
 </Window>
