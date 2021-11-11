@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
         xmlns:converters="clr-namespace:PLCSiemensSymulatorHMI.Converters"
         mc:Ignorable="d"
+        Background="Gainsboro"
         Title="Simple Siemens HMI" Height="850" Width="1700" MinHeight="450" MinWidth="900" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrush" />

@@ -5,19 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
              mc:Ignorable="d">
+    
     <Grid>
-        <StatusBar>
-            <TextBlock Text="{Binding ConnectionState, StringFormat=Connection state:{0}}"/>
-            <Separator/>
-            <TextBlock Text="{Binding TimeScan, StringFormat=TimeScan {0}}"/>
-            <Separator/>
-            <TextBlock Text="{Binding Name}"/>
-            <Separator/>
-            <TextBlock Text="{Binding IpAdress}"/>
-            <Separator/>
-            <TextBlock Text="{Binding Rack}"/>
-            <Separator/>
-            <TextBlock Text="{Binding Slot}"/>
+        <StatusBar Background="DarkSlateGray">
+            <TextBlock Foreground="White" Text="{Binding ConnectionState, StringFormat=Connection state:{0}}"/>
+            <Separator Background="Tan"/>
+            <TextBlock Foreground="White" Text="{Binding TimeScan, StringFormat=TimeScan {0}}"/>
+            <Separator Background="Tan"/>
+            <TextBlock Foreground="White" Text="{Binding Name}"/>
+            <Separator Background="Tan"/>
+            <TextBlock Foreground="White" Text="{Binding IpAdress}"/>
+            <Separator Background="Tan"/>
+            <TextBlock Foreground="White" Text="{Binding Rack}"/>
+            <Separator Background="Tan"/>
+            <TextBlock Foreground="White" Text="{Binding Slot}"/>
         </StatusBar>
     </Grid>
 </UserControl>

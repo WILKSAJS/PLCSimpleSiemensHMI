@@ -8,9 +8,16 @@
              mc:Ignorable="d" 
              d:DesignWidth="150">
 
-    <Border BorderBrush="Black" BorderThickness="0,0,1,0">
-        <StackPanel>
-            <Button x:Name="NaviToPLCreatorView" Content="Add new PLC"/>
+    <Border BorderBrush="LightSalmon" BorderThickness="0,0,2,0" Background="DimGray">
+        <StackPanel HorizontalAlignment="Stretch">
+            <Button x:Name="NaviToPLCreatorView" HorizontalContentAlignment="Stretch"  MaxWidth="200" MinWidth="146" Margin="0,5"
+                    Background="Crimson" Foreground="White" Height="40" Style="{StaticResource AddPlcButton}" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="30" Source="/Images/industries.png"/>
+                    <Label Content="ADD PLC"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontWeight="ExtraBold"/>
+                </StackPanel>
+            </Button>
+            <Separator Height="1" Background="Khaki" Margin="0,0,0,5" Focusable="False"/>
             <ItemsControl x:Name="PlcList" MaxWidth="200"/>
         </StackPanel>
     </Border>
