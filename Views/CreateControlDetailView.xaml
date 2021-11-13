@@ -6,27 +6,50 @@
         xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="CreateControlDetailView" Height="350" Width="500">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Detail control informations:"  FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <Label Content="Minimum ProgressBar Value :"/>
-                <TextBox x:Name="MinimumValue" MinWidth="100" Margin="22,0,0,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];" />
+        Background="Gainsboro"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Title="Create Control Details" Height="350" Width="500">
+    <Border BorderThickness="1" BorderBrush="#252525">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" Background="#252525" MouseDown="Border_MouseDown">
+                <Grid>
+                    <Label Content="Create Control Details" Foreground="Gray" FontWeight="SemiBold" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Width="25" Height="25" Content="_"  
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonMinimize_Click"/>
+
+                        <Button Width="25" Height="25" Content="⨉" Margin="0,0,5,0" 
+                            Background="Transparent" BorderThickness="0" 
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonExit_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+                <Label Content="Detail control informations:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10">
+                    <Label Content="Minimum ProgressBar Value :"/>
+                    <TextBox x:Name="MinimumValue" MinWidth="100" Margin="22,0,0,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10">
+                    <Label Content="Maximum ProgressBar Value :"/>
+                    <TextBox x:Name="MaximumValue" MinWidth="100" Margin="20,0,0,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10">
+                    <Label Content="PorgressBar Color :"/>
+                    <ComboBox MaxWidth="150" x:Name="PorgressBarColor" MinWidth="100" Margin="20,0,0,0" />
+                </StackPanel>
+                <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <Label Content="Maximum ProgressBar Value :"/>
-                <TextBox x:Name="MaximumValue" MinWidth="100" Margin="20,0,0,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <Label Content="PorgressBar Color :"/>
-                <ComboBox MaxWidth="150" x:Name="PorgressBarColor" MinWidth="100" Margin="20,0,0,0" />
-            </StackPanel>
-            <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

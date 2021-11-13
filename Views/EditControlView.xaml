@@ -6,17 +6,50 @@
         xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="EditControlView" Height="350" Width="300" WindowStartupLocation="CenterScreen">
+        Background="Gainsboro"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Title="Edit Control" Height="350" Width="300" WindowStartupLocation="CenterScreen">
+    <Border BorderThickness="1" BorderBrush="#252525">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#252525" MouseDown="Border_MouseDown">
+                <Grid>
+                    <Label Content="Edit Control" Foreground="Gray" FontWeight="SemiBold" VerticalAlignment="Center"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+
+                        <Button Width="25" Height="25" Content="_"  
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonMinimize_Click"/>
+
+                        <Button Width="25" Height="25" Content="⨉" Margin="0,0,5,0" 
+                            Background="Transparent" BorderThickness="0" 
+                            Foreground="Gray" FontWeight="Bold"
+                            Click="ButtonExit_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Row="1"  Width="200" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Control properties:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+
+                <Label Content="Control Name" Width="auto" Height="auto" Margin="30,0"/>
+                <TextBox x:Name="ControlName" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+                <Label Content="Data Block" Width="auto" Height="auto" Margin="30,0"/>
+                <TextBox x:Name="DataBlock" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+                <Label Content="Index" Width="auto" Height="auto" Margin="30,0"/>
+                <TextBox x:Name="Index" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+                <Label Content="Offset" Width="auto" Height="auto" Margin="30,0"/>
+                <TextBox x:Name="Offset" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
+                <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
+            </StackPanel>
+        </Grid>
+    </Border>
     
-    <StackPanel Width="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Label Content="Control Name" Width="auto" Height="auto" Margin="30,0"/>
-        <TextBox x:Name="ControlName" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
-        <Label Content="Data Block" Width="auto" Height="auto" Margin="30,0"/>
-        <TextBox x:Name="DataBlock" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
-        <Label Content="Index" Width="auto" Height="auto" Margin="30,0"/>
-        <TextBox x:Name="Index" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
-        <Label Content="Offset" Width="auto" Height="auto" Margin="30,0"/>
-        <TextBox x:Name="Offset" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
-        <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
-    </StackPanel>
 </Window>

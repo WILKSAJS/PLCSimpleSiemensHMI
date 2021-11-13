@@ -23,5 +23,19 @@ namespace PLCSiemensSymulatorHMI.Views
         {
             InitializeComponent();
         }
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void ButtonExit_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

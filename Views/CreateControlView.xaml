@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Background="Gainsboro"
         WindowStyle="None"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         AllowsTransparency="True"
         Title="CreateControlView" Height="380" Width="850" WindowStartupLocation="CenterScreen" Topmost="True">
     <Border BorderThickness="1" BorderBrush="#252525">
