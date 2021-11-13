@@ -7,26 +7,43 @@
              mc:Ignorable="d"
              HorizontalAlignment="Center"
              VerticalAlignment="Center">
-    <Border BorderBrush="Gray" BorderThickness="1">
-        <StackPanel>
-            <TextBlock Text="Create new PLC" TextAlignment="Center"  FontSize="25"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Name:" FontSize="20" />
-                <TextBox x:Name="Name" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="IP Adress:" FontSize="20" />
-                <TextBox x:Name="IpAdress" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Rack:" FontSize="20" />
-                <TextBox x:Name="Rack" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Slot" FontSize="20" />
-                <TextBox x:Name="Slot" FontSize="18" Margin="5,0" TextAlignment="Center" VerticalAlignment="Center" MinWidth="130" />
-            </StackPanel>
-            <Button x:Name="ConfirmCreatePlc" Content="Confirm" Margin="10,20,10,10" MaxWidth="150"/>
-        </StackPanel>
+    <Border BorderBrush="LightSalmon" BorderThickness="2">
+
+        <Grid Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.ColumnSpan="2" Text="Create new PLC" TextAlignment="Center"  FontSize="25" Margin="0,0,0,30"/>
+
+            <Label  Grid.Column="0" Grid.Row="1" Content="Name:" FontSize="20" />
+            <TextBox  Grid.Column="1" Grid.Row="1" x:Name="Name" FontSize="18" Margin="5,0" TextAlignment="Center" 
+                      VerticalAlignment="Center" MinWidth="130"/>
+
+            <Label Grid.Column="0" Grid.Row="2" Content="IP Adress:" FontSize="20" />
+            <TextBox Grid.Column="1" Grid.Row="2" x:Name="IpAdress" FontSize="18" Margin="5,0" TextAlignment="Center"
+                     VerticalAlignment="Center" MinWidth="130"/>
+
+            <Label Grid.Column="0" Grid.Row="3" Content="Rack:" FontSize="20" />
+            <TextBox Grid.Column="1" Grid.Row="3" x:Name="Rack" FontSize="18" Margin="5,0" TextAlignment="Center" 
+                     VerticalAlignment="Center" MinWidth="130"/>
+
+            <Label Grid.Column="0" Grid.Row="4" Content="Slot" FontSize="20" />
+            <TextBox Grid.Column="1" Grid.Row="4" x:Name="Slot" FontSize="18" Margin="5,0" TextAlignment="Center" 
+                     VerticalAlignment="Center" MinWidth="130" />
+
+            <Button Grid.Row="5" Grid.ColumnSpan="2" x:Name="ConfirmCreatePlc" FontWeight="UltraBold" Content="Confirm" Margin="10,20,10,10" 
+                    MinWidth="150" MinHeight="30" Style="{StaticResource ConfirmButton}"/>
+            
+        </Grid>
     </Border>
 </UserControl>

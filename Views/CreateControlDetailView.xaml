@@ -48,7 +48,8 @@
                     <Label Content="PorgressBar Color :"/>
                     <ComboBox MaxWidth="150" x:Name="PorgressBarColor" MinWidth="100" Margin="20,0,0,0" />
                 </StackPanel>
-                <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
+                <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"
+                        Style="{StaticResource SubmitButton}" Foreground="White" Height="25"/>
             </StackPanel>
         </Grid>
     </Border>

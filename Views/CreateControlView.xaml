@@ -51,7 +51,7 @@
                 <Label Content="Offset" Width="auto" Height="auto" Margin="30,0"/>
                 <TextBox x:Name="Offset" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
                 <ComboBox MaxWidth="150" x:Name="ControlType" Margin="0,30"/>
-                <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
+                <Button x:Name="Submit" Style="{StaticResource SubmitButton}" Foreground="White" Height="25" Content="Submit" Margin="30,30" Width="100"/>
             </StackPanel>
 
             <ScrollViewer Grid.Column="1" Grid.Row="1" Margin="20" MaxWidth="400" MaxHeight="280" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -63,7 +63,8 @@
                 <StackPanel Orientation="Horizontal" Margin="20,0,20,0">
                     <Label Content="File name:"/>
                     <TextBox x:Name="FilePath" Text="Path File" Width="300" Padding="0,5"/>
-                    <Button x:Name="OpenFileDialogClick" Content="..." Width="90" Margin="10,0,0,0"/>
+                    <Button x:Name="OpenFileDialogClick" Content="..." Width="90" Margin="10,0,0,0"
+                            Style="{StaticResource SubmitButton}" Foreground="White" Height="25"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

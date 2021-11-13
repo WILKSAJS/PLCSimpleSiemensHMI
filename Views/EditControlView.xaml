@@ -47,7 +47,7 @@
                 <TextBox x:Name="Index" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
                 <Label Content="Offset" Width="auto" Height="auto" Margin="30,0"/>
                 <TextBox x:Name="Offset" Margin="30,0" cal:Message.Attach="[Event TextChanged] = [Action TextChanged()];"/>
-                <Button x:Name="Submit" Content="Submit" Margin="30,30" Width="100"/>
+                <Button Style="{StaticResource SubmitButton}" Foreground="White" Height="25" x:Name="Submit" Content="Submit" Margin="30,30" Width="120"/>
             </StackPanel>
         </Grid>
     </Border>
