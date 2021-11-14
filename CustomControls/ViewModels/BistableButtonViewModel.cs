@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 {
-    class BistableButtonViewModel : BaseControlViewModel
+    public class BistableButtonViewModel : BaseControlViewModel
     {
         private readonly Sharp7PlcService _plcService;
 
@@ -38,8 +38,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
 
         public override async Task PerformControlOperation(Sharp7PlcService plcService)
         {
-            //Button doesn't need to read sate, because it should be independend from PLC behaviour
-            //State = await plcService.ReadBit(_DbBlockAdress);
+            State = await plcService.ReadBit(DbBlockAdress);
         }
 
         public bool CanBistableButtonClick

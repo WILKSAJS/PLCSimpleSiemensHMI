@@ -151,6 +151,8 @@ namespace PLCSiemensSymulatorHMI.ExternalComponents.Services
 
         #region BIT
         // WRITE
+        // Write method apraoch is a little diffrent. By default it changes intended bit, but also replces all the other bit's in particular byte as value 0, even if there is alredy some value.
+        // solution: 1. recognize ALL bits in particular byte, 2. read all bit values, 3 change value that we interested in, 4 write ALL byte which also inludes changed bit
         public async Task<int> WriteBit(string indexAdress, bool state)
         {
             var strings = indexAdress.Split('.');
@@ -166,9 +168,26 @@ namespace PLCSiemensSymulatorHMI.ExternalComponents.Services
             {
                 lock (_locker)
                 {
-                    var buffer = new byte[1];
-                    S7.SetBitAt(ref buffer, 0, bit, state);
-                    return _client.DBWrite(db, position, 1, buffer);
+                    //var buffer = new byte[1];
+                    //S7.SetBitAt(ref buffer, 0, bit, state);
+                    //return _client.DBWrite(db, position, 1, buffer);
+
+
+                    byte[] Bytebuffer = new byte[1];
+                    // 1.read all byte that includes "position.bit"
+                    _client.DBRead(db, position, Bytebuffer.Length, Bytebuffer);
+
+                    int readByte =  Convert.ToInt32(S7.GetByteAt(Bytebuffer, 0));
+                    // 2.bitwise oepartion AND(for 0) or OR(for 1) depending on state
+                    
+                    int modifiedReadByte = state ? readByte |= (1 << bit) : readByte &= ~(1 << bit);
+                    // 3. write back changed byte
+                    byte convertedValue = Convert.ToByte(modifiedReadByte);
+
+                    S7.SetByteAt(Bytebuffer, 0, convertedValue);
+                    return _client.DBWrite(db, position, Bytebuffer.Length, Bytebuffer);
+
+
                 }
             });
             return result;
