@@ -17,7 +17,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _windowManager;
 
-        public ShellConductorViewModel(TopMenuViewModel topMenuViewModel,
+        public ShellConductorViewModel(
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
             IBasePlcRepository plcRepository,

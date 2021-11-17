@@ -20,7 +20,7 @@
         <ItemsControl x:Name="ControlList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas x:Name="MyCanvas" Background="Gainsboro"/>
+                    <Canvas x:Name="MyCanvas" Background="WhiteSmoke"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>

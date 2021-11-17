@@ -160,7 +160,6 @@
     <Compile Include="ViewModels\PlcListViewModel.cs" />
     <Compile Include="ViewModels\PlcViewModel.cs" />
     <Compile Include="ViewModels\ShellConductorViewModel.cs" />
-    <Compile Include="ViewModels\TopMenuViewModel.cs" />
     <Compile Include="Views\ControlsHolderView.xaml.cs">
       <DependentUpon>ControlsHolderView.xaml</DependentUpon>
     </Compile>
@@ -193,9 +192,6 @@
     </Compile>
     <Compile Include="Views\ShellConductorView.xaml.cs">
       <DependentUpon>ShellConductorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TopMenuView.xaml.cs">
-      <DependentUpon>TopMenuView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -319,10 +315,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellConductorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TopMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

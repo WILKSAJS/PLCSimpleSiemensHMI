@@ -40,7 +40,6 @@ namespace PLCSiemensSymulatorHMI
             // viewModels
             _container.PerRequest<HmiStatusBarViewModel>();
 
-            _container.Singleton<TopMenuViewModel>();
             //_container.Singleton<SettingsViewModel>();
             _container.Singleton<PlcListViewModel>();
             _container.Singleton<CreatePlcViewModel>();
