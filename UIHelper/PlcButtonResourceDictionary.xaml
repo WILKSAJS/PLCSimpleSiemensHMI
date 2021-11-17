@@ -137,8 +137,8 @@
 
     <Style x:Key="SubmitButton" TargetType="{x:Type Button}">
         <Style.Resources>
-            <SolidColorBrush x:Key="ToolBarButtonHoverBorder" Color="DarkGray"/>
-            <SolidColorBrush x:Key="ToolBarButtonHover" Color="DarkGray"/>
+            <SolidColorBrush x:Key="ToolBarButtonHoverBorder" Color="Orange"/>
+            <SolidColorBrush x:Key="ToolBarButtonHover" Color="Orange"/>
             <SolidColorBrush x:Key="ToolBarButtonPressedBorder" Color="LightSteelBlue"/>
             <SolidColorBrush x:Key="ToolBarButtonPressed" Color="#400080FF"/>
         </Style.Resources>
@@ -173,6 +173,10 @@
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>
+                        <DataTrigger Binding="{Binding CanSubmit}" Value="false">
+                            <!-- check Valudation  -->
+                            <Setter Property="Background" Value="DarkGray"/>
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
