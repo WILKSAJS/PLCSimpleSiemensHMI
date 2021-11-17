@@ -23,6 +23,7 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
         <!--<ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>-->
@@ -48,9 +49,20 @@
                 </StackPanel>
             </Grid>
         </Border>
+        
+        
+        <!--Icon made by Freepik  https://www.freepik.com from https://www.flaticon.com/-->
 
         <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"/>
 
-        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"/>
+        <Border Background="DimGray" Grid.Row="3" Grid.Column="0"  BorderBrush="LightSalmon" 
+                BorderThickness="2,0,2,2">
+            
+            <Button x:Name="NavigateToSettings" Style="{StaticResource SettingsButton}"/>
+            
+        </Border>
+        
+
+        <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3"/>
     </Grid>
 </Window>

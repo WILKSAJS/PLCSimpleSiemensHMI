@@ -16,10 +16,12 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         private readonly IBasePlcRepository _plcRepository;
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _windowManager;
+        private readonly SettingsViewModel _settingsViewModel;
 
         public ShellConductorViewModel(
             PlcListViewModel plcListViewModel,
             CreatePlcViewModel createPlcViewModel,
+            SettingsViewModel settingsViewModel,
             IBasePlcRepository plcRepository,
             IEventAggregator eventAggregator,
             IWindowManager windowManager)
@@ -30,6 +32,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _plcRepository = plcRepository;
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+            _settingsViewModel = settingsViewModel;
         }
         //public TopMenuViewModel TopMenu { get; }
         public PlcListViewModel PlcList { get; }
@@ -39,20 +42,29 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             switch (message.CurrentPage)
             {
                 case CurrentPage.ControlPage:
+                    ActiveItem?.TryClose();
                     ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator, _windowManager));
                     break;
-                //case CurrentPage.SettingsPage:
-                //    ActivateItem(_settingsViewModel);
-                //    break;
+                case CurrentPage.SettingsPage:
+                    ActiveItem?.TryClose();
+                    ActivateItem(_settingsViewModel);
+                    break;
                 case CurrentPage.CreatePlcPage:
+                    ActiveItem?.TryClose();
                     ActivateItem(_createPlcViewModel);
                     break;
                 case CurrentPage.EditPlcPage:
+                    ActiveItem?.TryClose();
                     ActivateItem(new EditPlcViewModel(message.Plc, PlcList, (PlcViewModel)message.Sender, _eventAggregator));
                     break;
                 default:
                     break;
             }
+        }
+
+        public void NavigateToSettings()
+        {
+            Handle(new NavigateMessage() { CurrentPage = CurrentPage.SettingsPage, Sender = this });
         }
 
         protected override void OnActivate()

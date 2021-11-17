@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignWidth="150">
 
-    <Border BorderBrush="LightSalmon" BorderThickness="2,0,2,2" Background="DimGray">
+    <Border BorderBrush="LightSalmon" BorderThickness="2,0,2,0" Background="DimGray">
         <StackPanel HorizontalAlignment="Stretch">
             <Button x:Name="NaviToPLCreatorView" HorizontalContentAlignment="Stretch"  MaxWidth="200" MinWidth="146" Margin="0,0,0,5"
                     Background="Crimson" Height="40" Style="{StaticResource AddPlcButton}" HorizontalAlignment="Stretch">
