@@ -20,9 +20,22 @@ namespace PLCSiemensSymulatorHMI.ViewModels
         {
             _windowManager = windowManager;
             _plcRepository = plcRepository;
+            plcRepository.RepositoryReloaded += this.OnRepositoryReloaded;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
             // retrieve Plcs from Repo, and pass it for create each PlcViewModel then add to Item list - FOR THIS NESTED VM THERE IS NO BootstrapContener Registry!
+            RetrievePlcToCreateViewModels();
+        }
+
+        public void OnRepositoryReloaded(object source, EventArgs eventHandler)
+        {
+            PlcList.Clear();
+            RetrievePlcToCreateViewModels();
+        }
+
+
+        private void RetrievePlcToCreateViewModels()
+        {
             var repoPlcList = _plcRepository.GetAllPlc();
             if (repoPlcList.Count > 0)
             {
