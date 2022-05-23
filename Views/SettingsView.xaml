@@ -4,14 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLCSiemensSymulatorHMI.Views"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d">
     <StackPanel Margin="5">
-        <Label  Content="Set configuration file path:"/>
+        <Label  Content="Set configuration file path:" Margin="10,5,10,5"/>
         <StackPanel Orientation="Horizontal" Margin="20,0,20,0">
             <Label Content="File path:"/>
             <TextBox x:Name="FilePath" Width="300" Padding="0,5"/>
             <Button x:Name="OpenFileDialogClick" Content="..." Width="90" Margin="10,0,0,0"
                             Style="{StaticResource SubmitButton}" Foreground="White" Height="25"/>
+        </StackPanel>
+
+        <Label x:Name="IntervalTimeLatel" Margin="10,5,10,5"/>
+        <StackPanel Orientation="Horizontal" Margin="20,0,20,0">
+            <Label Content="Interval time [ms]: "/>
+
+            <TextBox Width="100" Padding="0,5">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyDown">
+                        <cal:ActionMessage MethodName="SaveNewValue">
+                            <cal:Parameter Value="$source" />
+                            <cal:Parameter Value="$eventArgs" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
     </StackPanel>
 </UserControl>

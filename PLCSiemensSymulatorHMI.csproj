@@ -141,6 +141,7 @@
     <Compile Include="ExternalComponents\Services\Sharp7PlcService.cs" />
     <Compile Include="ExternalComponents\Sharp7.cs" />
     <Compile Include="Messages\ChangeFilePathMessage.cs" />
+    <Compile Include="Messages\ChangeIntervalTimeArgs.cs" />
     <Compile Include="Messages\CreateControlMessage.cs" />
     <Compile Include="Messages\EditPlcMessage.cs" />
     <Compile Include="Messages\NavigateMessage.cs" />

@@ -43,7 +43,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             {
                 case CurrentPage.ControlPage:
                     ActiveItem?.TryClose();
-                    ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(), (PlcViewModel)message.Sender, _eventAggregator, _windowManager));
+                    ActivateItem(new ControlsHolderViewModel(_plcRepository, new Sharp7PlcService(_settingsViewModel), (PlcViewModel)message.Sender, _eventAggregator, _windowManager));
                     break;
                 case CurrentPage.SettingsPage:
                     ActiveItem?.TryClose();

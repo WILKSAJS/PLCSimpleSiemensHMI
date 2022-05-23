@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Diagnostics;
+using PLCSiemensSymulatorHMI.ViewModels;
+using PLCSiemensSymulatorHMI.Messages;
 
 namespace PLCSiemensSymulatorHMI.ExternalComponents.Services
 {
@@ -21,17 +23,8 @@ namespace PLCSiemensSymulatorHMI.ExternalComponents.Services
     {
         private readonly S7Client _client;
         // use to rise an event every period of time in terms of update values from plc
-        private readonly System.Timers.Timer _timer;
-
-        public Sharp7PlcService()
-        {
-            _client = new S7Client();
-            _timer = new System.Timers.Timer();
-            // set timer interval
-            _timer.Interval = 300;
-            _timer.Elapsed += OnTimerElapsed;
-        }
-
+        private System.Timers.Timer _timer;
+        private readonly SettingsViewModel _settingsViewModel;
         private DateTime LastScantime;
         private volatile object _locker = new object();
 
@@ -43,6 +36,28 @@ namespace PLCSiemensSymulatorHMI.ExternalComponents.Services
 
         // event to notify about ConnectionState
         public event EventHandler ConnectionStateUpdated;
+
+        public Sharp7PlcService(SettingsViewModel settingsViewModel)
+        {
+            _client = new S7Client();
+            _timer = new System.Timers.Timer();
+            // set timer interval - 300 by default
+            _timer.Interval = int.Parse(System.Configuration.ConfigurationManager.AppSettings["InitialReadPLCInterval"]);
+            _timer.Elapsed += OnTimerElapsed;
+            _settingsViewModel = settingsViewModel;
+            //subscribe event to update Intervl time
+            _settingsViewModel.IntervalTimeChanged += this.OnIntervalTimeChanged;
+        }
+
+        private void SetIntervalTimer(int timeMS)
+        {
+            _timer.Interval = timeMS;
+        }
+        
+        public void OnIntervalTimeChanged(object source, ChangeIntervalTimeArgs eventHandler)
+        {
+            SetIntervalTimer(eventHandler.NewIntervalTime);
+        }
 
         private void OnValueUpdated()
         {
