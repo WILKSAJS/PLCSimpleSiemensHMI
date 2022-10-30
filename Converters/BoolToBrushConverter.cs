@@ -26,6 +26,7 @@ namespace PLCSiemensSymulatorHMI.Converters
             BrushConverterColours colour = (BrushConverterColours)Enum.Parse(typeof(BrushConverterColours), values[1].ToString());
             var boolValue = (bool)values[0];
 
+            // for sure could be done other, better way - strateggy, state, builder pattern??
             switch (colour)
             {
                 case BrushConverterColours.Green:
@@ -43,6 +44,7 @@ namespace PLCSiemensSymulatorHMI.Converters
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
+            // Not needed
             throw new NotImplementedException();
         }
     }

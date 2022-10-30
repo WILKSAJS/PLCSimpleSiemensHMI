@@ -109,7 +109,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                 && (String.IsNullOrEmpty(Offset) ? true : OffsetlockRegex.IsMatch(Offset));
         }
 
-        // check indexValidation which depend on Control.Type
+        // check indexValidation which depends on Control.Type
         private bool IsIndexValid(ControlType controlType, string Index)
         {
             switch (controlType)

@@ -75,7 +75,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             IntervalTimeLatel = "Set scan time interval - default: " + newValue + " [ms]";
         }
 
-        // event to inform PLCService to change interval time  
+        // event informs PLCService to change interval time  
         protected virtual void OnIntervalTimeChanged(int NewIntervalTime)
         {
             IntervalTimeChanged?.Invoke(this, new ChangeIntervalTimeArgs() { NewIntervalTime = NewIntervalTime });
@@ -98,7 +98,7 @@ namespace PLCSiemensSymulatorHMI.ViewModels
                     // rise event to change value in PLC service as well!
                     OnIntervalTimeChanged(var);
 
-                    //set nev value at label:
+                    //set new value at label:
                     SetIntervalTimeLatel(value);
 
                     source.Text = "";

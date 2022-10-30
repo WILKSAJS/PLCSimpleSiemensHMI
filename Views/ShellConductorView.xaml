@@ -25,8 +25,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-
-        <!--<ContentControl x:Name="TopMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>-->
         <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#252525" MouseDown="Border_MouseDown">
             <Grid>
                 <Label Content="Simple Siemens HMI" Foreground="Gray" FontWeight="SemiBold" VerticalAlignment="Center"/>
@@ -49,8 +47,7 @@
                 </StackPanel>
             </Grid>
         </Border>
-        
-        
+
         <!--Icon made by Freepik  https://www.freepik.com from https://www.flaticon.com/-->
 
         <ContentControl x:Name="PlcList" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"/>
@@ -62,7 +59,7 @@
             
         </Border>
         
-
         <ContentControl x:Name="ActiveItem" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3"/>
+        
     </Grid>
 </Window>

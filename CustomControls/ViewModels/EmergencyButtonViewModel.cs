@@ -56,7 +56,7 @@ namespace PLCSiemensSymulatorHMI.CustomControls.ViewModels
             }
             else
             {
-                // TODO: Implement this with NLog for customer information
+                // TODO: Implement this with NLog?
                 Debug.WriteLine(DateTime.Now.ToString() + "\t WRITE BistableButton State Error");
             }
         }

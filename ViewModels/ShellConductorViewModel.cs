@@ -26,7 +26,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             IEventAggregator eventAggregator,
             IWindowManager windowManager)
         {
-            // TopMenu = topMenuViewModel;
             PlcList = plcListViewModel;
             _createPlcViewModel = createPlcViewModel;
             _plcRepository = plcRepository;
@@ -34,7 +33,6 @@ namespace PLCSiemensSymulatorHMI.ViewModels
             _windowManager = windowManager;
             _settingsViewModel = settingsViewModel;
         }
-        //public TopMenuViewModel TopMenu { get; }
         public PlcListViewModel PlcList { get; }
         
         public void Handle(NavigateMessage message)

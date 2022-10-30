@@ -16,7 +16,6 @@ namespace PLCSiemensSymulatorHMI.Converters
             bool boolValue = (bool)values[0];
 
             return boolValue == true ? Brushes.Green : Brushes.DarkRed;
-            // POPRAWIC ZMIANE KOLORU!
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

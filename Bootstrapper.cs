@@ -49,13 +49,6 @@ namespace PLCSiemensSymulatorHMI
             _container.PerRequest<MonostableButtonViewModel>();
             _container.Singleton<CreateControlViewModel>();
             _container.Singleton<ControlsHolderViewModel>();
-
-            // service
-            // zrobic rejestracje przez klucz i sprobowac pozyskać istancje Sharp7PlcService na rzdądanie
-            // https://csharp.hotexamples.com/examples/Caliburn.Micro/PhoneContainer/RegisterPerRequest/php-phonecontainer-registerperrequest-method-examples.html
-            //_container.PerRequest<Sharp7PlcService>();
-
-           
         }
 
         protected override object GetInstance(Type service, string key)
