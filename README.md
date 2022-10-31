@@ -1,11 +1,11 @@
-# PLCSiemensSymulatorHMI
+# PLCSimpleSiemensHMI
 
 ## Overview
 Application serves as customizable (at certain level) desktop **HMI** panel and enables simultaneous communication between PC and **Siemens** S7-family PLC’s. Most of already existing dektop HMI applications for Siemens PLC's (like e.g. WinCC) are commercial and paid, therefore the main purposes during development process of my application was to take advantage of free tools and libraries. Application with its look and functionalities resembles HMI operation panels, which are widely known in industrial environment as devices that allow to monitor and control either PLC controllers or executive devices. 
 
 ___
 ## Application presentaion video
--- put YT link here
+https://youtu.be/MQMx-ZSXBP4
 
 ___
 ## Technology Stack
